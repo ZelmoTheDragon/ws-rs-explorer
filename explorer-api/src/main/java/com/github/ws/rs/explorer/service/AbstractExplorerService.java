@@ -2,8 +2,10 @@ package com.github.ws.rs.explorer.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import jakarta.json.JsonObject;
+import jakarta.security.enterprise.SecurityContext;
 
 
 import com.github.ws.rs.explorer.Action;
@@ -13,14 +15,21 @@ import com.github.ws.rs.explorer.persistence.Queries;
 import com.github.ws.rs.explorer.persistence.ExplorerDAO;
 import com.github.ws.rs.explorer.ExplorerManager;
 import com.github.ws.rs.explorer.EntityMapper;
+import com.github.ws.rs.explorer.security.SecurityManager;
 
 
 public abstract class AbstractExplorerService implements ExplorerService {
 
+    protected final SecurityContext securityContext;
     protected final ExplorerManager explorerManager;
     protected final ExplorerDAO dao;
 
-    protected AbstractExplorerService(final ExplorerManager explorerManager, final ExplorerDAO dao) {
+    protected AbstractExplorerService(
+            final SecurityContext securityContext,
+            final ExplorerManager explorerManager,
+            final ExplorerDAO dao) {
+
+        this.securityContext = securityContext;
         this.explorerManager = explorerManager;
         this.dao = dao;
     }
@@ -29,7 +38,7 @@ public abstract class AbstractExplorerService implements ExplorerService {
     public <E, D, M extends EntityMapper<E, D>> PaginationData<D> onFilter(final String name, final Map<String, List<String>> parameters) {
 
         var entry = this.explorerManager.<E, D, M, AbstractExplorerService>resolve(name);
-        checkAction(entry, Action.FILTER);
+        checkAuthorization(entry, Action.FILTER);
 
         var entityClass = entry.getEntityClass();
         var mapper = this.explorerManager.invokeMapper(entry);
@@ -57,7 +66,7 @@ public abstract class AbstractExplorerService implements ExplorerService {
     public <E, D, M extends EntityMapper<E, D>> Optional<D> onFind(final String name, final String id) {
 
         var entry = this.explorerManager.<E, D, M, AbstractExplorerService>resolve(name);
-        checkAction(entry, Action.FIND);
+        checkAuthorization(entry, Action.FIND);
 
         var entityClass = entry.getEntityClass();
         var mapper = this.explorerManager.invokeMapper(entry);
@@ -72,7 +81,7 @@ public abstract class AbstractExplorerService implements ExplorerService {
     public <E, D, M extends EntityMapper<E, D>, K> K onCreate(final String name, final JsonObject document) {
 
         var entry = this.explorerManager.<E, D, M, AbstractExplorerService>resolve(name);
-        checkAction(entry, Action.CREATE);
+        checkAuthorization(entry, Action.CREATE);
 
         var dataClass = entry.getDataClass();
         var mapper = this.explorerManager.invokeMapper(entry);
@@ -93,7 +102,7 @@ public abstract class AbstractExplorerService implements ExplorerService {
     public <E, D, M extends EntityMapper<E, D>> void onUpdate(final String name, final JsonObject document, final String id) {
 
         var entry = this.explorerManager.<E, D, M, AbstractExplorerService>resolve(name);
-        checkAction(entry, Action.UPDATE);
+        checkAuthorization(entry, Action.UPDATE);
 
         var entityClass = entry.getEntityClass();
         var dataClass = entry.getDataClass();
@@ -113,7 +122,7 @@ public abstract class AbstractExplorerService implements ExplorerService {
     public <E, D, M extends EntityMapper<E, D>> void onDelete(final String name, final String id) {
 
         var entry = this.explorerManager.<E, D, M, AbstractExplorerService>resolve(name);
-        checkAction(entry, Action.DELETE);
+        checkAuthorization(entry, Action.DELETE);
 
         var mapper = this.explorerManager.invokeMapper(entry);
         var uuid = mapper.mapId(id);
@@ -122,8 +131,20 @@ public abstract class AbstractExplorerService implements ExplorerService {
         this.dao.remove(entityClass, uuid);
     }
 
-    protected static void checkAction(final DynamicEntry<?, ?, ?, ?> entry, final Action action) {
-        if (!entry.getActions().contains(action)) {
+    protected void checkAuthorization(final DynamicEntry<?, ?, ?, ?> entry, final Action action) {
+
+        if (entry.getActions().containsKey(action)) {
+            var role = entry.getActions().get(action);
+            if (!Objects.equals(SecurityManager.PERMIT_ALL, role)) {
+                var principal = this.securityContext.getCallerPrincipal();
+                if (Objects.isNull(principal)) {
+                    throw new ActionDeniedException(action, "User not authenticate");
+                } else if (!this.securityContext.isCallerInRole(role)) {
+                    throw new ActionDeniedException(action, "Insufficient authorization");
+                }
+                // NO-OP: OK
+            }
+        } else {
             throw new ActionDeniedException(action);
         }
     }

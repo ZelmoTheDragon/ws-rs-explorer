@@ -12,9 +12,13 @@ public final class ActionDeniedException extends ExplorerException {
 
     private final Action action;
 
-    public ActionDeniedException(final Action action) {
-        super(String.format("Action type [%s] denied !", action));
+    public ActionDeniedException(final Action action, final String message) {
+        super(String.format("Action type [%s] denied ! %s", action, message));
         this.action = action;
+    }
+
+    public ActionDeniedException(final Action action) {
+        this(action, "");
     }
 
     public Action getAction() {

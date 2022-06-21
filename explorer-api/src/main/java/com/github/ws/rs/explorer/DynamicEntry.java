@@ -1,7 +1,7 @@
 package com.github.ws.rs.explorer;
 
+import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 import com.github.ws.rs.explorer.service.ExplorerService;
 
@@ -9,7 +9,7 @@ public class DynamicEntry<E, D, M extends EntityMapper<E, D>, S extends Explorer
 
     private final String name;
 
-    private final Set<Action> actions;
+    private final Map<Action, String> actions;
 
     private final Class<E> entityClass;
 
@@ -21,14 +21,14 @@ public class DynamicEntry<E, D, M extends EntityMapper<E, D>, S extends Explorer
 
     public DynamicEntry(
             final String name,
-            final Set<Action> actions,
+            final Map<Action, String> actions,
             final Class<E> entityClass,
             final Class<D> dataClass,
             final Class<M> mapperClass,
             final Class<S> serviceClass) {
 
         this.name = name;
-        this.actions = Set.copyOf(actions);
+        this.actions = Map.copyOf(actions);
         this.entityClass = entityClass;
         this.dataClass = dataClass;
         this.mapperClass = mapperClass;
@@ -76,8 +76,8 @@ public class DynamicEntry<E, D, M extends EntityMapper<E, D>, S extends Explorer
         return name;
     }
 
-    public Set<Action> getActions() {
-        return Set.copyOf(actions);
+    public Map<Action, String> getActions() {
+        return Map.copyOf(actions);
     }
 
     public Class<E> getEntityClass() {
