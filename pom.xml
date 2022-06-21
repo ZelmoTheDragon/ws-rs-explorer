@@ -41,12 +41,13 @@
 
     <groupId>com.github.ws-rs-explorer</groupId>
     <artifactId>ws-rs-explorer</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>ws-rs-explorer</name>
 
     <modules>
         <module>explorer-api</module>
+        <module>explorer-example</module>
     </modules>
 
     <properties>

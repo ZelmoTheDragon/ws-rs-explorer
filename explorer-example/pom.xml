@@ -9,13 +9,13 @@
     <parent>
         <artifactId>ws-rs-explorer</artifactId>
         <groupId>com.github.ws-rs-explorer</groupId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>explorer-api</artifactId>
-    <packaging>jar</packaging>
-    <name>explorer-api</name>
+    <artifactId>explorer-example</artifactId>
+    <packaging>war</packaging>
+    <name>explorer-example</name>
 
     <properties>
         <!-- Configuration -->
@@ -31,6 +31,19 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.ws-rs-explorer</groupId>
+            <artifactId>explorer-api</artifactId>
+            <version>0.0.2-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.openliberty.tools</groupId>
+                <artifactId>liberty-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>
