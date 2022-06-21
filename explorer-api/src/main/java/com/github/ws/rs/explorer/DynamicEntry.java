@@ -5,7 +5,7 @@ import java.util.Set;
 
 import com.github.ws.rs.explorer.service.ExplorerService;
 
-public class EndpointEntry<E, D, M extends EntityMapper<E, D>, S extends ExplorerService> {
+public class DynamicEntry<E, D, M extends EntityMapper<E, D>, S extends ExplorerService> {
 
     private final String name;
 
@@ -19,7 +19,7 @@ public class EndpointEntry<E, D, M extends EntityMapper<E, D>, S extends Explore
 
     private final Class<S> serviceClass;
 
-    public EndpointEntry(
+    public DynamicEntry(
             final String name,
             final Set<Action> actions,
             final Class<E> entityClass,
@@ -43,7 +43,7 @@ public class EndpointEntry<E, D, M extends EntityMapper<E, D>, S extends Explore
         } else if (obj == null || getClass() != obj.getClass()) {
             eq = false;
         } else {
-            var entry = (EndpointEntry) obj;
+            var entry = (DynamicEntry) obj;
             eq = Objects.equals(name, entry.name)
                     && Objects.equals(actions, entry.actions)
                     && Objects.equals(entityClass, entry.entityClass)

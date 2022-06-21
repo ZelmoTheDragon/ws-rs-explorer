@@ -9,15 +9,15 @@ import jakarta.inject.Singleton;
 import com.github.ws.rs.explorer.service.ExplorerService;
 
 @Singleton
-public class EndpointManager {
+public class ExplorerManager {
 
-    private final Set<EndpointEntry<?, ?, ?, ?>> entries;
+    private final Set<DynamicEntry<?, ?, ?, ?>> entries;
 
-    private EndpointManager() {
+    private ExplorerManager() {
         this.entries = new HashSet<>();
     }
 
-    public <E, D, M extends EntityMapper<E, D>, S extends ExplorerService> void register(final EndpointEntry<E, D, M, S> entry) {
+    public <E, D, M extends EntityMapper<E, D>, S extends ExplorerService> void register(final DynamicEntry<E, D, M, S> entry) {
         if (this.entries.contains(entry)) {
             throw new IllegalArgumentException("Entry already registered : " + entry);
         } else {
@@ -25,8 +25,8 @@ public class EndpointManager {
         }
     }
 
-    public <E, D, M extends EntityMapper<E, D>, S extends ExplorerService> EndpointEntry<E, D, M, S> resolve(final String name) {
-        return (EndpointEntry<E, D, M, S>) this.entries
+    public <E, D, M extends EntityMapper<E, D>, S extends ExplorerService> DynamicEntry<E, D, M, S> resolve(final String name) {
+        return (DynamicEntry<E, D, M, S>) this.entries
                 .stream()
                 .filter(d -> Objects.equals(d.getName(), name))
                 .findFirst()
@@ -34,13 +34,13 @@ public class EndpointManager {
     }
 
     public <E, D, M extends EntityMapper<E, D>, S extends ExplorerService> S invokeService(final String name) {
-        EndpointEntry<E, D, M, S> entry = this.resolve(name);
-        Class<S> service = entry.getServiceClass();
+        var entry = this.<E, D, M, S>resolve(name);
+        var service = entry.getServiceClass();
         return CDI.current().select(service).get();
     }
 
-    public <E, D, M extends EntityMapper<E, D>, S extends ExplorerService> M invokeMapper(final EndpointEntry<E, D, M, S> entry) {
-        Class<M> mapper = entry.getMapperClass();
+    public <E, D, M extends EntityMapper<E, D>, S extends ExplorerService> M invokeMapper(final DynamicEntry<E, D, M, S> entry) {
+        var mapper = entry.getMapperClass();
         return CDI.current().select(mapper).get();
     }
 

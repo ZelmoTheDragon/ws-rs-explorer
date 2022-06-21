@@ -16,7 +16,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 
-import com.github.ws.rs.explorer.EndpointManager;
+import com.github.ws.rs.explorer.ExplorerManager;
 
 
 @RequestScoped
@@ -25,15 +25,15 @@ import com.github.ws.rs.explorer.EndpointManager;
 @Consumes(MediaType.APPLICATION_JSON)
 public class ExplorerEndpoint {
 
-    private final EndpointManager endpointManager;
+    private final ExplorerManager explorerManager;
 
     ExplorerEndpoint() {
-        this.endpointManager = null;
+        this.explorerManager = null;
     }
 
     @Inject
-    public ExplorerEndpoint(final EndpointManager endpointManager) {
-        this.endpointManager = endpointManager;
+    public ExplorerEndpoint(final ExplorerManager explorerManager) {
+        this.explorerManager = explorerManager;
     }
 
     @GET
@@ -43,7 +43,7 @@ public class ExplorerEndpoint {
             @PathParam("entity") final String entity) {
 
         var parameters = info.getQueryParameters();
-        var service = this.endpointManager.invokeService(entity);
+        var service = this.explorerManager.invokeService(entity);
         var paginationData = service.onFilter(entity, parameters);
         return Response.ok(paginationData).build();
     }
@@ -53,7 +53,7 @@ public class ExplorerEndpoint {
     public Response find(
             @PathParam("entity") final String entity,
             @PathParam("id") final String id) {
-        var service = this.endpointManager.invokeService(entity);
+        var service = this.explorerManager.invokeService(entity);
         var data = service.onFind(entity, id);
 
         return data
@@ -68,7 +68,7 @@ public class ExplorerEndpoint {
             @PathParam("entity") final String entity,
             final JsonObject document) {
 
-        var service = endpointManager.invokeService(entity);
+        var service = explorerManager.invokeService(entity);
         var id = service.onCreate(entity, document);
 
         var uri = info
@@ -86,7 +86,7 @@ public class ExplorerEndpoint {
             @PathParam("id") final String id,
             final JsonObject document) {
 
-        var service = endpointManager.invokeService(entity);
+        var service = explorerManager.invokeService(entity);
         service.onUpdate(entity, document, id);
         return Response.noContent().build();
     }
@@ -97,7 +97,7 @@ public class ExplorerEndpoint {
             @PathParam("entity") final String entity,
             @PathParam("id") final String id) {
 
-        var service = endpointManager.invokeService(entity);
+        var service = explorerManager.invokeService(entity);
         service.onDelete(entity, id);
         return Response.noContent().build();
     }

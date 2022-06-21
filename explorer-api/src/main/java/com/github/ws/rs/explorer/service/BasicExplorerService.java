@@ -5,7 +5,7 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 
 import com.github.ws.rs.explorer.persistence.ExplorerDAO;
-import com.github.ws.rs.explorer.EndpointManager;
+import com.github.ws.rs.explorer.ExplorerManager;
 
 @ApplicationScoped
 @Transactional
@@ -16,7 +16,7 @@ public class BasicExplorerService extends AbstractExplorerService {
     }
 
     @Inject
-    public BasicExplorerService(final EndpointManager endpointManager, final ExplorerDAO dao) {
-        super(endpointManager, dao);
+    public BasicExplorerService(final ExplorerManager explorerManager, final ExplorerDAO dao) {
+        super(explorerManager, dao);
     }
 }
