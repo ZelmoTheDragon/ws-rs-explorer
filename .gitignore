@@ -1,0 +1,8 @@
+# .gitignore
+
+# Maven
+**/target
+
+# IDEA
+**/.idea
+**/*.iml

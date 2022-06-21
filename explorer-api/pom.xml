@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>ws-rs-explorer</artifactId>
+        <groupId>com.github.ws-rs-explorer</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>explorer-api</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>explorer-api</name>
+
+    <properties>
+        <!-- Configuration -->
+        <maven.compiler.source>${version.java}</maven.compiler.source>
+        <maven.compiler.target>${version.java}</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <!-- Jakarta Platform -->
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.microprofile</groupId>
+            <artifactId>microprofile</artifactId>
+            <version>${version.microprofile}</version>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+
+        <plugins>
+            <plugin>
+                <groupId>io.openliberty.tools</groupId>
+                <artifactId>liberty-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
