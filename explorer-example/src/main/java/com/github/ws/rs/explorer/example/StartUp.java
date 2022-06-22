@@ -12,10 +12,10 @@ import com.github.ws.rs.explorer.ExplorerManager;
 import com.github.ws.rs.explorer.example.customer.CustomerDTO;
 import com.github.ws.rs.explorer.example.customer.CustomerEntity;
 import com.github.ws.rs.explorer.example.customer.CustomerMapper;
+import com.github.ws.rs.explorer.example.endpoint.WebConfiguration;
 import com.github.ws.rs.explorer.example.gender.GenderDTO;
 import com.github.ws.rs.explorer.example.gender.GenderEntity;
 import com.github.ws.rs.explorer.example.gender.GenderMapper;
-import com.github.ws.rs.explorer.example.security.Roles;
 import com.github.ws.rs.explorer.security.SecurityManager;
 import com.github.ws.rs.explorer.service.BasicExplorerService;
 
@@ -34,8 +34,7 @@ public class StartUp {
 
     public void start(@Observes @Initialized(ApplicationScoped.class) final Object pointless) {
 
-        this.securityManager.addRole(Roles.GENDER_MANAGER);
-        this.securityManager.addRole(Roles.CUSTOMER_MANAGER);
+        this.securityManager.scanRoleClassConfiguration(WebConfiguration.class);
 
         this.explorerManager.register(new DynamicEntry<>(
                 "gender",

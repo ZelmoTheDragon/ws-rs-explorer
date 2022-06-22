@@ -1,7 +1,6 @@
 package com.github.ws.rs.explorer.security;
 
 import java.util.Optional;
-import java.util.regex.Pattern;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.security.enterprise.AuthenticationException;
@@ -16,7 +15,7 @@ import jakarta.ws.rs.core.HttpHeaders;
 @ApplicationScoped
 public class OAuth2Authentication implements HttpAuthenticationMechanism {
 
-    private static final Pattern JWT_EXTRACTOR_PATTERN = Pattern.compile("^Bearer +([^ ]+) *$", Pattern.CASE_INSENSITIVE);
+    private static final String BEARER_TOKEN = "Bearer ";
 
     private final IdentityStoreHandler identityStoreHandler;
 
@@ -39,12 +38,18 @@ public class OAuth2Authentication implements HttpAuthenticationMechanism {
 
         AuthenticationStatus authenticationStatus;
 
-        var authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
-        var matcher = JWT_EXTRACTOR_PATTERN.matcher(Optional.ofNullable(authorization).orElse(""));
-        if (!matcher.matches()) {
+        var authorization = Optional.ofNullable(request.getHeader(HttpHeaders.AUTHORIZATION));
+        var isBearer = authorization
+                .map(e -> e.startsWith(BEARER_TOKEN))
+                .orElse(Boolean.FALSE);
+
+        if (!isBearer) {
             authenticationStatus = httpMessageContext.doNothing();
         } else {
-            var token = matcher.group(1);
+            var token = authorization
+                    .map(e -> e.replace(BEARER_TOKEN, ""))
+                    .orElse("");
+
             var credential = tokenProvider.of(token);
             if (!credential.isValid()) {
                 authenticationStatus = httpMessageContext.responseUnauthorized();
