@@ -36,6 +36,10 @@ public class ExplorerDAO implements Serializable {
         this.em.remove(attachedEntity);
     }
 
+    public <E> void remove(final E attachedEntity) {
+        this.em.remove(attachedEntity);
+    }
+
     public <E> E save(final E entity) {
         E managedEntity;
         if (this.em.contains(entity)) {
@@ -54,7 +58,8 @@ public class ExplorerDAO implements Serializable {
 
     public <E> List<E> find(
             final Class<E> entityClass,
-            final Set<FilterQuery> queries) {
+            final Set<FilterQuery> queries,
+            final AdditionalCriteriaPredicate<E, E> additionalCriteriaPredicate) {
 
         var distinct = Queries.isDistinct(queries);
 
@@ -70,26 +75,27 @@ public class ExplorerDAO implements Serializable {
         var pageNumber = Queries.getPageNumber(queries);
         var startPosition = Math.max(0, (pageNumber - 1) * pageSize);
 
-        return createQuery(this.em, entityClass, predicate)
+        return createQuery(this.em, entityClass, predicate, additionalCriteriaPredicate)
                 .setFirstResult(startPosition)
                 .setMaxResults(pageSize)
                 .getResultList();
     }
 
-    public  <E> long size(
+    public <E> long size(
             final Class<E> entityClass,
-            final Set<FilterQuery> queries) {
+            final Set<FilterQuery> queries,
+            final AdditionalCriteriaPredicate<E, Long> additionalCriteriaPredicate) {
 
         CriteriaPredicate<E, Long> predicate = (b, r, q) -> {
             q.select(b.count(r));
             return buildPredicate(em, entityClass, b, r, queries);
         };
 
-        return createQuery(this.em, entityClass, Long.class, predicate)
+        return createQuery(this.em, entityClass, Long.class, predicate, additionalCriteriaPredicate)
                 .getSingleResult();
     }
 
-    public  <E> boolean contains(final E entity) {
+    public <E> boolean contains(final E entity) {
 
         var entityClass = (Class<E>) entity.getClass();
         CriteriaPredicate<E, Long> predicate = (b, r, q) -> {
@@ -99,7 +105,7 @@ public class ExplorerDAO implements Serializable {
             return b.equal(r.get(attribut), id);
         };
 
-        return createQuery(this.em, entityClass, Long.class, predicate)
+        return createQuery(this.em, entityClass, Long.class, predicate, AdditionalCriteriaPredicate::empty)
                 .getSingleResult() >= 1L;
 
     }
@@ -126,12 +132,14 @@ public class ExplorerDAO implements Serializable {
             final EntityManager em,
             final Class<E> entityClass,
             final Class<R> targetClass,
-            final CriteriaPredicate<E, R> criteria) {
+            final CriteriaPredicate<E, R> criteria,
+            final AdditionalCriteriaPredicate<E, R> additionalCriteriaPredicate) {
 
         var builder = em.getCriteriaBuilder();
         var query = builder.createQuery(targetClass);
         var root = query.from(entityClass);
         var predicate = criteria.toPredicate(builder, root, query);
+        additionalCriteriaPredicate.toPredicate(predicate, builder, root, query);
         query.where(predicate);
         return em.createQuery(query);
     }
@@ -139,9 +147,10 @@ public class ExplorerDAO implements Serializable {
     private static <E> TypedQuery<E> createQuery(
             final EntityManager em,
             final Class<E> entityClass,
-            final CriteriaPredicate<E, E> criteria) {
+            final CriteriaPredicate<E, E> criteria,
+            final AdditionalCriteriaPredicate<E, E> additionalCriteriaPredicate) {
 
-        return createQuery(em, entityClass, entityClass, criteria);
+        return createQuery(em, entityClass, entityClass, criteria, additionalCriteriaPredicate);
     }
 
 

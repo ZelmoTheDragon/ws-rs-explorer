@@ -35,7 +35,7 @@ public abstract class AbstractExplorerService implements ExplorerService {
     }
 
     @Override
-    public <E, D, M extends EntityMapper<E, D>> PaginationData<D> onFilter(final String name, final Map<String, List<String>> parameters) {
+    public <E, D, M extends EntityMapper<E, D>> PaginationData<D> filter(final String name, final Map<String, List<String>> parameters) {
 
         var entry = this.explorerManager.<E, D, M, AbstractExplorerService>resolve(name);
         checkAuthorization(entry, Action.FILTER);
@@ -44,8 +44,8 @@ public abstract class AbstractExplorerService implements ExplorerService {
         var mapper = this.explorerManager.invokeMapper(entry);
         var queries = Queries.extractQueries(parameters);
 
-        var entities = this.dao.find(entityClass, queries);
-        var size = this.dao.size(entityClass, queries);
+        var entities = this.dao.find(entityClass, queries, this::onFilter);
+        var size = this.dao.size(entityClass, queries, this::onFilter);
         var pageSize = Queries.getPageSize(queries);
         var pageNumber = Queries.getPageNumber(queries);
         var pageCount = Queries.getPageCount(queries, size);
@@ -63,7 +63,7 @@ public abstract class AbstractExplorerService implements ExplorerService {
     }
 
     @Override
-    public <E, D, M extends EntityMapper<E, D>> Optional<D> onFind(final String name, final String id) {
+    public <E, D, M extends EntityMapper<E, D>> Optional<D> find(final String name, final String id) {
 
         var entry = this.explorerManager.<E, D, M, AbstractExplorerService>resolve(name);
         checkAuthorization(entry, Action.FIND);
@@ -74,11 +74,12 @@ public abstract class AbstractExplorerService implements ExplorerService {
 
         return this.dao
                 .find(entityClass, uuid)
-                .map(mapper::fromEntity);
+                .map(mapper::fromEntity)
+                .map(this::onFind);
     }
 
     @Override
-    public <E, D, M extends EntityMapper<E, D>, K> K onCreate(final String name, final JsonObject document) {
+    public <E, D, M extends EntityMapper<E, D>, K> K create(final String name, final JsonObject document) {
 
         var entry = this.explorerManager.<E, D, M, AbstractExplorerService>resolve(name);
         checkAuthorization(entry, Action.CREATE);
@@ -93,13 +94,14 @@ public abstract class AbstractExplorerService implements ExplorerService {
             throw new ServiceExplorerException("Entity already exist !");
         }
 
+        entity = this.onCreate(entity);
         entity = this.dao.save(entity);
         return this.dao.getPrimaryKey(entity);
 
     }
 
     @Override
-    public <E, D, M extends EntityMapper<E, D>> void onUpdate(final String name, final JsonObject document, final String id) {
+    public <E, D, M extends EntityMapper<E, D>> void update(final String name, final JsonObject document, final String id) {
 
         var entry = this.explorerManager.<E, D, M, AbstractExplorerService>resolve(name);
         checkAuthorization(entry, Action.UPDATE);
@@ -115,20 +117,25 @@ public abstract class AbstractExplorerService implements ExplorerService {
                 .orElseThrow(() -> new ServiceExplorerException("Entity not exist !"));
 
         mapper.updateEntity(data, entity);
+        this.onUpdate(entity);
         //this.dao.save(entity);
     }
 
     @Override
-    public <E, D, M extends EntityMapper<E, D>> void onDelete(final String name, final String id) {
+    public <E, D, M extends EntityMapper<E, D>> void delete(final String name, final String id) {
 
         var entry = this.explorerManager.<E, D, M, AbstractExplorerService>resolve(name);
         checkAuthorization(entry, Action.DELETE);
 
         var mapper = this.explorerManager.invokeMapper(entry);
-        var uuid = mapper.mapId(id);
-
         var entityClass = entry.getEntityClass();
-        this.dao.remove(entityClass, uuid);
+        var uuid = mapper.mapId(id);
+        var entity = this.dao
+                .find(entityClass, uuid)
+                .orElseThrow(() -> new ServiceExplorerException("Entity not exist !"));
+
+        this.onRemove(entity);
+        this.dao.remove(entity);
     }
 
     protected void checkAuthorization(final DynamicEntry<?, ?, ?, ?> entry, final Action action) {

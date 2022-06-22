@@ -44,7 +44,7 @@ public class ExplorerEndpoint {
 
         var parameters = info.getQueryParameters();
         var service = this.explorerManager.invokeService(entity);
-        var paginationData = service.onFilter(entity, parameters);
+        var paginationData = service.filter(entity, parameters);
         return Response.ok(paginationData).build();
     }
 
@@ -54,7 +54,7 @@ public class ExplorerEndpoint {
             @PathParam("entity") final String entity,
             @PathParam("id") final String id) {
         var service = this.explorerManager.invokeService(entity);
-        var data = service.onFind(entity, id);
+        var data = service.find(entity, id);
 
         return data
                 .map(d -> Response.ok(d).build())
@@ -69,7 +69,7 @@ public class ExplorerEndpoint {
             final JsonObject document) {
 
         var service = explorerManager.invokeService(entity);
-        var id = service.onCreate(entity, document);
+        var id = service.create(entity, document);
 
         var uri = info
                 .getAbsolutePathBuilder()
@@ -87,7 +87,7 @@ public class ExplorerEndpoint {
             final JsonObject document) {
 
         var service = explorerManager.invokeService(entity);
-        service.onUpdate(entity, document, id);
+        service.update(entity, document, id);
         return Response.noContent().build();
     }
 
@@ -98,7 +98,7 @@ public class ExplorerEndpoint {
             @PathParam("id") final String id) {
 
         var service = explorerManager.invokeService(entity);
-        service.onDelete(entity, id);
+        service.delete(entity, id);
         return Response.noContent().build();
     }
 
