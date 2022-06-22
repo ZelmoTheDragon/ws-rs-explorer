@@ -13,8 +13,11 @@ public final class SecurityManager {
 
     private final Set<String> roles;
 
+    private boolean managerEndpointAllowed;
+
     public SecurityManager() {
         this.roles = new HashSet<>();
+        this.managerEndpointAllowed = false;
     }
 
     public void addRole(final String role) {
@@ -39,6 +42,14 @@ public final class SecurityManager {
 
     public Set<String> roles() {
         return Set.copyOf(this.roles);
+    }
+
+    public boolean isManagerEndpointAllowed() {
+        return managerEndpointAllowed;
+    }
+
+    public void setManagerEndpointAllowed(final boolean managerEndpointAllowed) {
+        this.managerEndpointAllowed = managerEndpointAllowed;
     }
 
 }

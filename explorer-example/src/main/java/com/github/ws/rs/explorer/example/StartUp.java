@@ -34,6 +34,7 @@ public class StartUp {
 
     public void start(@Observes @Initialized(ApplicationScoped.class) final Object pointless) {
 
+        this.securityManager.setManagerEndpointAllowed(true);
         this.securityManager.scanRoleClassConfiguration(WebConfiguration.class);
 
         this.explorerManager.register(new DynamicEntry<>(

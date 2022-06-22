@@ -44,4 +44,8 @@ public class ExplorerManager {
         return CDI.current().select(mapper).get();
     }
 
+    public Set<DynamicEntry<?, ?, ?, ?>> entries() {
+        return Set.copyOf(entries);
+    }
+
 }
