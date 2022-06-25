@@ -39,15 +39,15 @@
         </developer>
     </developers>
 
-    <groupId>com.github.ws-rs-explorer</groupId>
-    <artifactId>ws-rs-explorer</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <groupId>com.github.zelmothedragon.ws-rs-explorer</groupId>
+    <artifactId>ws-rs-explorer-parent</artifactId>
+    <version>0.0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>ws-rs-explorer</name>
+    <name>ws-rs-explorer-parent</name>
 
     <modules>
-        <module>explorer-api</module>
-        <module>explorer-example</module>
+        <module>ws-rs-explorer</module>
+        <module>ws-rs-explorer-example</module>
     </modules>
 
     <properties>
