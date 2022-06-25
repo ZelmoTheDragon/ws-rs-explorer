@@ -1,9 +1,23 @@
 package com.github.ws.rs.explorer.security;
 
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import jakarta.security.enterprise.credential.Credential;
 
-public interface TokenProvider {
+@Singleton
+class TokenProvider {
 
-    Credential of(String token);
+    static final String SUPPORTED_TYPE = "JWT";
 
+    private final SecurityManager securityManager;
+
+    @Inject
+    TokenProvider(final SecurityManager securityManager) {
+        this.securityManager = securityManager;
+    }
+
+    Credential of(final String token) {
+
+        return new JsonWebTokenSignedHashMac(token, "");
+    }
 }
