@@ -9,12 +9,25 @@ import jakarta.json.JsonObject;
 import com.github.ws.rs.explorer.Action;
 import com.github.ws.rs.explorer.DynamicEntry;
 
+/**
+ * Simple <i>JSON</i> object mapper for {@link DynamicEntry} class.
+ */
 final class DynamicEntryMapper {
 
+    /**
+     * Internal constructor.
+     * Instance not allowed.
+     */
     private DynamicEntryMapper() {
         throw new UnsupportedOperationException("Instance not allowed");
     }
 
+    /**
+     * Convert to <i>JSON</i> array.
+     *
+     * @param entries Collection of entry point
+     * @return A <i>JSON</i> array of entry point
+     */
     static JsonArray toJson(final Collection<DynamicEntry<?, ?, ?, ?>> entries) {
         var array = Json.createArrayBuilder();
         for (var e : entries) {
@@ -25,6 +38,12 @@ final class DynamicEntryMapper {
 
     }
 
+    /**
+     * Convert to <i>JSON</i> object.
+     *
+     * @param entry Entry point
+     * @return A <i>JSON</i> object of entry point
+     */
     private static JsonObject toJson(final DynamicEntry<?, ?, ?, ?> entry) {
         var actions = toJson(entry.getActions());
         return Json
@@ -38,6 +57,12 @@ final class DynamicEntryMapper {
                 .build();
     }
 
+    /**
+     * Convert to <i>JSON</i> array.
+     *
+     * @param actions Action with role
+     * @return A <i>JSON</i> array of action
+     */
     private static JsonArray toJson(final Map<Action, String> actions) {
         var array = Json.createArrayBuilder();
         for (var a : actions.entrySet()) {

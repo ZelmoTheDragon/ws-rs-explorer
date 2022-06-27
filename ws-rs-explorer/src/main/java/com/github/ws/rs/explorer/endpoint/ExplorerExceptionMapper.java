@@ -10,10 +10,18 @@ import jakarta.ws.rs.ext.Provider;
 
 import com.github.ws.rs.explorer.ExplorerException;
 
+/**
+ * Generic exception mapper for this module.
+ */
 @Provider
 public class ExplorerExceptionMapper implements ExceptionMapper<ExplorerException> {
 
+    /**
+     * Default constructor.
+     * This class is injectable, don't call the constructor explicitly.
+     */
     public ExplorerExceptionMapper() {
+        // NO-OP
     }
 
     @Override

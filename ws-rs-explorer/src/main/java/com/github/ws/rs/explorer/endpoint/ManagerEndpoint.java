@@ -13,21 +13,39 @@ import jakarta.ws.rs.core.Response;
 import com.github.ws.rs.explorer.ExplorerManager;
 import com.github.ws.rs.explorer.security.SecurityManager;
 
+/**
+ * Basic controller exposing registered dynamic entry.
+ * This feature must be enabled in {@link SecurityManager}.
+ */
 @RequestScoped
 @Path("manager")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ManagerEndpoint {
 
+    /**
+     * Security manager for this module.
+     */
     private final SecurityManager securityManager;
 
+    /**
+     * Dynamic entry manager.
+     */
     private final ExplorerManager explorerManager;
 
+    /**
+     * Default constructor.
+     * This class is injectable, don't call the constructor explicitly.
+     */
     ManagerEndpoint() {
         this.securityManager = null;
         this.explorerManager = null;
     }
 
+    /**
+     * Injection constructor.
+     * This class is injectable, don't call the constructor explicitly.
+     */
     @Inject
     public ManagerEndpoint(
             final SecurityManager securityManager,
@@ -37,6 +55,11 @@ public class ManagerEndpoint {
         this.explorerManager = explorerManager;
     }
 
+    /**
+     * Show all registered entries.
+     *
+     * @return A <i>JSON</i> object of all registered entries.
+     */
     @GET
     @Path("entry")
     public Response entries() {
@@ -55,6 +78,11 @@ public class ManagerEndpoint {
         return response;
     }
 
+    /**
+     * Show all registered roles.
+     *
+     * @return A <i>JSON</i> object of all registered roles.
+     */
     @GET
     @Path("role")
     public Response roles() {

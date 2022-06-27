@@ -18,24 +18,46 @@ import jakarta.ws.rs.core.UriInfo;
 
 import com.github.ws.rs.explorer.ExplorerManager;
 
-
+/**
+ * Dynamic controller for registered entry point.
+ * Offers basic operations on entities like create, read, update and delete.
+ * And an advance feature for filtered queries.
+ */
 @RequestScoped
 @Path("entity")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ExplorerEndpoint {
 
+    /**
+     * Manager for entry point.
+     */
     private final ExplorerManager explorerManager;
 
+    /**
+     * Default constructor.
+     * This class is injectable, don't call the constructor explicitly.
+     */
     ExplorerEndpoint() {
         this.explorerManager = null;
     }
 
+    /**
+     * Injection constructor.
+     * This class is injectable, don't call the constructor explicitly.
+     */
     @Inject
     public ExplorerEndpoint(final ExplorerManager explorerManager) {
         this.explorerManager = explorerManager;
     }
 
+    /**
+     * Filter data with advance query parameters.
+     *
+     * @param info   URI information for query parameters
+     * @param entity Unique path name
+     * @return A pagination object with filtered data
+     */
     @GET
     @Path("{entity}")
     public Response filter(
@@ -48,6 +70,13 @@ public class ExplorerEndpoint {
         return Response.ok(paginationData).build();
     }
 
+    /**
+     * Find by identifier.
+     *
+     * @param entity Unique path name
+     * @param id     Unique identifier
+     * @return The entity
+     */
     @GET
     @Path("{entity}/{id}")
     public Response find(
@@ -61,6 +90,14 @@ public class ExplorerEndpoint {
                 .orElseGet(() -> Response.status(Response.Status.NOT_FOUND).build());
     }
 
+    /**
+     * Create a new entity.
+     *
+     * @param info     URI context information
+     * @param entity   Unique path name
+     * @param document <i>JSON</i> objet corresponding to the data transfer object
+     * @return The location of the new entity created
+     */
     @POST
     @Path("{entity}")
     public Response create(
@@ -79,6 +116,14 @@ public class ExplorerEndpoint {
         return Response.created(uri).build();
     }
 
+    /**
+     * Update an entity.
+     *
+     * @param entity   Unique path name
+     * @param id       Unique identifier
+     * @param document <i>JSON</i> objet corresponding to the data transfer object
+     * @return No content
+     */
     @PUT
     @Path("{entity}/{id}")
     public Response update(
@@ -91,6 +136,13 @@ public class ExplorerEndpoint {
         return Response.noContent().build();
     }
 
+    /**
+     * Delete an entity.
+     *
+     * @param entity Unique path name
+     * @param id     Unique identifier
+     * @return No content
+     */
     @DELETE
     @Path("{entity}/{id}")
     public Response delete(
