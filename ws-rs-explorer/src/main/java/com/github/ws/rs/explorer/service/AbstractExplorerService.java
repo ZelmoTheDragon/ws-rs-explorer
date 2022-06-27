@@ -35,7 +35,9 @@ public abstract class AbstractExplorerService implements ExplorerService {
     }
 
     @Override
-    public <E, D, M extends EntityMapper<E, D>> PaginationData<D> filter(final String name, final Map<String, List<String>> parameters) {
+    public <E, D, M extends EntityMapper<E, D>> PaginationData<D> filter(
+            final String name,
+            final Map<String, List<String>> parameters) {
 
         var entry = this.explorerManager.<E, D, M, AbstractExplorerService>resolve(name);
         checkAuthorization(entry, Action.FILTER);
@@ -63,7 +65,9 @@ public abstract class AbstractExplorerService implements ExplorerService {
     }
 
     @Override
-    public <E, D, M extends EntityMapper<E, D>> Optional<D> find(final String name, final String id) {
+    public <E, D, M extends EntityMapper<E, D>> Optional<D> find(
+            final String name,
+            final String id) {
 
         var entry = this.explorerManager.<E, D, M, AbstractExplorerService>resolve(name);
         checkAuthorization(entry, Action.FIND);
@@ -79,7 +83,9 @@ public abstract class AbstractExplorerService implements ExplorerService {
     }
 
     @Override
-    public <E, D, M extends EntityMapper<E, D>, K> K create(final String name, final JsonObject document) {
+    public <E, D, M extends EntityMapper<E, D>, K> K create(
+            final String name,
+            final JsonObject document) {
 
         var entry = this.explorerManager.<E, D, M, AbstractExplorerService>resolve(name);
         checkAuthorization(entry, Action.CREATE);
@@ -101,7 +107,10 @@ public abstract class AbstractExplorerService implements ExplorerService {
     }
 
     @Override
-    public <E, D, M extends EntityMapper<E, D>> void update(final String name, final JsonObject document, final String id) {
+    public <E, D, M extends EntityMapper<E, D>> void update(
+            final String name,
+            final JsonObject document,
+            final String id) {
 
         var entry = this.explorerManager.<E, D, M, AbstractExplorerService>resolve(name);
         checkAuthorization(entry, Action.UPDATE);
@@ -122,7 +131,9 @@ public abstract class AbstractExplorerService implements ExplorerService {
     }
 
     @Override
-    public <E, D, M extends EntityMapper<E, D>> void delete(final String name, final String id) {
+    public <E, D, M extends EntityMapper<E, D>> void delete(
+            final String name,
+            final String id) {
 
         var entry = this.explorerManager.<E, D, M, AbstractExplorerService>resolve(name);
         checkAuthorization(entry, Action.DELETE);
@@ -138,7 +149,9 @@ public abstract class AbstractExplorerService implements ExplorerService {
         this.dao.remove(entity);
     }
 
-    protected void checkAuthorization(final DynamicEntry<?, ?, ?, ?> entry, final Action action) {
+    protected void checkAuthorization(
+            final DynamicEntry<?, ?, ?, ?> entry,
+            final Action action) {
 
         if (entry.getActions().containsKey(action)) {
             var role = entry.getActions().get(action);

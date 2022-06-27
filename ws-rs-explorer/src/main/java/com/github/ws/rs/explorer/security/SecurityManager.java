@@ -1,7 +1,6 @@
 package com.github.ws.rs.explorer.security;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;

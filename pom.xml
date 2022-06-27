@@ -59,6 +59,8 @@
         <version.jakarta>9.1.0</version.jakarta>
         <version.microprofile>5.0</version.microprofile>
 
+        <version.glassfish>6.2.5</version.glassfish>
+
         <!-- Configuration -->
         <maven.compiler.source>${version.java}</maven.compiler.source>
         <maven.compiler.target>${version.java}</maven.compiler.target>
@@ -86,9 +88,9 @@
             <plugins>
 
                 <plugin>
-                    <groupId>io.openliberty.tools</groupId>
-                    <artifactId>liberty-maven-plugin</artifactId>
-                    <version>3.5.2</version>
+                    <groupId>org.codehaus.cargo</groupId>
+                    <artifactId>cargo-maven3-plugin</artifactId>
+                    <version>1.9.11</version>
                 </plugin>
 
                 <!-- Extension Maven  -->

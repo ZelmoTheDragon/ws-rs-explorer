@@ -1,5 +1,6 @@
 package com.github.ws.rs.explorer.endpoint;
 
+import java.util.Objects;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -41,7 +42,10 @@ public class ManagerEndpoint {
     public Response entries() {
 
         Response response;
-        if (this.securityManager.isManagerEndpointAllowed()) {
+        var permission = this.securityManager
+                .getConfiguration(SecurityManager.Configuration.MANAGER_ENDPOINT);
+
+        if (Objects.equals(Boolean.parseBoolean(permission), Boolean.TRUE)) {
             var entries = this.explorerManager.entries();
             var document = DynamicEntryMapper.toJson(entries);
             response = Response.ok(document).build();
@@ -56,7 +60,10 @@ public class ManagerEndpoint {
     public Response roles() {
 
         Response response;
-        if (this.securityManager.isManagerEndpointAllowed()) {
+        var permission = this.securityManager
+                .getConfiguration(SecurityManager.Configuration.MANAGER_ENDPOINT);
+
+        if (Objects.equals(Boolean.parseBoolean(permission), Boolean.TRUE)) {
             var roles = this.securityManager.roles();
             response = Response.ok(roles).build();
         } else {

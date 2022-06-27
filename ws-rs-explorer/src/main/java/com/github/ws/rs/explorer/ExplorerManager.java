@@ -13,7 +13,7 @@ public class ExplorerManager {
 
     private final Set<DynamicEntry<?, ?, ?, ?>> entries;
 
-    private ExplorerManager() {
+    public ExplorerManager() {
         this.entries = new HashSet<>();
     }
 
