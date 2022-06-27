@@ -29,7 +29,7 @@ final class DynamicEntryMapper {
         var actions = toJson(entry.getActions());
         return Json
                 .createObjectBuilder()
-                .add("path", entry.getName())
+                .add("path", entry.getPath())
                 .add("entity", entry.getEntityClass().getSimpleName())
                 .add("data", entry.getDataClass().getSimpleName())
                 .add("mapper", entry.getMapperClass().getSimpleName())

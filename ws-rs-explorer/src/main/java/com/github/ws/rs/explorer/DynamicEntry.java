@@ -5,29 +5,68 @@ import java.util.Objects;
 
 import com.github.ws.rs.explorer.service.ExplorerService;
 
+/**
+ * Dynamic entry point.
+ *
+ * @param <E> Type of persistence entity
+ * @param <D> Type of data transfer object
+ * @param <M> Type of mapper
+ * @param <S> Type of service
+ */
 public class DynamicEntry<E, D, M extends EntityMapper<E, D>, S extends ExplorerService> {
 
-    private final String name;
+    /**
+     * Path of entry point.
+     * Must be unique and following URL path name convention.
+     */
+    private final String path;
 
+    /**
+     * Actions with roles.
+     * Must be a <i>CDI</i> injectable class.
+     */
     private final Map<Action, String> actions;
 
+    /**
+     * Entity type.
+     */
     private final Class<E> entityClass;
 
+    /**
+     * Data transfer object type.
+     */
     private final Class<D> dataClass;
 
+    /**
+     * Mapper type.
+     * Must be a <i>CDI</i> injectable class.
+     */
     private final Class<M> mapperClass;
 
+    /**
+     * Service type.
+     */
     private final Class<S> serviceClass;
 
+    /**
+     * Construct a new entry point for controller explorer.
+     *
+     * @param path         Path of entry point
+     * @param actions      Actions with roles
+     * @param entityClass  Entity type
+     * @param dataClass    Data transfer object type
+     * @param mapperClass  Mapper type
+     * @param serviceClass Service type
+     */
     public DynamicEntry(
-            final String name,
+            final String path,
             final Map<Action, String> actions,
             final Class<E> entityClass,
             final Class<D> dataClass,
             final Class<M> mapperClass,
             final Class<S> serviceClass) {
 
-        this.name = name;
+        this.path = path;
         this.actions = Map.copyOf(actions);
         this.entityClass = entityClass;
         this.dataClass = dataClass;
@@ -44,7 +83,7 @@ public class DynamicEntry<E, D, M extends EntityMapper<E, D>, S extends Explorer
             eq = false;
         } else {
             var entry = (DynamicEntry) obj;
-            eq = Objects.equals(name, entry.name)
+            eq = Objects.equals(path, entry.path)
                     && Objects.equals(actions, entry.actions)
                     && Objects.equals(entityClass, entry.entityClass)
                     && Objects.equals(dataClass, entry.dataClass)
@@ -56,13 +95,13 @@ public class DynamicEntry<E, D, M extends EntityMapper<E, D>, S extends Explorer
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, actions, entityClass, dataClass, mapperClass, serviceClass);
+        return Objects.hash(path, actions, entityClass, dataClass, mapperClass, serviceClass);
     }
 
     @Override
     public String toString() {
         return new StringBuilder(this.getClass().getSimpleName())
-                .append("{name='").append(name).append('\'')
+                .append("{name='").append(path).append('\'')
                 .append(", actions='").append(actions).append('\'')
                 .append(", entityClass=").append(entityClass)
                 .append(", dataClass=").append(dataClass)
@@ -70,10 +109,10 @@ public class DynamicEntry<E, D, M extends EntityMapper<E, D>, S extends Explorer
                 .append('}').toString();
     }
 
-    // Accesseurs
+    // Getter...
 
-    public String getName() {
-        return name;
+    public String getPath() {
+        return path;
     }
 
     public Map<Action, String> getActions() {
