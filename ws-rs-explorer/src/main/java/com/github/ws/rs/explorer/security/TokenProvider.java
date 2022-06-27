@@ -17,7 +17,7 @@ class TokenProvider {
     }
 
     Credential of(final String token) {
-
-        return new JsonWebTokenSignedHashMac(token, "");
+        var secret = this.securityManager.getConfiguration(SecurityManager.Configuration.SECRET);
+        return new TokenCredential(token, secret);
     }
 }

@@ -1,8 +1,10 @@
 package com.github.ws.rs.explorer.security;
 
 import java.util.Objects;
+import jakarta.json.JsonObject;
 import jakarta.json.bind.annotation.JsonbProperty;
 import jakarta.json.bind.annotation.JsonbPropertyOrder;
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.json.bind.config.PropertyOrderStrategy;
 
 @JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
@@ -13,6 +15,9 @@ class Header {
 
     @JsonbProperty("alg")
     private String type;
+
+    @JsonbTransient
+    private transient JsonObject rawData;
 
     public Header() {
     }
@@ -35,6 +40,15 @@ class Header {
     @Override
     public int hashCode() {
         return Objects.hash(algorithm, type);
+    }
+
+
+    JsonObject getRawData() {
+        return rawData;
+    }
+
+    void setRawData(final JsonObject rawData) {
+        this.rawData = rawData;
     }
 
     public String getAlgorithm() {

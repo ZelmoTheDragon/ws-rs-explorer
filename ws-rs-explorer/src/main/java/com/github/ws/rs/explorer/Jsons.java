@@ -1,5 +1,6 @@
 package com.github.ws.rs.explorer;
 
+import java.io.StringReader;
 import java.io.StringWriter;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
@@ -36,6 +37,15 @@ public final class Jsons {
         var builder = JsonbBuilder.create();
         try (builder) {
             return builder.toJson(entity);
+        } catch (Exception ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
+
+    public static JsonObject parse(final String document) {
+        var reader = Json.createReader(new StringReader(document));
+        try (reader) {
+            return reader.readObject();
         } catch (Exception ex) {
             throw new IllegalStateException(ex);
         }

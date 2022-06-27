@@ -1,5 +1,6 @@
 package com.github.ws.rs.explorer.example;
 
+import java.util.Properties;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Initialized;
 import jakarta.enterprise.event.Observes;
@@ -34,8 +35,9 @@ public class StartUp {
 
     public void start(@Observes @Initialized(ApplicationScoped.class) final Object pointless) {
 
-        this.securityManager.setManagerEndpointAllowed(true);
         this.securityManager.scanRoleClassConfiguration(WebConfiguration.class);
+        this.securityManager.putConfiguration(SecurityManager.Configuration.MANAGER_ENDPOINT, "true");
+        this.securityManager.putConfiguration(SecurityManager.Configuration.SECRET, "secret");
 
         this.explorerManager.register(new DynamicEntry<>(
                 "gender",

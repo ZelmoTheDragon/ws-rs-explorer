@@ -1,8 +1,10 @@
 package com.github.ws.rs.explorer.security;
 
 import java.util.Objects;
+import jakarta.json.JsonObject;
 import jakarta.json.bind.annotation.JsonbProperty;
 import jakarta.json.bind.annotation.JsonbPropertyOrder;
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.json.bind.config.PropertyOrderStrategy;
 
 @JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
@@ -28,6 +30,9 @@ class Payload {
 
     @JsonbProperty("jti")
     private String jwtId;
+
+    @JsonbTransient
+    private transient JsonObject rawData;
 
     public Payload() {
     }
@@ -55,6 +60,14 @@ class Payload {
     @Override
     public int hashCode() {
         return Objects.hash(issuer, subject, audience, expirationTime, notBeforeTime, issuedAtTime, jwtId);
+    }
+
+    JsonObject getRawData() {
+        return rawData;
+    }
+
+    void setRawData(final JsonObject rawData) {
+        this.rawData = rawData;
     }
 
     public String getIssuer() {

@@ -1,7 +1,9 @@
 package com.github.ws.rs.explorer.security;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Properties;
 import java.util.Set;
 import jakarta.annotation.security.DeclareRoles;
 import jakarta.inject.Singleton;
@@ -13,11 +15,11 @@ public final class SecurityManager {
 
     private final Set<String> roles;
 
-    private boolean managerEndpointAllowed;
+    private final Properties configuration;
 
     public SecurityManager() {
         this.roles = new HashSet<>();
-        this.managerEndpointAllowed = false;
+        this.configuration = new Properties();
     }
 
     public void addRole(final String role) {
@@ -44,12 +46,26 @@ public final class SecurityManager {
         return Set.copyOf(this.roles);
     }
 
-    public boolean isManagerEndpointAllowed() {
-        return managerEndpointAllowed;
+    public void setConfiguration(final Properties configuration) {
+        this.configuration.putAll(configuration);
     }
 
-    public void setManagerEndpointAllowed(final boolean managerEndpointAllowed) {
-        this.managerEndpointAllowed = managerEndpointAllowed;
+    public void putConfiguration(final Configuration key, String value) {
+        this.configuration.setProperty(key.name(), value);
     }
 
+    public String getConfiguration(final Configuration key) {
+        return this.configuration.getProperty(key.name());
+    }
+
+    public enum Configuration {
+
+        TOKEN_CLAIM_USERNAME,
+
+        TOKEN_CLAIM_GROUPS,
+
+        MANAGER_ENDPOINT,
+
+        SECRET
+    }
 }
