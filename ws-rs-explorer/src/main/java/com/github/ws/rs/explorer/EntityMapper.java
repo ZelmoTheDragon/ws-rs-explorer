@@ -8,7 +8,7 @@ import java.util.UUID;
 /**
  * Root converter for dynamic entry.
  *
- * @param <E> Type of persistence entity
+ * @param <E> Type of persistent entity
  * @param <D> Type of data transfer object
  */
 public interface EntityMapper<E, D> {

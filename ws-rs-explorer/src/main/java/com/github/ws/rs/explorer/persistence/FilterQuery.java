@@ -5,34 +5,83 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Web query.
+ */
 public final class FilterQuery {
 
+    /**
+     * Web query parameter for order by.
+     */
     private static final String ORDER_BY_QUERY = "orderBy";
 
+    /**
+     * Web query parameter for page size.
+     */
     private static final String PAGE_SIZE_QUERY = "pageSize";
 
+    /**
+     * Web query parameter for page number.
+     */
     private static final String PAGE_NUMBER_QUERY = "pageNumber";
 
+    /**
+     * Web query parameter for distinct result.
+     */
     private static final String DISTINCT_QUERY = "distinct";
 
+    /**
+     * Web parameter for keyword search.
+     */
     private static final String KEYWORD_QUERY = "keyword";
 
+    /**
+     * Web parameter for attribut selection.
+     */
     private static final String SELECT_QUERY = "select";
 
+    /**
+     * Prefix symbol for ascending order.
+     */
     private static final String ORDER_ASC_SYMBOL = "+";
 
+    /**
+     * Prefix symbol for descending order.
+     */
     private static final String ORDER_DESC_SYMBOL = "-";
 
+    /**
+     * Index of the first element in between web query.
+     */
     private static final int BETWEEN_FIRST_ARGUMENT = 0;
 
+    /**
+     * Index of the second element in between web query.
+     */
     private static final int BETWEEN_SECOND_ARGUMENT = 1;
 
+    /**
+     * Attribut name.
+     */
     private final String name;
 
+    /**
+     * Values.
+     */
     private final List<String> values;
 
+    /**
+     * Logical operator.
+     */
     private final Operator operator;
 
+    /**
+     * Construct a web query.
+     *
+     * @param name     Attribut name
+     * @param values   Values
+     * @param operator Logical operator
+     */
     FilterQuery(final String name, final List<String> values, final Operator operator) {
         this.name = name;
         this.values = List.copyOf(values);
@@ -69,7 +118,7 @@ public final class FilterQuery {
                 .append('}').toString();
     }
 
-    // Accesseurs
+    // Getter...
 
     String getName() {
         return name;

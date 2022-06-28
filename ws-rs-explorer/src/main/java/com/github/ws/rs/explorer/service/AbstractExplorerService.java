@@ -44,7 +44,7 @@ public abstract class AbstractExplorerService implements ExplorerService {
 
         var entityClass = entry.getEntityClass();
         var mapper = this.explorerManager.invokeMapper(entry);
-        var queries = Queries.extractQueries(parameters);
+        var queries = Queries.convertQueries(parameters);
 
         var entities = this.dao.find(entityClass, queries, this::onFilter);
         var size = this.dao.size(entityClass, queries, this::onFilter);

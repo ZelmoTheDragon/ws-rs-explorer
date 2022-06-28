@@ -8,7 +8,7 @@ import com.github.ws.rs.explorer.service.ExplorerService;
 /**
  * Dynamic entry point.
  *
- * @param <E> Type of persistence entity
+ * @param <E> Type of persistent entity
  * @param <D> Type of data transfer object
  * @param <M> Type of mapper
  * @param <S> Type of service

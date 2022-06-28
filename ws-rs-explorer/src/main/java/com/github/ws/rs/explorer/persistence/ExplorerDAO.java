@@ -1,7 +1,6 @@
 package com.github.ws.rs.explorer.persistence;
 
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -21,11 +20,23 @@ import jakarta.persistence.metamodel.Attribute;
 import jakarta.persistence.metamodel.SingularAttribute;
 
 
+/**
+ * Generic and dynamic repository for explorer logic.
+ */
 @Singleton
-public class ExplorerDAO implements Serializable {
+public class ExplorerDAO {
 
+    /**
+     * Default entity manager.
+     */
     private transient final EntityManager em;
 
+    /**
+     * Injection constructor.
+     * This class is injectable, don't call the constructor explicitly.
+     *
+     * @param em Entity manager
+     */
     @Inject
     public ExplorerDAO(final EntityManager em) {
         this.em = em;
@@ -36,10 +47,24 @@ public class ExplorerDAO implements Serializable {
         this.em.remove(attachedEntity);
     }
 
+    /**
+     * Remove an entity.
+     *
+     * @param attachedEntity Entity referenced in persistence context
+     * @param <E>            Type of persistent entity
+     */
     public <E> void remove(final E attachedEntity) {
         this.em.remove(attachedEntity);
     }
 
+    /**
+     * Save an entity.
+     * If the entity already exists it will be updated, otherwise it will be inserted.
+     *
+     * @param entity Persistent entity
+     * @param <E>    Type of persistent entity
+     * @return The entity referenced by the persistence context
+     */
     public <E> E save(final E entity) {
         E managedEntity;
         if (this.em.contains(entity)) {
@@ -51,11 +76,28 @@ public class ExplorerDAO implements Serializable {
         return managedEntity;
     }
 
+    /**
+     * Find an entity by unique identifier.
+     *
+     * @param entityClass Entity class
+     * @param id          Unique identifier
+     * @param <E>         Type of persistent entity
+     * @return An option of persistent entity
+     */
     public <E> Optional<E> find(final Class<E> entityClass, final Object id) {
         var entity = this.em.find(entityClass, id);
         return Optional.ofNullable(entity);
     }
 
+    /**
+     * Search entities.
+     *
+     * @param entityClass                 Entity class
+     * @param queries                     Web queries
+     * @param additionalCriteriaPredicate additional function for filtering data
+     * @param <E>                         Type of persistent entity
+     * @return A list of entity filtered
+     */
     public <E> List<E> find(
             final Class<E> entityClass,
             final Set<FilterQuery> queries,
@@ -81,6 +123,15 @@ public class ExplorerDAO implements Serializable {
                 .getResultList();
     }
 
+    /**
+     * Count entities.
+     *
+     * @param entityClass                 Entity class
+     * @param queries                     Web queries
+     * @param additionalCriteriaPredicate additional function for filtering data
+     * @param <E>                         Type of persistent entity
+     * @return The number of entity filtered
+     */
     public <E> long size(
             final Class<E> entityClass,
             final Set<FilterQuery> queries,
@@ -95,6 +146,13 @@ public class ExplorerDAO implements Serializable {
                 .getSingleResult();
     }
 
+    /**
+     * Check if an entity exists.
+     *
+     * @param entity Persistent entity
+     * @param <E>    Type of persistent entity
+     * @return The value {@code true} if the entity exists, otherwise {@code false} is returned
+     */
     public <E> boolean contains(final E entity) {
 
         var entityClass = (Class<E>) entity.getClass();
@@ -110,11 +168,27 @@ public class ExplorerDAO implements Serializable {
 
     }
 
+    /**
+     * Get the unique identifier.
+     *
+     * @param entity Persistent entity
+     * @param <E>    Type of persistent entity
+     * @param <K>    Type of unique identifier
+     * @return The unique identifier
+     */
     public <E, K> K getPrimaryKey(final E entity) {
         var puu = this.em.getEntityManagerFactory().getPersistenceUnitUtil();
         return (K) puu.getIdentifier(entity);
     }
 
+    /**
+     * Get the unique identifier attribut.
+     *
+     * @param em          Entity manager
+     * @param entityClass Entity class
+     * @param <E>         Type of persistent entity
+     * @return The unique identifier attribut
+     */
     private static <E> SingularAttribute<E, ?> getPrimaryKeyAttribut(
             final EntityManager em,
             final Class<E> entityClass) {
@@ -128,6 +202,18 @@ public class ExplorerDAO implements Serializable {
                 .orElseThrow(() -> new PersistenceException("No primary key attribut found in class: " + entityClass));
     }
 
+    /**
+     * Construct the <i>JPA</i> query.
+     *
+     * @param em                          Entity manager
+     * @param entityClass                 Entity class
+     * @param targetClass                 Result query class
+     * @param criteria                    Current predicate
+     * @param additionalCriteriaPredicate Additional predicate
+     * @param <E>                         Type of persistent entity
+     * @param <R>                         Type of query return
+     * @return The <i>JPA</i> query
+     */
     private static <E, R> TypedQuery<R> createQuery(
             final EntityManager em,
             final Class<E> entityClass,
@@ -144,6 +230,16 @@ public class ExplorerDAO implements Serializable {
         return em.createQuery(query);
     }
 
+    /**
+     * Construct the <i>JPA</i> query.
+     *
+     * @param em                          Entity manager
+     * @param entityClass                 Entity class
+     * @param criteria                    Current predicate
+     * @param additionalCriteriaPredicate Additional predicate
+     * @param <E>                         Type of persistent entity
+     * @return The <i>JPA</i> query
+     */
     private static <E> TypedQuery<E> createQuery(
             final EntityManager em,
             final Class<E> entityClass,
@@ -154,6 +250,15 @@ public class ExplorerDAO implements Serializable {
     }
 
 
+    /**
+     * Construct a <i>JPA ORDER BY</i> clause.
+     *
+     * @param queries Wen queries
+     * @param builder Criteria builder
+     * @param root    Root clause of database query
+     * @param <E>     Type of persistent entity
+     * @return A list of <i>JPA ORDER BY</i> clause
+     */
     private static <E> List<Order> buildOrder(
             final Set<FilterQuery> queries,
             final CriteriaBuilder builder,
@@ -170,6 +275,15 @@ public class ExplorerDAO implements Serializable {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Construct a <i>JPA ORDER BY</i> clause.
+     *
+     * @param attribute Entity attribut
+     * @param builder   Criteria builder
+     * @param root      Root clause of database query
+     * @param <E>       Type of persistent entity
+     * @return A <i>JPA ORDER BY</i> clause
+     */
     private static <E> Order buildOrder(
             final Map.Entry<String, Boolean> attribute,
             final CriteriaBuilder builder,
@@ -184,6 +298,17 @@ public class ExplorerDAO implements Serializable {
         return order;
     }
 
+    /**
+     * Construct a <i>JPA</i> predicate with all web queries.
+     *
+     * @param em          Entity manager
+     * @param entityClass Entity class
+     * @param builder     Criteria builder
+     * @param root        Root clause of database query
+     * @param queries     Web queries
+     * @param <E>         Type of persistent entity
+     * @return A complex <i>JPA</i> predicate
+     */
     private static <E> Predicate buildPredicate(
             final EntityManager em,
             final Class<E> entityClass,
@@ -202,9 +327,18 @@ public class ExplorerDAO implements Serializable {
         );
     }
 
-    private static <X> Optional<Predicate> buildPredicate(
+    /**
+     * Construct a <i>JPA</i> predicate from a web query.
+     *
+     * @param builder Criteria builder
+     * @param root    Root clause of database query
+     * @param query   Web query
+     * @param <E>     Type of persistent entity
+     * @return An option of complex <i>JPA</i> predicate
+     */
+    private static <E> Optional<Predicate> buildPredicate(
             final CriteriaBuilder builder,
-            final Root<X> root,
+            final Root<E> root,
             final FilterQuery query) {
 
         Predicate predicate;
@@ -232,6 +366,15 @@ public class ExplorerDAO implements Serializable {
         return Optional.ofNullable(predicate);
     }
 
+    /**
+     * Check the web query is applicable on this persistent entity.
+     *
+     * @param em          Entity manager
+     * @param entityClass Entity class
+     * @param query       Web query
+     * @param <E>         Type of persistent entity
+     * @return The value {@code true} if the web query is  applicable on this persistent entity otherwise the value {@code false} is returned
+     */
     private static <E> boolean isSafeSearchQuery(
             final EntityManager em,
             final Class<E> entityClass,
