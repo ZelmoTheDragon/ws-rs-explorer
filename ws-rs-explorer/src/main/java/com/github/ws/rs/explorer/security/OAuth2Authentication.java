@@ -62,20 +62,29 @@ public class OAuth2Authentication implements HttpAuthenticationMechanism {
                 .map(e -> e.startsWith(BEARER_TOKEN))
                 .orElse(Boolean.FALSE);
 
-        if (!isBearer) {
-            authenticationStatus = httpMessageContext.doNothing();
-        } else {
-            var token = authorization
-                    .map(e -> e.replace(BEARER_TOKEN, ""))
-                    .orElse("");
+        if (isBearer) {
 
-            var credential = tokenCredentialFactory.of(token);
-            if (!credential.isValid()) {
-                authenticationStatus = httpMessageContext.responseUnauthorized();
-            } else {
+            var credential = authorization
+                    .map(e -> e.replace(BEARER_TOKEN, ""))
+                    .map(String::trim)
+                    .filter(e -> !e.isBlank())
+                    .map(tokenCredentialFactory::of)
+                    .orElseGet(tokenCredentialFactory::of);
+
+            if (credential.isValid()) {
                 var result = identityStoreHandler.validate(credential);
                 authenticationStatus = httpMessageContext.notifyContainerAboutLogin(result);
+
+            } else {
+                authenticationStatus = httpMessageContext.responseUnauthorized();
             }
+
+            credential.clear();
+
+        } else if (httpMessageContext.isProtected()) {
+            authenticationStatus = httpMessageContext.responseUnauthorized();
+        } else {
+            authenticationStatus = httpMessageContext.doNothing();
         }
 
         return authenticationStatus;

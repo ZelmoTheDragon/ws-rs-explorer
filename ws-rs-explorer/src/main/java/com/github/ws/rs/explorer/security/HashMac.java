@@ -13,15 +13,6 @@ import javax.crypto.spec.SecretKeySpec;
 public final class HashMac {
 
     /**
-     * Supported algorithm between <i>Java</i> and <i>JWT</i>.
-     */
-    public static final Map<String, String> SUPPORTED_ALGORITHM = Map.of(
-            "HS256", "HmacSHA256",
-            "HS384", "HmacSHA384",
-            "HS512", "HmacSHA512"
-    );
-
-    /**
      * Internal constructor.
      * Instance not allowed.
      */
@@ -32,7 +23,7 @@ public final class HashMac {
     /**
      * Hash a text input with a secret key.
      *
-     * @param algorithm Algorithm for hashing, see {@link #SUPPORTED_ALGORITHM}
+     * @param algorithm Algorithm for hashing
      * @param key       Secret key
      * @param input     Input text
      * @return The input hashed with the secret key

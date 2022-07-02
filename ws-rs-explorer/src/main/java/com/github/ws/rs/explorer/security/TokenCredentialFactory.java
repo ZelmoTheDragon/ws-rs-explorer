@@ -1,5 +1,6 @@
 package com.github.ws.rs.explorer.security;
 
+import java.util.Map;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.security.enterprise.credential.Credential;
@@ -14,6 +15,15 @@ class TokenCredentialFactory {
      * Supporter token format.
      */
     static final String SUPPORTED_TYPE = "JWT";
+
+    /**
+     * Supported algorithm between <i>Java</i> and <i>JWT</i>.
+     */
+    static final Map<String, String> SUPPORTED_ALGORITHM = Map.of(
+            "HS256", "HmacSHA256",
+            "HS384", "HmacSHA384",
+            "HS512", "HmacSHA512"
+    );
 
     /**
      * Security manager for this module.
@@ -35,10 +45,20 @@ class TokenCredentialFactory {
      * Create a token credential from a raw encoded token.
      *
      * @param token Raw encoded token
-     * @return a token credential
+     * @return A token credential
      */
     Credential of(final String token) {
         var secret = this.securityManager.getConfiguration(SecurityManager.Configuration.SECRET);
         return new TokenCredential(token, secret);
     }
+
+    /**
+     * Create an empty and invalid token credential.
+     *
+     * @return An empty and invalid token credential
+     */
+    Credential of() {
+        return new EmptyTokenCredential();
+    }
+
 }

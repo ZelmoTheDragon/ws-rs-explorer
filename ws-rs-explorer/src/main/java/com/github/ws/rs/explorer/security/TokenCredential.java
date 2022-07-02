@@ -99,7 +99,7 @@ final class TokenCredential implements Credential {
     }
 
     /**
-     * Extract the signature from token.
+     * Get the signature from token.
      *
      * @return The signature
      */
@@ -116,7 +116,7 @@ final class TokenCredential implements Credential {
     private boolean isValidSignature() {
         var base64Header = this.tokens[HEADER_INDEX];
         var base64Payload = this.tokens[PAYLOAD_INDEX];
-        var sign = this.tokens[SIGNATURE_INDEX];
+        var sign = this.getSignature();
         var alg = extractAlgorithmFromHeader();
         var input = String.join(".", base64Header, base64Payload);
         var output = HashMac.execute(alg, this.secret, input);
@@ -142,14 +142,14 @@ final class TokenCredential implements Credential {
      * Extract the algorithm from header.
      *
      * @return The algorithm used for the signature
-     * @throws UnsupportedOperationException If the header contains an unsupported token type of algorithm
+     * @throws ExplorerException If the header contains an unsupported token type of algorithm
      */
     private String extractAlgorithmFromHeader() {
         var header = decodeHeader();
         if (!Objects.equals(header.getType(), TokenCredentialFactory.SUPPORTED_TYPE)) {
             throw new ExplorerException("Unsupported 'typ' : " + header.getAlgorithm());
         }
-        var alg = HashMac.SUPPORTED_ALGORITHM.get(header.getAlgorithm());
+        var alg = TokenCredentialFactory.SUPPORTED_ALGORITHM.get(header.getAlgorithm());
 
         return Optional
                 .ofNullable(alg)

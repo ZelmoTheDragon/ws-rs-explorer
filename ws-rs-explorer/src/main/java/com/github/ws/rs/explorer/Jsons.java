@@ -40,7 +40,7 @@ public final class Jsons {
      * Parse a <i>JSON</i> object to data transfer object.
      *
      * @param type     Data type
-     * @param document <i>JSON</i> Object
+     * @param document <i>JSON</i> object
      * @param <T>      Generic data type
      * @return A data transfer object
      */
@@ -86,7 +86,13 @@ public final class Jsons {
         }
     }
 
-    public static String parse(JsonObject document) {
+    /**
+     * Parse a <i>JSON</i> object to <i>JSON</i> string.
+     *
+     * @param document <i>JSON</i> object
+     * @return A <i>JSON</i> string
+     */
+    public static String parse(final JsonObject document) {
         var output = new StringWriter();
         var writer = Json.createWriter(output);
         try (output; writer) {
