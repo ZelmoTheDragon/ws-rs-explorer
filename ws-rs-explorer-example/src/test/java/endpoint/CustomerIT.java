@@ -3,7 +3,6 @@ package endpoint;
 import io.restassured.RestAssured;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
-import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import util.WebContext;

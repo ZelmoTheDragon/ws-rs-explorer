@@ -40,7 +40,7 @@ public class ExplorerManager {
      */
     public <E, D, M extends EntityMapper<E, D>, S extends ExplorerService> void register(final DynamicEntry<E, D, M, S> entry) {
         if (this.entries.contains(entry)) {
-            throw new IllegalArgumentException("Entry already registered : " + entry);
+            throw new ExplorerException("Entry already registered : " + entry);
         } else {
             this.entries.add(entry);
         }
@@ -62,7 +62,7 @@ public class ExplorerManager {
                 .stream()
                 .filter(d -> Objects.equals(d.getPath(), name))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("No entry registered for name : " + name));
+                .orElseThrow(() -> new ExplorerException("No entry registered for name : " + name));
     }
 
     /**

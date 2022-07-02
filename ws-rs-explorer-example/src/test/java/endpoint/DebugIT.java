@@ -1,10 +1,15 @@
 package endpoint;
 
+import java.util.UUID;
+
 import io.restassured.RestAssured;
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 import util.WebContext;
 
 class DebugIT {
+
+    private static final String FAKE_ENDPOINT = String.join("/", WebContext.API_BASE_URL, "entity", "fake");
 
     DebugIT() {
     }
@@ -17,7 +22,7 @@ class DebugIT {
                 .get(WebContext.BASE_URL)
                 .then()
                 .assertThat()
-                .statusCode(200);
+                .statusCode(HttpStatus.SC_OK);
     }
 
     @Test
@@ -27,6 +32,29 @@ class DebugIT {
                 .get(WebContext.APP_BASE_URL)
                 .then()
                 .assertThat()
-                .statusCode(200);
+                .statusCode(HttpStatus.SC_OK);
+    }
+
+    @Test
+    void testFakeEndpoint() {
+
+        RestAssured
+                .when()
+                .options(FAKE_ENDPOINT)
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_BAD_REQUEST);
+    }
+
+    @Test
+    void testFakeEndpointId() {
+        var path = String.join("/", FAKE_ENDPOINT, UUID.randomUUID().toString());
+
+        RestAssured
+                .when()
+                .options(path)
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_BAD_REQUEST);
     }
 }

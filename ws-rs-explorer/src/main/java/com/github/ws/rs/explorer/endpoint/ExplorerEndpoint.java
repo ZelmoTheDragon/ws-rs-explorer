@@ -2,6 +2,7 @@ package com.github.ws.rs.explorer.endpoint;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.json.JsonObject;
@@ -21,6 +22,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 
 import com.github.ws.rs.explorer.ExplorerManager;
+import com.github.ws.rs.explorer.service.ExplorerService;
 
 /**
  * Dynamic controller for registered entry point.
@@ -194,7 +196,10 @@ public class ExplorerEndpoint {
         Response.ResponseBuilder result;
 
         var service = this.explorerManager.invokeService(entity);
-        var exists = service.exists(entity, id);
+        var exists = Optional
+                .ofNullable(service)
+                .map(s -> s.exists(entity, id))
+                .orElse(Boolean.FALSE);
 
         if (exists) {
             var allows = String.join(
