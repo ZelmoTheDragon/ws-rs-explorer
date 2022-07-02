@@ -13,7 +13,7 @@ import jakarta.ws.rs.ext.Provider;
  * Generic exception mapper for <i>JAX-RS</i> exception.
  */
 @Provider
-public class WebExceptionMapper implements ExceptionMapper<WebApplicationException> {
+public final class WebExceptionMapper implements ExceptionMapper<WebApplicationException> {
 
     /**
      * Default constructor.

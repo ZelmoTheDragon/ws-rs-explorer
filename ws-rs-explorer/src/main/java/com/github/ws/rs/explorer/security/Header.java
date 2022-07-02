@@ -11,7 +11,7 @@ import jakarta.json.bind.config.PropertyOrderStrategy;
  * Simple <i>JWT</i> header.
  */
 @JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
-public class Header {
+public final class Header {
 
     /**
      * Signature algorithm.

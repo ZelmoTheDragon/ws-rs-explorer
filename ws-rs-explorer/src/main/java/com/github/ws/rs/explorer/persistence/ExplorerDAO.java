@@ -24,7 +24,7 @@ import jakarta.persistence.metamodel.SingularAttribute;
  * Generic and dynamic repository for explorer logic.
  */
 @Singleton
-public class ExplorerDAO {
+public final class ExplorerDAO {
 
     /**
      * Default entity manager.

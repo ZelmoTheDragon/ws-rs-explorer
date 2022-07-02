@@ -11,7 +11,7 @@ import jakarta.json.bind.config.PropertyOrderStrategy;
  * Simple <i>JWT</i> payload.
  */
 @JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
-public class Payload {
+public final class Payload {
 
     /**
      * Issuer.

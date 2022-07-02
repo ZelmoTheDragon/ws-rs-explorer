@@ -9,7 +9,7 @@ import jakarta.security.enterprise.credential.Credential;
  * Factory class for construct token credential.
  */
 @Singleton
-class TokenCredentialFactory {
+final class TokenCredentialFactory {
 
     /**
      * Supporter token format.

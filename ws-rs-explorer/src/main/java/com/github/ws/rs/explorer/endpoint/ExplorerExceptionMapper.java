@@ -14,7 +14,7 @@ import com.github.ws.rs.explorer.ExplorerException;
  * Generic exception mapper for this module.
  */
 @Provider
-public class ExplorerExceptionMapper implements ExceptionMapper<ExplorerException> {
+public final class ExplorerExceptionMapper implements ExceptionMapper<ExplorerException> {
 
     /**
      * Default constructor.

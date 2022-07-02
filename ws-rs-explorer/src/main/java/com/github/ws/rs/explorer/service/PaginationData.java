@@ -12,7 +12,7 @@ import jakarta.json.bind.config.PropertyOrderStrategy;
  * @param <T> Data type
  */
 @JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
-public class PaginationData<T> {
+public final class PaginationData<T> {
 
     /**
      * Data.

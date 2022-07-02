@@ -13,7 +13,7 @@ import com.github.ws.rs.explorer.service.ExplorerService;
  * This class should register dynamics entries when the initializing phase is call.
  */
 @Singleton
-public class ExplorerManager {
+public final class ExplorerManager {
 
     /**
      * Dynamics entries.

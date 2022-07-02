@@ -13,7 +13,7 @@ import com.github.ws.rs.explorer.service.ExplorerService;
  * @param <M> Type of mapper
  * @param <S> Type of service
  */
-public class DynamicEntry<E, D, M extends EntityMapper<E, D>, S extends ExplorerService> {
+public final class DynamicEntry<E, D, M extends EntityMapper<E, D>, S extends ExplorerService> {
 
     /**
      * Path of entry point.

@@ -12,7 +12,7 @@ import jakarta.security.enterprise.identitystore.IdentityStore;
  * An identity store for validate token credential.
  */
 @Singleton
-public class TokenIdentityStore implements IdentityStore {
+public final class TokenIdentityStore implements IdentityStore {
 
     /**
      * Security manager for this module.
@@ -46,9 +46,9 @@ public class TokenIdentityStore implements IdentityStore {
                     .getConfiguration(SecurityManager.Configuration.TOKEN_CLAIM_GROUPS);
 
             var callerName = jsonObject.getJsonString(claimUsername).getString();
-            var groups = jsonObject.getJsonArray(claimGroups).getValuesAs(String::valueOf);
+            var groups = Set.copyOf(jsonObject.getJsonArray(claimGroups).getValuesAs(String::valueOf));
 
-            result = new CredentialValidationResult(callerName, Set.copyOf(groups));
+            result = new CredentialValidationResult(callerName, groups);
         } else {
             result = CredentialValidationResult.INVALID_RESULT;
         }
