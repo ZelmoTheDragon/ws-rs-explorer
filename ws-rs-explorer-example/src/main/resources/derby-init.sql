@@ -8,6 +8,7 @@ ALTER TABLE application_user ADD UNIQUE(username)
 
 CREATE TABLE application_user_role(user_id VARCHAR(36) NOT NULL, role VARCHAR(255) NOT NULL)
 ALTER TABLE application_user_role ADD PRIMARY KEY(user_id, role)
+ALTER TABLE application_user_role ADD FOREIGN KEY(user_id) REFERENCES application_user(id)
 
 CREATE TABLE gender(id VARCHAR(36) NOT NULL)
 ALTER TABLE gender ADD version BIGINT NOT NULL DEFAULT 0

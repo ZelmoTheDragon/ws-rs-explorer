@@ -10,12 +10,12 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * Utility class for hashing text.
  */
-final class HashMac {
+public final class HashMac {
 
     /**
      * Supported algorithm between <i>Java</i> and <i>JWT</i>.
      */
-    static final Map<String, String> SUPPORTED_ALGORITHM = Map.of(
+    public static final Map<String, String> SUPPORTED_ALGORITHM = Map.of(
             "HS256", "HmacSHA256",
             "HS384", "HmacSHA384",
             "HS512", "HmacSHA512"
@@ -37,7 +37,7 @@ final class HashMac {
      * @param input     Input text
      * @return The input hashed with the secret key
      */
-    static String execute(final String algorithm, final String key, final String input) {
+    public static String execute(final String algorithm, final String key, final String input) {
 
         var secret = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), algorithm);
         var hexCode = new StringBuilder();

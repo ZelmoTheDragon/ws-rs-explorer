@@ -11,7 +11,7 @@ import jakarta.json.bind.config.PropertyOrderStrategy;
  * Simple <i>JWT</i> header.
  */
 @JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
-class Header {
+public class Header {
 
     /**
      * Signature algorithm.
@@ -22,7 +22,7 @@ class Header {
     /**
      * Token type.
      */
-    @JsonbProperty("alg")
+    @JsonbProperty("typ")
     private String type;
 
     /**
@@ -60,11 +60,11 @@ class Header {
 
     // Getters and setters...
 
-    JsonObject getRawData() {
+    public JsonObject getRawData() {
         return rawData;
     }
 
-    void setRawData(final JsonObject rawData) {
+    public void setRawData(final JsonObject rawData) {
         this.rawData = rawData;
     }
 

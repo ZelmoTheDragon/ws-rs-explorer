@@ -21,6 +21,7 @@
         <!-- Configuration -->
         <maven.compiler.source>${version.java}</maven.compiler.source>
         <maven.compiler.target>${version.java}</maven.compiler.target>
+        <skipITs>false</skipITs>
     </properties>
 
     <dependencies>
@@ -109,6 +110,9 @@
                         <goals>
                             <goal>start</goal>
                         </goals>
+                        <configuration>
+                            <skip>${skipITs}</skip>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>glassfish-stop</id>
@@ -116,6 +120,9 @@
                         <goals>
                             <goal>stop</goal>
                         </goals>
+                        <configuration>
+                            <skip>${skipITs}</skip>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -148,6 +155,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <configuration>
+                    <skipITs>${skipITs}</skipITs>
                     <excludes>
                         <exclude>**/*Test.java</exclude>
                     </excludes>

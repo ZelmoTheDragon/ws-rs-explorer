@@ -7,6 +7,7 @@ import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import util.TokenGenerator;
 import util.WebContext;
 
 class GenderIT {
@@ -36,11 +37,13 @@ class GenderIT {
 
     @Test
     void testFilter() {
+        var jwt = TokenGenerator.generateNewToken();
 
         RestAssured
                 .given()
                 .contentType(ContentType.JSON)
                 .queryParam("code[eq]", "M")
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
                 .when()
                 .get(ENDPOINT)
                 .then()
@@ -52,9 +55,12 @@ class GenderIT {
     @Test
     void testFind() {
         var path = String.join("/", ENDPOINT, DataSet.FEMALE_ID);
+        var jwt = TokenGenerator.generateNewToken();
+
         RestAssured
                 .given()
                 .contentType(ContentType.JSON)
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
                 .when()
                 .get(path)
                 .then()
@@ -137,9 +143,9 @@ class GenderIT {
 
         private static final String SAMPLE_JSON_DATA = """
                 {
-                    "name": "Hermaphrodite",
-                    "code": "H",
-                    "description": "Both sex organ"
+                    "name": "Random",
+                    "code": "R",
+                    "description": "Random sex organ"
                 }
                 """;
 

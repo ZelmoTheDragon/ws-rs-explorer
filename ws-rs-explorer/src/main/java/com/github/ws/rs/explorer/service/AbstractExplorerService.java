@@ -172,6 +172,7 @@ public abstract class AbstractExplorerService implements ExplorerService {
     @Override
     public <E, D, M extends EntityMapper<E, D>> boolean exists(final String name, final String id) {
         var entry = this.explorerManager.<E, D, M, AbstractExplorerService>resolve(name);
+        checkAuthorization(entry, Action.FIND);
         var mapper = this.explorerManager.invokeMapper(entry);
         var entityClass = entry.getEntityClass();
         var uuid = mapper.mapId(id);
@@ -190,17 +191,19 @@ public abstract class AbstractExplorerService implements ExplorerService {
             final Action action) {
 
         if (entry.getActions().containsKey(action)) {
-            var role = entry.getActions().get(action);
-            if (!Objects.equals(SecurityManager.PERMIT_ALL, role)) {
-                var principal = this.securityContext.getCallerPrincipal();
-                if (Objects.isNull(principal)) {
-                    throw new ActionDeniedException(action, "User not authenticate");
-                }
-                if (!this.securityContext.isCallerInRole(role)) {
-                    throw new ActionDeniedException(action, "Insufficient authorization");
-                }
-                // NO-OP: OK
+
+            var principal = this.securityContext.getCallerPrincipal();
+            if (Objects.isNull(principal)) {
+                throw new ActionDeniedException(action, "User not authenticate");
             }
+
+            var role = entry.getActions().get(action);
+            if (!Objects.equals(SecurityManager.PERMIT_ALL, role)
+                    && !this.securityContext.isCallerInRole(role)) {
+
+                throw new ActionDeniedException(action, "Insufficient authorization");
+            }
+            // NO-OP: OK
         } else {
             throw new ActionDeniedException(action);
         }

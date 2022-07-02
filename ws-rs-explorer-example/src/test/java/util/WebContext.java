@@ -1,6 +1,6 @@
 package util;
 
-public class WebContext {
+public final class WebContext {
 
     public static final String HOST = "localhost";
 

@@ -1,6 +1,5 @@
 package com.github.ws.rs.explorer.endpoint;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import jakarta.enterprise.context.RequestScoped;
@@ -22,7 +21,6 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 
 import com.github.ws.rs.explorer.ExplorerManager;
-import com.github.ws.rs.explorer.service.ExplorerService;
 
 /**
  * Dynamic controller for registered entry point.

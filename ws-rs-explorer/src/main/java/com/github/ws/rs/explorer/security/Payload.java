@@ -11,7 +11,7 @@ import jakarta.json.bind.config.PropertyOrderStrategy;
  * Simple <i>JWT</i> payload.
  */
 @JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
-class Payload {
+public class Payload {
 
     /**
      * Issuer.
@@ -91,11 +91,11 @@ class Payload {
 
     // Getters and setters...
 
-    JsonObject getRawData() {
+    public JsonObject getRawData() {
         return rawData;
     }
 
-    void setRawData(final JsonObject rawData) {
+    public void setRawData(final JsonObject rawData) {
         this.rawData = rawData;
     }
 

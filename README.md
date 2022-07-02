@@ -15,6 +15,9 @@ GET     <your-path>/entity/customser/{id}
 POST    <your-path>/entity/customer
 PUT     <your-path>/entity/customer/{id}
 DELETE  <your-path>/entity/customer/{id}
+
+OPTIONS <your-path>/entity/customer
+OPTIONS <your-path>/entity/customer/{id}
 ~~~
 
 ### Filter

@@ -48,7 +48,7 @@ public class ApplicationUser implements Serializable {
     @ElementCollection(fetch = FetchType.EAGER)
     @Column(name = "role", nullable = false)
     @CollectionTable(
-            name = "user_role",
+            name = "application_user_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
     )
     private Set<String> roles;

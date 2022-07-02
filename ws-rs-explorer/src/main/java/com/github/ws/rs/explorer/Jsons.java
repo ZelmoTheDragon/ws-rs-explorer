@@ -85,4 +85,15 @@ public final class Jsons {
             throw new IllegalStateException(ex);
         }
     }
+
+    public static String parse(JsonObject document) {
+        var output = new StringWriter();
+        var writer = Json.createWriter(output);
+        try (output; writer) {
+            writer.writeObject(document);
+            return output.toString();
+        } catch (Exception ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
 }
