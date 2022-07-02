@@ -144,6 +144,7 @@ See `com.github.ws.rs.explorer.example.customer.CustomerDTO`.
 Create your mapper class between entity and data class.
 See `com.github.ws.rs.explorer.example.customer.CustomerMapper`.
 
+> Simplify writing Java beans with [Lombok](https://projectlombok.org/).
 > You can generate mappers using [Mapstruct](https://mapstruct.org/).
 
 ### Step 3: Register your entry point
@@ -155,3 +156,5 @@ ___
 
 > This project is writing in **Java 17** with **Jakarta 9.1**.
 > It uses **Glassfish 6.X** as standard implementation.
+> Build with **Maven 3.8.X**.
+
