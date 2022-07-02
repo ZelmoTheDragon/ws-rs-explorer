@@ -169,6 +169,15 @@ public abstract class AbstractExplorerService implements ExplorerService {
         this.dao.remove(entity);
     }
 
+    @Override
+    public <E, D, M extends EntityMapper<E, D>> boolean exists(final String name, final String id) {
+        var entry = this.explorerManager.<E, D, M, AbstractExplorerService>resolve(name);
+        var mapper = this.explorerManager.invokeMapper(entry);
+        var entityClass = entry.getEntityClass();
+        var uuid = mapper.mapId(id);
+        return this.dao.contains(entityClass, uuid);
+    }
+
     /**
      * Check if the current user can do an action.
      *

@@ -42,6 +42,13 @@ public class ExplorerDAO {
         this.em = em;
     }
 
+    /**
+     * Remove an entity.
+     *
+     * @param entityClass Entity class
+     * @param id          Unique identifier
+     * @param <E>         Type of persistent entity
+     */
     public <E> void remove(final Class<E> entityClass, final Object id) {
         var attachedEntity = this.em.getReference(entityClass, id);
         this.em.remove(attachedEntity);
@@ -144,6 +151,26 @@ public class ExplorerDAO {
 
         return createQuery(this.em, entityClass, Long.class, predicate, additionalCriteriaPredicate)
                 .getSingleResult();
+    }
+
+    /**
+     * Check if an entity exists.
+     *
+     * @param entityClass Entity class
+     * @param id          Unique identifier
+     * @param <E>         Type of persistent entity
+     * @return The value {@code true} if the entity exists, otherwise {@code false} is returned
+     */
+    public <E> boolean contains(final Class<E> entityClass, final Object id) {
+
+        CriteriaPredicate<E, Long> predicate = (b, r, q) -> {
+            q.select(b.count(r));
+            var attribut = getPrimaryKeyAttribut(this.em, entityClass);
+            return b.equal(r.get(attribut), id);
+        };
+
+        return createQuery(this.em, entityClass, Long.class, predicate, AdditionalCriteriaPredicate::empty)
+                .getSingleResult() >= 1L;
     }
 
     /**

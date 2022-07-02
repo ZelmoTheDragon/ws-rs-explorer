@@ -1,17 +1,21 @@
 package com.github.ws.rs.explorer.endpoint;
 
+import java.util.List;
+import java.util.Objects;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.json.JsonObject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.OPTIONS;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
@@ -154,6 +158,60 @@ public class ExplorerEndpoint {
         var service = explorerManager.invokeService(entity);
         service.delete(entity, id);
         return Response.noContent().build();
+    }
+
+    @OPTIONS
+    @Path("{entity}")
+    public Response options(@PathParam("entity") final String entity) {
+
+        Response.ResponseBuilder result;
+
+        var service = this.explorerManager.invokeService(entity);
+        if (Objects.nonNull(service)) {
+            var allows = String.join(
+                    ", ",
+                    OPTIONS.class.getSimpleName(),
+                    GET.class.getSimpleName(),
+                    POST.class.getSimpleName()
+            );
+
+            result = Response
+                    .ok()
+                    .header(HttpHeaders.ALLOW, allows);
+        } else {
+            result = Response.status(Response.Status.NOT_FOUND);
+        }
+
+        return result.build();
+    }
+
+    @OPTIONS
+    @Path("{entity}/{id}")
+    public Response options(
+            @PathParam("entity") final String entity,
+            @PathParam("id") final String id) {
+
+        Response.ResponseBuilder result;
+
+        var service = this.explorerManager.invokeService(entity);
+        var exists = service.exists(entity, id);
+
+        if (exists) {
+            var allows = String.join(
+                    ", ",
+                    OPTIONS.class.getSimpleName(),
+                    PUT.class.getSimpleName(),
+                    DELETE.class.getSimpleName()
+            );
+
+            result = Response
+                    .ok()
+                    .header(HttpHeaders.ALLOW, allows);
+        } else {
+            result = Response.status(Response.Status.NOT_FOUND);
+        }
+
+        return result.build();
     }
 
 

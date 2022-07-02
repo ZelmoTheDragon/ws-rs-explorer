@@ -143,4 +143,16 @@ public interface ExplorerService {
      */
     <E, D, M extends EntityMapper<E, D>> void delete(String name, String id);
 
+    /**
+     * Check if the unique identifier is associated with an entity.
+     *
+     * @param name Web entity name
+     * @param id   Unique identifier
+     * @param <E>  Type of persistent entity
+     * @param <D>  Type of data transfer object
+     * @param <M>  Type of mapper
+     * @return The value {@code true} if the unique identifier is associated with an entity
+     * otherwise the value {@code false} is returned
+     */
+    <E, D, M extends EntityMapper<E, D>> boolean exists(String name, String id);
 }

@@ -2,6 +2,7 @@ package endpoint;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,8 +28,9 @@ class GenderIT {
                 .given()
                 .contentType(ContentType.JSON)
                 .when()
-                .get(ENDPOINT)
+                .options(ENDPOINT)
                 .then()
+                .header(HttpHeaders.ALLOW, Matchers.is("OPTIONS, GET, POST"))
                 .statusCode(HttpStatus.SC_OK);
     }
 
