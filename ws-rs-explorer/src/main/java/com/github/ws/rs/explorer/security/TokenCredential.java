@@ -8,6 +8,7 @@ import java.util.function.BiConsumer;
 import jakarta.json.JsonObject;
 import jakarta.security.enterprise.credential.Credential;
 
+import com.github.ws.rs.explorer.ExplorerException;
 import com.github.ws.rs.explorer.Jsons;
 
 /**
@@ -73,19 +74,9 @@ final class TokenCredential implements Credential {
 
     @Override
     public boolean isValid() {
-        boolean valid;
-        if (this.isCleared()) {
-            valid = false;
-        } else {
-            var base64Header = this.tokens[HEADER_INDEX];
-            var base64Payload = this.tokens[PAYLOAD_INDEX];
-            var sign = this.tokens[SIGNATURE_INDEX];
-            var alg = extractAlgorithmFromHeader();
-            var input = String.join(".", base64Header, base64Payload);
-            var output = HashMac.execute(alg, this.secret, input);
-            valid = Objects.equals(sign, output);
-        }
-        return valid;
+        return !this.isCleared()
+                && this.isValidSignature()
+                && this.isValidTime();
     }
 
 
@@ -117,6 +108,37 @@ final class TokenCredential implements Credential {
     }
 
     /**
+     * Verify if the token signature is valid.
+     *
+     * @return The value {@code true} if the token signature is valid,
+     * otherwise the value {@code false} is returned
+     */
+    private boolean isValidSignature() {
+        var base64Header = this.tokens[HEADER_INDEX];
+        var base64Payload = this.tokens[PAYLOAD_INDEX];
+        var sign = this.tokens[SIGNATURE_INDEX];
+        var alg = extractAlgorithmFromHeader();
+        var input = String.join(".", base64Header, base64Payload);
+        var output = HashMac.execute(alg, this.secret, input);
+        return Objects.equals(sign, output);
+    }
+
+    /**
+     * Verify if the token is in right time range.
+     *
+     * @return The value {@code true} if the token is in right time range,
+     * otherwise the value {@code false} is returned
+     */
+    private boolean isValidTime() {
+        var payload = decodePayload();
+        var now = System.currentTimeMillis() / 1000L;
+        var exp = Optional.ofNullable(payload.getExpirationTime()).orElse(0L);
+        var nbf = Optional.ofNullable(payload.getNotBeforeTime()).orElse(0L);
+
+        return exp > now && nbf < now;
+    }
+
+    /**
      * Extract the algorithm from header.
      *
      * @return The algorithm used for the signature
@@ -125,13 +147,13 @@ final class TokenCredential implements Credential {
     private String extractAlgorithmFromHeader() {
         var header = decodeHeader();
         if (!Objects.equals(header.getType(), TokenCredentialFactory.SUPPORTED_TYPE)) {
-            throw new UnsupportedOperationException("Unsupported 'typ' : " + header.getAlgorithm());
+            throw new ExplorerException("Unsupported 'typ' : " + header.getAlgorithm());
         }
         var alg = HashMac.SUPPORTED_ALGORITHM.get(header.getAlgorithm());
 
         return Optional
                 .ofNullable(alg)
-                .orElseThrow(() -> new UnsupportedOperationException("Unsupported 'alg' :" + alg));
+                .orElseThrow(() -> new ExplorerException("Unsupported 'alg' :" + alg));
     }
 
     /**

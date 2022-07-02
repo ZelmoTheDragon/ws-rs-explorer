@@ -88,6 +88,7 @@ public class ExplorerEndpoint {
     public Response find(
             @PathParam("entity") final String entity,
             @PathParam("id") final String id) {
+
         var service = this.explorerManager.invokeService(entity);
         var data = service.find(entity, id);
 
