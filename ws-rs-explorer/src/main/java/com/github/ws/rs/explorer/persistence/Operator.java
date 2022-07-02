@@ -10,66 +10,81 @@ enum Operator {
 
     /**
      * Equal.
+     * Exact match.
      */
     EQUAL("eq"),
 
     /**
      * Not equal.
+     * Same as {@link #EQUAL} but negate.
      */
-    NOT_EQUAL("neq"),
+    NOT_EQUAL("ne"),
 
     /**
      * Like.
+     * Case-insensitive and ignore accent.
+     * Contains the specified value.
      */
     LIKE("li"),
 
     /**
      * Not like.
+     * Same as {@link #LIKE} but negate
      */
-    NOT_LIKE("nli"),
+    NOT_LIKE("nl"),
 
     /**
      * Greater than.
+     * Work with text, number and date.
      */
     GREATER_THAN("gt"),
 
     /**
      * Greater than or equal.
+     * Work with text, number and date.
      */
     GREATER_THAN_OR_EQUAL("ge"),
 
     /**
      * Less than.
+     * Work with text, number and date.
      */
     LESS_THAN("lt"),
 
     /**
      * Less than or equal.
+     * Work with text, number and date.
      */
     LESS_THAN_OR_EQUAL("le"),
 
     /**
      * In.
+     * Exact match.
      */
     IN("in"),
 
     /**
      * Not in.
+     * Same as {@link #IN} but negate.
      */
-    NOT_IN("nin"),
+    NOT_IN("ni"),
 
     /**
      * Between.
+     * Exact match.
+     * Work with text, number and date.
      */
     BETWEEN("bt"),
 
     /**
      * Not between.
+     * Same as {@link #BETWEEN} but negate.
      */
     NOT_BETWEEN("nbt"),
 
     /**
      * None.
+     * No operator, only for specific web query.
      */
     NONE("");
 
