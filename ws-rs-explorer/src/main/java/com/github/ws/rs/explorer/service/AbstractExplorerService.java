@@ -17,13 +17,33 @@ import com.github.ws.rs.explorer.ExplorerManager;
 import com.github.ws.rs.explorer.EntityMapper;
 import com.github.ws.rs.explorer.security.SecurityManager;
 
-
+/**
+ * Base class with basic business logic.
+ */
 public abstract class AbstractExplorerService implements ExplorerService {
 
+    /**
+     * Security manager for this module.
+     */
     protected final SecurityContext securityContext;
+
+    /**
+     * Manager for all entry point.
+     */
     protected final ExplorerManager explorerManager;
+
+    /**
+     * Dynamic and generic repository.
+     */
     protected final ExplorerDAO dao;
 
+    /**
+     * Full constructor.
+     *
+     * @param securityContext Security manager for this module
+     * @param explorerManager Manager for all entry point
+     * @param dao             Dynamic and generic repository
+     */
     protected AbstractExplorerService(
             final SecurityContext securityContext,
             final ExplorerManager explorerManager,
@@ -149,6 +169,13 @@ public abstract class AbstractExplorerService implements ExplorerService {
         this.dao.remove(entity);
     }
 
+    /**
+     * Check if the current user can do an action.
+     *
+     * @param entry  dynamic entry point
+     * @param action business action
+     * @throws ActionDeniedException If the user is not authenticate or has not enough authorization
+     */
     protected void checkAuthorization(
             final DynamicEntry<?, ?, ?, ?> entry,
             final Action action) {
@@ -159,7 +186,8 @@ public abstract class AbstractExplorerService implements ExplorerService {
                 var principal = this.securityContext.getCallerPrincipal();
                 if (Objects.isNull(principal)) {
                     throw new ActionDeniedException(action, "User not authenticate");
-                } else if (!this.securityContext.isCallerInRole(role)) {
+                }
+                if (!this.securityContext.isCallerInRole(role)) {
                     throw new ActionDeniedException(action, "Insufficient authorization");
                 }
                 // NO-OP: OK

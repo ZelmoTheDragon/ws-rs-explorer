@@ -7,30 +7,57 @@ import jakarta.json.bind.annotation.JsonbPropertyOrder;
 import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.json.bind.config.PropertyOrderStrategy;
 
+/**
+ * Simple <i>JWT</i> payload.
+ */
 @JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
 class Payload {
 
+    /**
+     * Issuer.
+     */
     @JsonbProperty("iss")
     private String issuer;
 
+    /**
+     * Subject.
+     */
     @JsonbProperty("sub")
     private String subject;
 
+    /**
+     * Audience.
+     */
     @JsonbProperty("aud")
     private String audience;
 
+    /**
+     * Expiration time (in second).
+     */
     @JsonbProperty("exp")
     private Long expirationTime;
 
+    /**
+     * Not before time (in second).
+     */
     @JsonbProperty("nbf")
     private Long notBeforeTime;
 
+    /**
+     * Issued at time (in second).
+     */
     @JsonbProperty("iat")
     private Long issuedAtTime;
 
+    /**
+     * <i>JWT</i> identifier.
+     */
     @JsonbProperty("jti")
     private String jwtId;
 
+    /**
+     * Full <i>JSON</i> object of <i>JWT</i> payload.
+     */
     @JsonbTransient
     private transient JsonObject rawData;
 
@@ -61,6 +88,8 @@ class Payload {
     public int hashCode() {
         return Objects.hash(issuer, subject, audience, expirationTime, notBeforeTime, issuedAtTime, jwtId);
     }
+
+    // Getters and setters...
 
     JsonObject getRawData() {
         return rawData;

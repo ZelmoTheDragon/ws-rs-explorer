@@ -36,7 +36,7 @@ public class ExplorerEndpoint {
 
     /**
      * Default constructor.
-     * This class is injectable, don't call the constructor explicitly.
+     * This class is injectable, don't call this constructor explicitly.
      */
     ExplorerEndpoint() {
         this.explorerManager = null;
@@ -44,7 +44,9 @@ public class ExplorerEndpoint {
 
     /**
      * Injection constructor.
-     * This class is injectable, don't call the constructor explicitly.
+     * This class is injectable, don't call this constructor explicitly.
+     *
+     * @param explorerManager Manager for entry point
      */
     @Inject
     public ExplorerEndpoint(final ExplorerManager explorerManager) {

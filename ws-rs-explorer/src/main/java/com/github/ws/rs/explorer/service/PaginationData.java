@@ -6,33 +6,52 @@ import jakarta.json.bind.annotation.JsonbProperty;
 import jakarta.json.bind.annotation.JsonbPropertyOrder;
 import jakarta.json.bind.config.PropertyOrderStrategy;
 
+/**
+ * Paginated search result.
+ *
+ * @param <T> Data type
+ */
 @JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
 public class PaginationData<T> {
 
+    /**
+     * Data.
+     */
     @JsonbProperty("data")
     private List<T> data;
 
+    /**
+     * Total number of element.
+     */
     @JsonbProperty("size")
     private long size;
 
+    /**
+     * Page size.
+     */
     @JsonbProperty("pageSize")
     private long pageSize;
 
+    /**
+     * Page number.
+     */
     @JsonbProperty("pageNumber")
     private long pageNumber;
 
+    /**
+     * Page count.
+     */
     @JsonbProperty("pageCount")
     private long pageCount;
 
+    /**
+     * Default constructor.
+     */
     public PaginationData() {
         this.data = new ArrayList<>();
     }
 
-    public boolean isEmpty() {
-        return this.data.isEmpty();
-    }
-
-    // Accesseurs & Mutateurs
+    // Getters and setters...
 
     public List<T> getData() {
         return List.copyOf(data);

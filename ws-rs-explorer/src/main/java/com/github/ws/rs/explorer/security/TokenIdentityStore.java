@@ -8,11 +8,23 @@ import jakarta.security.enterprise.credential.Credential;
 import jakarta.security.enterprise.identitystore.CredentialValidationResult;
 import jakarta.security.enterprise.identitystore.IdentityStore;
 
+/**
+ * An identity store for validate token credential.
+ */
 @Singleton
 public class TokenIdentityStore implements IdentityStore {
 
+    /**
+     * Security manager for this module.
+     */
     private final SecurityManager securityManager;
 
+    /**
+     * Injection constructor.
+     * This class is injectable, don't call this constructor explicitly.
+     *
+     * @param securityManager Security manager for this module.
+     */
     @Inject
     public TokenIdentityStore(final SecurityManager securityManager) {
         this.securityManager = securityManager;

@@ -7,19 +7,35 @@ import jakarta.json.bind.annotation.JsonbPropertyOrder;
 import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.json.bind.config.PropertyOrderStrategy;
 
+/**
+ * Simple <i>JWT</i> header.
+ */
 @JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
 class Header {
 
+    /**
+     * Signature algorithm.
+     */
     @JsonbProperty("alg")
     private String algorithm;
 
+    /**
+     * Token type.
+     */
     @JsonbProperty("alg")
     private String type;
 
+    /**
+     * Full <i>JSON</i> object of <i>JWT</i> header.
+     */
     @JsonbTransient
     private transient JsonObject rawData;
 
+    /**
+     * Default constructor.
+     */
     public Header() {
+        // NO-OP
     }
 
     @Override
@@ -42,6 +58,7 @@ class Header {
         return Objects.hash(algorithm, type);
     }
 
+    // Getters and setters...
 
     JsonObject getRawData() {
         return rawData;

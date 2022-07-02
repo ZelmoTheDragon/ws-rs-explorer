@@ -12,22 +12,41 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.ws.rs.core.HttpHeaders;
 
+/**
+ * An <i>HTTP</i> authentification mechanism for <i>JWT</i> flow.
+ */
 @ApplicationScoped
 public class OAuth2Authentication implements HttpAuthenticationMechanism {
 
+    /**
+     * Keyword in <i>HTTP</i> header.
+     */
     private static final String BEARER_TOKEN = "Bearer ";
 
+    /**
+     * Service handler for authentification validation.
+     */
     private final IdentityStoreHandler identityStoreHandler;
 
-    private final TokenProvider tokenProvider;
+    /**
+     * Token provider service for decoding <i>JWT</i>.
+     */
+    private final TokenCredentialFactory tokenCredentialFactory;
 
+    /**
+     * Injection constructor.
+     * This class is injectable, don't call this constructor explicitly.
+     *
+     * @param identityStoreHandler   Service handler for authentification validation
+     * @param tokenCredentialFactory Token provider service for decoding <i>JWT</i>
+     */
     @Inject
     public OAuth2Authentication(
             final IdentityStoreHandler identityStoreHandler,
-            final TokenProvider tokenProvider) {
+            final TokenCredentialFactory tokenCredentialFactory) {
 
         this.identityStoreHandler = identityStoreHandler;
-        this.tokenProvider = tokenProvider;
+        this.tokenCredentialFactory = tokenCredentialFactory;
     }
 
     @Override
@@ -50,7 +69,7 @@ public class OAuth2Authentication implements HttpAuthenticationMechanism {
                     .map(e -> e.replace(BEARER_TOKEN, ""))
                     .orElse("");
 
-            var credential = tokenProvider.of(token);
+            var credential = tokenCredentialFactory.of(token);
             if (!credential.isValid()) {
                 authenticationStatus = httpMessageContext.responseUnauthorized();
             } else {

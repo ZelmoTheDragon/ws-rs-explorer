@@ -35,7 +35,7 @@ public class ManagerEndpoint {
 
     /**
      * Default constructor.
-     * This class is injectable, don't call the constructor explicitly.
+     * This class is injectable, don't call this constructor explicitly.
      */
     ManagerEndpoint() {
         this.securityManager = null;
@@ -44,7 +44,7 @@ public class ManagerEndpoint {
 
     /**
      * Injection constructor.
-     * This class is injectable, don't call the constructor explicitly.
+     * This class is injectable, don't call this constructor explicitly.
      */
     @Inject
     public ManagerEndpoint(

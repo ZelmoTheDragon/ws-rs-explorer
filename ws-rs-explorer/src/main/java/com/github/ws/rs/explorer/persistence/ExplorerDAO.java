@@ -33,7 +33,7 @@ public class ExplorerDAO {
 
     /**
      * Injection constructor.
-     * This class is injectable, don't call the constructor explicitly.
+     * This class is injectable, don't call this constructor explicitly.
      *
      * @param em Entity manager
      */
@@ -253,7 +253,7 @@ public class ExplorerDAO {
     /**
      * Construct a <i>JPA ORDER BY</i> clause.
      *
-     * @param queries Wen queries
+     * @param queries Web queries
      * @param builder Criteria builder
      * @param root    Root clause of database query
      * @param <E>     Type of persistent entity

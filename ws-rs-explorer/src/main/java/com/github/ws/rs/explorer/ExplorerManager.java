@@ -22,7 +22,7 @@ public class ExplorerManager {
 
     /**
      * Default constructor.
-     * This class is injectable, don't call the constructor explicitly.
+     * This class is injectable, don't call this constructor explicitly.
      */
     public ExplorerManager() {
         this.entries = new HashSet<>();
