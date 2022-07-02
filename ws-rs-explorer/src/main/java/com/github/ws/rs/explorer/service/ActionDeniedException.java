@@ -29,7 +29,7 @@ public final class ActionDeniedException extends ExplorerException {
      * @param message Specific message can be visible by the client
      */
     public ActionDeniedException(final Action action, final String message) {
-        super(String.format("Action type [%s] denied ! %s", action, message));
+        super(String.format("Action type [%s] denied ! %s", action, message).trim());
         this.action = action;
     }
 

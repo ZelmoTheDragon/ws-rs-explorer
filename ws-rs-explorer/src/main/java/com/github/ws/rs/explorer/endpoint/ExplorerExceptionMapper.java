@@ -30,7 +30,7 @@ public class ExplorerExceptionMapper implements ExceptionMapper<ExplorerExceptio
         var json = Json.createObjectBuilder()
                 .add("error", exception.getClass().getName())
                 .add("message", exception.getMessage())
-                .add("date", LocalDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME))
+                .add("date", LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME))
                 .build();
 
         return Response
