@@ -14,18 +14,21 @@
 
         <properties>
             <!-- 
-            Génération automatique de la base de données
-            Ce processus s'active à chaque déploiement de l'application 
-            Utiliser les annotations JPA pour générer la base de données à la volée
+                JPA property:
+
+                Populate the database during deployment.
             -->
             <property name="jakarta.persistence.schema-generation.database.action" value="none" />
             <property name="jakarta.persistence.schema-generation.scripts.create-source"  value="metadata" />
             <property name="jakarta.persistence.schema-generation.scripts.drop-source" value="metadata" />
             <property name="jakarta.persistence.sql-load-script-source" value="derby-init.sql" />
 
-            <!-- /!\ NON STANDARD JPA -->
-            <!-- DEBUG uniquement -->
-            <!-- Voir les requêtes SQL dans la console -->
+            <!--
+                /!\ EclipseLink property:
+
+                DEBUG only.
+                Print queries to console output.
+            -->
             <property name="eclipselink.logging.level" value="FINE"/>
             <property name="eclipselink.logging.level.sql" value="FINE"/>
             <property name="eclipselink.logging.parameters" value="TRUE"/>

@@ -90,7 +90,7 @@ public final class SecurityManager {
      * Add or replace a specific configuration.
      *
      * @param key   Name of the property
-     * @param value Value value associated with this key
+     * @param value The value associated with this key
      */
     public void putConfiguration(final Configuration key, String value) {
         this.configuration.setProperty(key.name(), value);
