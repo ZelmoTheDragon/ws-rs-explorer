@@ -22,7 +22,7 @@ public class GenderEntity extends AbstractEntity {
 
     @NotBlank
     @Size(max = 255)
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @NotBlank
