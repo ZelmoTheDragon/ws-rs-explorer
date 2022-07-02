@@ -51,6 +51,11 @@ public final class FilterQuery {
     private static final String ORDER_DESC_SYMBOL = "-";
 
     /**
+     * Logical operator <i>OR</i> symbol in value.
+     */
+    private static final String OR_SYMBOL = "|";
+
+    /**
      * Index of the first element in between web query.
      */
     private static final int BETWEEN_FIRST_ARGUMENT = 0;

@@ -47,7 +47,7 @@ interface BasicCriteriaPredicate<X> {
         return Stream.of(query)
                 .flatMap(q -> Queries.asValues(type, q).stream())
                 .map(v -> builder.equal(attribute, v))
-                .reduce(builder::or)
+                .reduce(builder::and)
                 .orElseGet(() -> builder.isNull(attribute));
     }
 
@@ -91,7 +91,7 @@ interface BasicCriteriaPredicate<X> {
                 .map(BasicCriteriaPredicate::stripAccent)
                 .map(v -> "%" + v + "%")
                 .map(v -> builder.like(builder.lower(attribute), v))
-                .reduce(builder::or)
+                .reduce(builder::and)
                 .orElseGet(() -> builder.isNull(attribute));
     }
 
@@ -133,7 +133,7 @@ interface BasicCriteriaPredicate<X> {
         return Stream.of(query)
                 .flatMap(q -> Queries.asValues(type, q).stream())
                 .map(v -> builder.greaterThan(attribute, v))
-                .reduce(builder::or)
+                .reduce(builder::and)
                 .orElseGet(() -> builder.isNull(attribute));
     }
 
@@ -158,7 +158,7 @@ interface BasicCriteriaPredicate<X> {
         return Stream.of(query)
                 .flatMap(q -> Queries.asValues(type, q).stream())
                 .map(v -> builder.greaterThanOrEqualTo(attribute, v))
-                .reduce(builder::or)
+                .reduce(builder::and)
                 .orElseGet(() -> builder.isNull(attribute));
     }
 
@@ -183,7 +183,7 @@ interface BasicCriteriaPredicate<X> {
         return Stream.of(query)
                 .flatMap(q -> Queries.asValues(type, q).stream())
                 .map(v -> builder.lessThan(attribute, v))
-                .reduce(builder::or)
+                .reduce(builder::and)
                 .orElseGet(() -> builder.isNull(attribute));
     }
 
@@ -208,7 +208,7 @@ interface BasicCriteriaPredicate<X> {
         return Stream.of(query)
                 .flatMap(q -> Queries.asValues(type, q).stream())
                 .map(v -> builder.lessThanOrEqualTo(attribute, v))
-                .reduce(builder::or)
+                .reduce(builder::and)
                 .orElseGet(() -> builder.isNull(attribute));
     }
 
@@ -315,7 +315,7 @@ interface BasicCriteriaPredicate<X> {
                 .filter(a -> Objects.equals(a.getJavaType(), String.class))
                 .map(a -> root.<String>get(a.getName()))
                 .map(a -> builder.like(builder.lower(a), stripAccent(query.getSingleValue())))
-                .reduce(builder::or)
+                .reduce(builder::and)
                 .orElseGet(builder::and);
     }
 
