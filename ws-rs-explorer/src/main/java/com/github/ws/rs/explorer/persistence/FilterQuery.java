@@ -43,17 +43,12 @@ public final class FilterQuery {
     /**
      * Prefix symbol for ascending order.
      */
-    private static final String ORDER_ASC_SYMBOL = "+";
+    private static final char ORDER_ASC_SYMBOL = '+';
 
     /**
      * Prefix symbol for descending order.
      */
-    private static final String ORDER_DESC_SYMBOL = "-";
-
-    /**
-     * Logical operator <i>OR</i> symbol in value.
-     */
-    private static final String OR_SYMBOL = "|";
+    private static final char ORDER_DESC_SYMBOL = '-';
 
     /**
      * Index of the first element in between web query.
@@ -73,7 +68,7 @@ public final class FilterQuery {
     /**
      * Values.
      */
-    private final List<String> values;
+    private final Map<WebOperator, List<String>> values;
 
     /**
      * Logical operator.
@@ -87,9 +82,9 @@ public final class FilterQuery {
      * @param values   Values
      * @param operator Logical operator
      */
-    FilterQuery(final String name, final List<String> values, final Operator operator) {
+    FilterQuery(final String name, final Map<WebOperator, List<String>> values, final Operator operator) {
         this.name = name;
-        this.values = List.copyOf(values);
+        this.values = Map.copyOf(values);
         this.operator = operator;
     }
 
@@ -129,8 +124,8 @@ public final class FilterQuery {
         return name;
     }
 
-    List<String> getValues() {
-        return List.copyOf(values);
+    Map<WebOperator, List<String>> getValues() {
+        return Map.copyOf(values);
     }
 
     Operator getOperator() {
@@ -166,26 +161,31 @@ public final class FilterQuery {
     }
 
     String getBetweenFirstValue() {
-        return this.values.get(BETWEEN_FIRST_ARGUMENT);
+        var between = this.values.get(WebOperator.AND);
+        return between.get(BETWEEN_FIRST_ARGUMENT);
     }
 
     String getBetweenSecondValue() {
-        return this.values.get(BETWEEN_SECOND_ARGUMENT);
+        var between = this.values.get(WebOperator.AND);
+        return between.get(BETWEEN_SECOND_ARGUMENT);
     }
 
     Map<String, Boolean> getSortedValues() {
         var orders = new HashMap<String, Boolean>();
-        for (var v : this.values) {
+        for (var v : this.values.values()) {
+
             var name = String.valueOf(v);
-            if (name.startsWith(ORDER_DESC_SYMBOL)) {
-                name = name.replace(ORDER_DESC_SYMBOL, "");
-                orders.put(name, Boolean.FALSE);
-            } else if (name.startsWith(ORDER_ASC_SYMBOL)) {
-                name = name.replace(ORDER_ASC_SYMBOL, "");
-                orders.put(name, Boolean.TRUE);
+            boolean asc;
+            if (name.charAt(0) == ORDER_DESC_SYMBOL) {
+                name = name.substring(1);
+                asc = false;
+            } else if (name.charAt(0) == ORDER_ASC_SYMBOL) {
+                name = name.substring(1);
+                asc = true;
             } else {
-                orders.put(name, Boolean.TRUE);
+                asc = true;
             }
+            orders.put(name, asc);
         }
         return orders;
     }
@@ -193,7 +193,7 @@ public final class FilterQuery {
     String getSingleValue() {
         String value;
         if (!this.values.isEmpty()) {
-            value = this.values.get(0);
+            value = this.values.get(WebOperator.AND).get(0);
         } else {
             value = null;
         }

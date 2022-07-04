@@ -2,6 +2,7 @@ package com.github.ws.rs.explorer.persistence;
 
 import java.text.Normalizer;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Stream;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.Predicate;
@@ -45,8 +46,13 @@ interface BasicCriteriaPredicate<X> {
         var type = attribute.getModel().getBindableJavaType();
 
         return Stream.of(query)
-                .flatMap(q -> Queries.asValues(type, q).stream())
-                .map(v -> builder.equal(attribute, v))
+                .flatMap(q -> Queries.asValues(type, q).entrySet().stream())
+                .map(e -> e.getValue()
+                        .stream()
+                        .map(v -> builder.equal(attribute, v))
+                        .reduce((a, v) -> e.getKey().reducer().apply(builder, a, v))
+                )
+                .flatMap(Optional::stream)
                 .reduce(builder::and)
                 .orElseGet(() -> builder.isNull(attribute));
     }
@@ -86,11 +92,16 @@ interface BasicCriteriaPredicate<X> {
         var attribute = root.<String>get(query.getName());
 
         return Stream.of(query)
-                .flatMap(q -> Queries.asValues(String.class, q).stream())
-                .map(v -> String.valueOf(v).toLowerCase())
-                .map(BasicCriteriaPredicate::stripAccent)
-                .map(v -> "%" + v + "%")
-                .map(v -> builder.like(builder.lower(attribute), v))
+                .flatMap(q -> Queries.asValues(String.class, q).entrySet().stream())
+                .map(e -> e.getValue()
+                        .stream()
+                        .map(v -> String.valueOf(v).toLowerCase())
+                        .map(BasicCriteriaPredicate::stripAccent)
+                        .map(v -> "%" + v + "%")
+                        .map(v -> builder.like(builder.lower(attribute), v))
+                        .reduce((a, v) -> e.getKey().reducer().apply(builder, a, v))
+                )
+                .flatMap(Optional::stream)
                 .reduce(builder::and)
                 .orElseGet(() -> builder.isNull(attribute));
     }
@@ -131,8 +142,13 @@ interface BasicCriteriaPredicate<X> {
         var type = attribute.getModel().getBindableJavaType();
 
         return Stream.of(query)
-                .flatMap(q -> Queries.asValues(type, q).stream())
-                .map(v -> builder.greaterThan(attribute, v))
+                .flatMap(q -> Queries.asValues(type, q).entrySet().stream())
+                .map(e -> e.getValue()
+                        .stream()
+                        .map(v -> builder.greaterThan(attribute, v))
+                        .reduce((a, v) -> e.getKey().reducer().apply(builder, a, v))
+                )
+                .flatMap(Optional::stream)
                 .reduce(builder::and)
                 .orElseGet(() -> builder.isNull(attribute));
     }
@@ -156,8 +172,13 @@ interface BasicCriteriaPredicate<X> {
         var type = attribute.getModel().getBindableJavaType();
 
         return Stream.of(query)
-                .flatMap(q -> Queries.asValues(type, q).stream())
-                .map(v -> builder.greaterThanOrEqualTo(attribute, v))
+                .flatMap(q -> Queries.asValues(type, q).entrySet().stream())
+                .map(e -> e.getValue()
+                        .stream()
+                        .map(v -> builder.greaterThanOrEqualTo(attribute, v))
+                        .reduce((a, v) -> e.getKey().reducer().apply(builder, a, v))
+                )
+                .flatMap(Optional::stream)
                 .reduce(builder::and)
                 .orElseGet(() -> builder.isNull(attribute));
     }
@@ -181,8 +202,13 @@ interface BasicCriteriaPredicate<X> {
         var type = attribute.getModel().getBindableJavaType();
 
         return Stream.of(query)
-                .flatMap(q -> Queries.asValues(type, q).stream())
-                .map(v -> builder.lessThan(attribute, v))
+                .flatMap(q -> Queries.asValues(type, q).entrySet().stream())
+                .map(e -> e.getValue()
+                        .stream()
+                        .map(v -> builder.lessThan(attribute, v))
+                        .reduce((a, v) -> e.getKey().reducer().apply(builder, a, v))
+                )
+                .flatMap(Optional::stream)
                 .reduce(builder::and)
                 .orElseGet(() -> builder.isNull(attribute));
     }
@@ -206,8 +232,13 @@ interface BasicCriteriaPredicate<X> {
         var type = attribute.getModel().getBindableJavaType();
 
         return Stream.of(query)
-                .flatMap(q -> Queries.asValues(type, q).stream())
-                .map(v -> builder.lessThanOrEqualTo(attribute, v))
+                .flatMap(q -> Queries.asValues(type, q).entrySet().stream())
+                .map(e -> e.getValue()
+                        .stream()
+                        .map(v -> builder.lessThanOrEqualTo(attribute, v))
+                        .reduce((a, v) -> e.getKey().reducer().apply(builder, a, v))
+                )
+                .flatMap(Optional::stream)
                 .reduce(builder::and)
                 .orElseGet(() -> builder.isNull(attribute));
     }

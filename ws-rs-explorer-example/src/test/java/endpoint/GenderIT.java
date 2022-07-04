@@ -42,13 +42,15 @@ class GenderIT {
         RestAssured
                 .given()
                 .contentType(ContentType.JSON)
-                .queryParam("code[eq]", "M")
+                .queryParam("code[eq]", "M|F")
+                .queryParam("orderBy", "-code")
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
                 .when()
                 .get(ENDPOINT)
                 .then()
-                .body("size", Matchers.is(1))
+                .body("size", Matchers.is(2))
                 .body("data[0].id", Matchers.is(DataSet.MALE_ID))
+                .body("data[1].id", Matchers.is(DataSet.FEMALE_ID))
                 .statusCode(HttpStatus.SC_OK);
     }
 

@@ -1,5 +1,7 @@
 package com.github.ws.rs.explorer.persistence;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -75,12 +77,20 @@ public final class Queries {
      * @param <T>   Basic type
      * @return The raw value converted as list
      */
-    static <T> List<T> asValues(final Class<T> type, final FilterQuery query) {
+    static <T> Map<WebOperator, List<T>> asValues(final Class<T> type, final FilterQuery query) {
 
-        return query.getValues()
-                .stream()
-                .map(s -> (T) CONVERTERS.get(type).apply(s))
-                .collect(Collectors.toList());
+        var map = new HashMap<WebOperator, List<T>>();
+        for (var m : query.getValues().entrySet()) {
+            var k = m.getKey();
+            var v = m.getValue()
+                    .stream()
+                    .map(s -> (T) CONVERTERS.get(type).apply(s))
+                    .toList();
+
+            map.put(k, v);
+        }
+
+        return map;
     }
 
     /**
@@ -159,7 +169,7 @@ public final class Queries {
      * Convert raw parameter to web query.
      *
      * @param parameterName Attribut name with or without operator symbol
-     * @param values        Values
+     * @param values        Web parameters values
      * @return A web query
      */
     public static FilterQuery convertQuery(final String parameterName, final List<String> values) {
@@ -168,17 +178,46 @@ public final class Queries {
         var bracketClose = parameterName.indexOf("]");
 
         String name;
+        Map<WebOperator, List<String>> compositeValues;
         Operator operator;
 
         if (bracketOpen == -1 || bracketClose == -1 || bracketOpen > bracketClose) {
             name = parameterName;
             operator = Operator.NONE;
+            compositeValues = Map.of(WebOperator.AND, values);
         } else {
             name = parameterName.substring(0, bracketOpen);
             var rawOperator = parameterName.substring(bracketOpen + 1, bracketClose);
+            compositeValues = convertValues(values);
             operator = Operator.parse(rawOperator);
         }
-        return new FilterQuery(name, values, operator);
+        return new FilterQuery(name, compositeValues, operator);
+    }
+
+    /**
+     * Convert web parameters values to composite web values.
+     *
+     * @param values Web parameters values
+     * @return
+     */
+    private static Map<WebOperator, List<String>> convertValues(final List<String> values) {
+        var map = new HashMap<WebOperator, List<String>>();
+
+        for (var v : values) {
+            var or = v.split("\\|");
+            if (or.length > 1) {
+                for (var o : or) {
+                    var orValues = map.getOrDefault(WebOperator.OR, new ArrayList<>());
+                    orValues.add(o);
+                    map.put(WebOperator.OR, orValues);
+                }
+            } else {
+                var andValues = map.getOrDefault(WebOperator.AND, new ArrayList<>());
+                andValues.add(v);
+                map.put(WebOperator.AND, andValues);
+            }
+        }
+        return map;
     }
 
 

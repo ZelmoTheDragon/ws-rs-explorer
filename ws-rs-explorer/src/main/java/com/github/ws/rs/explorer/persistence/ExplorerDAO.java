@@ -296,8 +296,7 @@ public final class ExplorerDAO {
                 .filter(FilterQuery::isSortQuery)
                 .map(FilterQuery::getSortedValues)
                 .map(Map::entrySet)
-                .map(Set::stream)
-                .map(e -> (Map.Entry<String, Boolean>) e)
+                .flatMap(Set::stream)
                 .map(e -> buildOrder(e, builder, root))
                 .collect(Collectors.toList());
     }
