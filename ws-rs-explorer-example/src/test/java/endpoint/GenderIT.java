@@ -1,5 +1,7 @@
 package endpoint;
 
+import java.util.List;
+
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.apache.http.HttpHeaders;
@@ -39,10 +41,12 @@ class GenderIT {
     void testFilter() {
         var jwt = TokenGenerator.generateNewToken();
 
+        // FIXME: query parameter value -code became [-code] why ?
+
         RestAssured
                 .given()
                 .contentType(ContentType.JSON)
-                .queryParam("code[eq]", "M|F")
+                .queryParams("code[eq]", "M|F")
                 .queryParam("orderBy", "-code")
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
                 .when()

@@ -198,7 +198,7 @@ public final class Queries {
      * Convert web parameters values to composite web values.
      *
      * @param values Web parameters values
-     * @return
+     * @return The values associated with the web operator
      */
     private static Map<WebOperator, List<String>> convertValues(final List<String> values) {
         var map = new HashMap<WebOperator, List<String>>();
