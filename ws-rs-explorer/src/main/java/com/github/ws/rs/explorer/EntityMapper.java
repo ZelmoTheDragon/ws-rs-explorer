@@ -1,9 +1,12 @@
 package com.github.ws.rs.explorer;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * Root converter for dynamic entry.
@@ -21,7 +24,17 @@ public interface EntityMapper<E, D> {
      * @return An instance of identifier with the right type
      */
     default <K> K mapId(String id) {
-        return (K) UUID.fromString(id);
+        var entityClass = Stream
+                .of(this.getClass().getGenericInterfaces())
+                .filter(t -> t instanceof ParameterizedType)
+                .map(t -> (ParameterizedType) t)
+                .filter(t -> Objects.equals(t.getRawType(), EntityMapper.class))
+                .map(t -> (Class<E>) t.getActualTypeArguments()[0])
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("Can not find entity class using introspection"));
+
+        var idClass = EntityMappers.findIdentifierType(entityClass);
+        return (K) EntityMappers.convert(idClass, id);
     }
 
     /**
