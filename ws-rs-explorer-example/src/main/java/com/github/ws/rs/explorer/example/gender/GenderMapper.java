@@ -9,11 +9,10 @@ import com.github.ws.rs.explorer.example.persistence.GenericDAO;
 @Singleton
 public class GenderMapper implements EntityMapper<GenderEntity, GenderDTO> {
 
-    private final GenericDAO dao;
-
     @Inject
-    public GenderMapper(final GenericDAO dao) {
-        this.dao = dao;
+    private  GenericDAO dao;
+
+    public GenderMapper() {
     }
 
     @Override

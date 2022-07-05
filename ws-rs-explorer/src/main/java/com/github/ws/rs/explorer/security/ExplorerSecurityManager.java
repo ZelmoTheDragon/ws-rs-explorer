@@ -11,7 +11,7 @@ import jakarta.inject.Singleton;
  * Simple security manager.
  */
 @Singleton
-public final class SecurityManager {
+public class ExplorerSecurityManager {
 
     /**
      * Role required only an authenticated user without specific privileges.
@@ -32,7 +32,7 @@ public final class SecurityManager {
      * Default constructor.
      * This class is injectable, don't call this constructor explicitly.
      */
-    public SecurityManager() {
+    public ExplorerSecurityManager() {
         this.roles = new HashSet<>();
         this.configuration = new Properties();
     }

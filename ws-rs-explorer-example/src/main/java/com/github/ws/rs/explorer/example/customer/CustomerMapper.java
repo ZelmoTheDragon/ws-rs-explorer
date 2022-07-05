@@ -1,5 +1,6 @@
 package com.github.ws.rs.explorer.example.customer;
 
+import java.util.UUID;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
@@ -10,11 +11,10 @@ import com.github.ws.rs.explorer.example.persistence.GenericDAO;
 @Singleton
 public class CustomerMapper implements EntityMapper<CustomerEntity, CustomerDTO> {
 
-    private final GenericDAO dao;
-
     @Inject
-    public CustomerMapper(final GenericDAO dao) {
-        this.dao = dao;
+    private GenericDAO dao;
+
+    public CustomerMapper() {
     }
 
     @Override

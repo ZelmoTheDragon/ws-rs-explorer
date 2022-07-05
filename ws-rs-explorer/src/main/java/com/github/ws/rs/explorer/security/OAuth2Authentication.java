@@ -26,27 +26,15 @@ public class OAuth2Authentication implements HttpAuthenticationMechanism {
     /**
      * Service handler for authentification validation.
      */
-    private final IdentityStoreHandler identityStoreHandler;
-
-    /**
-     * Token provider service for decoding <i>JWT</i>.
-     */
-    private final TokenCredentialFactory tokenCredentialFactory;
-
-    /**
-     * Injection constructor.
-     * This class is injectable, don't call this constructor explicitly.
-     *
-     * @param identityStoreHandler   Service handler for authentification validation
-     * @param tokenCredentialFactory Token provider service for decoding <i>JWT</i>
-     */
     @Inject
-    public OAuth2Authentication(
-            final IdentityStoreHandler identityStoreHandler,
-            final TokenCredentialFactory tokenCredentialFactory) {
+    private IdentityStoreHandler identityStoreHandler;
 
-        this.identityStoreHandler = identityStoreHandler;
-        this.tokenCredentialFactory = tokenCredentialFactory;
+    /**
+     * Default constructor.
+     * This class is injectable, don't call this constructor explicitly.
+     */
+    public OAuth2Authentication() {
+        // NO-OP
     }
 
     @Override
@@ -68,8 +56,8 @@ public class OAuth2Authentication implements HttpAuthenticationMechanism {
                     .map(e -> e.replace(BEARER_TOKEN, ""))
                     .map(String::trim)
                     .filter(e -> !e.isBlank())
-                    .map(tokenCredentialFactory::of)
-                    .orElseGet(tokenCredentialFactory::of);
+                    .map(TokenCredentialFactory::of)
+                    .orElseGet(TokenCredentialFactory::of);
 
             if (credential.isValid()) {
                 var result = identityStoreHandler.validate(credential);

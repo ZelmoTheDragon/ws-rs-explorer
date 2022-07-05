@@ -11,11 +11,11 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import com.github.ws.rs.explorer.ExplorerManager;
-import com.github.ws.rs.explorer.security.SecurityManager;
+import com.github.ws.rs.explorer.security.ExplorerSecurityManager;
 
 /**
  * Basic controller exposing registered dynamic entry.
- * This feature must be enabled in {@link SecurityManager}.
+ * This feature must be enabled in {@link ExplorerSecurityManager}.
  */
 @RequestScoped
 @Path("manager")
@@ -26,33 +26,21 @@ public class ManagerEndpoint {
     /**
      * Security manager for this module.
      */
-    private final SecurityManager securityManager;
+    @Inject
+    private ExplorerSecurityManager explorerSecurityManager;
 
     /**
      * Dynamic entry manager.
      */
-    private final ExplorerManager explorerManager;
+    @Inject
+    private ExplorerManager explorerManager;
 
     /**
      * Default constructor.
      * This class is injectable, don't call this constructor explicitly.
      */
-    ManagerEndpoint() {
-        this.securityManager = null;
-        this.explorerManager = null;
-    }
-
-    /**
-     * Injection constructor.
-     * This class is injectable, don't call this constructor explicitly.
-     */
-    @Inject
-    public ManagerEndpoint(
-            final SecurityManager securityManager,
-            final ExplorerManager explorerManager) {
-
-        this.securityManager = securityManager;
-        this.explorerManager = explorerManager;
+    public ManagerEndpoint() {
+        // NO-OP
     }
 
     /**
@@ -65,8 +53,8 @@ public class ManagerEndpoint {
     public Response entries() {
 
         Response response;
-        var permission = this.securityManager
-                .getConfiguration(SecurityManager.Configuration.MANAGER_ENDPOINT);
+        var permission = this.explorerSecurityManager
+                .getConfiguration(ExplorerSecurityManager.Configuration.MANAGER_ENDPOINT);
 
         if (Objects.equals(Boolean.parseBoolean(permission), Boolean.TRUE)) {
             var entries = this.explorerManager.entries();
@@ -88,11 +76,11 @@ public class ManagerEndpoint {
     public Response roles() {
 
         Response response;
-        var permission = this.securityManager
-                .getConfiguration(SecurityManager.Configuration.MANAGER_ENDPOINT);
+        var permission = this.explorerSecurityManager
+                .getConfiguration(ExplorerSecurityManager.Configuration.MANAGER_ENDPOINT);
 
         if (Objects.equals(Boolean.parseBoolean(permission), Boolean.TRUE)) {
-            var roles = this.securityManager.roles();
+            var roles = this.explorerSecurityManager.roles();
             response = Response.ok(roles).build();
         } else {
             response = Response.status(Response.Status.FORBIDDEN).build();

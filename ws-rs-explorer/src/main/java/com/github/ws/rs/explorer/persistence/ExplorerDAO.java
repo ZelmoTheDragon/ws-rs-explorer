@@ -24,22 +24,21 @@ import jakarta.persistence.metamodel.SingularAttribute;
  * Generic and dynamic repository for explorer logic.
  */
 @Singleton
-public final class ExplorerDAO {
+public class ExplorerDAO {
 
     /**
      * Default entity manager.
      */
-    private transient final EntityManager em;
+    @Inject
+    private transient EntityManager em;
 
     /**
-     * Injection constructor.
+     * Default constructor.
      * This class is injectable, don't call this constructor explicitly.
-     *
-     * @param em Entity manager
      */
     @Inject
-    public ExplorerDAO(final EntityManager em) {
-        this.em = em;
+    public ExplorerDAO() {
+        // NO-OP
     }
 
     /**

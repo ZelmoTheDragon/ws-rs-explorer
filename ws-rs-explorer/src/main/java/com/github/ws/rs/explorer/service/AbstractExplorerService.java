@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import jakarta.inject.Inject;
 import jakarta.json.JsonObject;
 import jakarta.security.enterprise.SecurityContext;
 
@@ -15,43 +16,38 @@ import com.github.ws.rs.explorer.persistence.Queries;
 import com.github.ws.rs.explorer.persistence.ExplorerDAO;
 import com.github.ws.rs.explorer.ExplorerManager;
 import com.github.ws.rs.explorer.EntityMapper;
-import com.github.ws.rs.explorer.security.SecurityManager;
+import com.github.ws.rs.explorer.security.ExplorerSecurityManager;
 
 /**
  * Base class with basic business logic.
+ * Subclass should be an injectable class.
  */
 public abstract class AbstractExplorerService implements ExplorerService {
 
     /**
      * Security manager for this module.
      */
-    protected final SecurityContext securityContext;
+    @Inject
+    protected SecurityContext securityContext;
 
     /**
      * Manager for all entry point.
      */
-    protected final ExplorerManager explorerManager;
+    @Inject
+    protected ExplorerManager explorerManager;
 
     /**
      * Dynamic and generic repository.
      */
-    protected final ExplorerDAO dao;
+    @Inject
+    protected ExplorerDAO dao;
 
     /**
-     * Full constructor.
-     *
-     * @param securityContext Security manager for this module
-     * @param explorerManager Manager for all entry point
-     * @param dao             Dynamic and generic repository
+     * Default constructor.
+     * Subclass should be an injectable class, don't call this constructor explicitly.
      */
-    protected AbstractExplorerService(
-            final SecurityContext securityContext,
-            final ExplorerManager explorerManager,
-            final ExplorerDAO dao) {
-
-        this.securityContext = securityContext;
-        this.explorerManager = explorerManager;
-        this.dao = dao;
+    protected AbstractExplorerService() {
+        // NO-OP
     }
 
     @Override
@@ -198,7 +194,7 @@ public abstract class AbstractExplorerService implements ExplorerService {
             }
 
             var role = entry.getActions().get(action);
-            if (!Objects.equals(SecurityManager.PERMIT_ALL, role)
+            if (!Objects.equals(ExplorerSecurityManager.PERMIT_ALL, role)
                     && !this.securityContext.isCallerInRole(role)) {
 
                 throw new ActionDeniedException(action, "Insufficient authorization");

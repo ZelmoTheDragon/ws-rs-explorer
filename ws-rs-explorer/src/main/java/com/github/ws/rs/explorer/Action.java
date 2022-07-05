@@ -2,7 +2,7 @@ package com.github.ws.rs.explorer;
 
 import java.util.Map;
 
-import com.github.ws.rs.explorer.security.SecurityManager;
+import com.github.ws.rs.explorer.security.ExplorerSecurityManager;
 
 /**
  * Possible action on an entry point.
@@ -39,11 +39,11 @@ public enum Action {
      * No role need.
      */
     public static final Map<Action, String> ALL = Map.of(
-            FILTER, SecurityManager.PERMIT_ALL,
-            FIND, SecurityManager.PERMIT_ALL,
-            CREATE, SecurityManager.PERMIT_ALL,
-            UPDATE, SecurityManager.PERMIT_ALL,
-            DELETE, SecurityManager.PERMIT_ALL
+            FILTER, ExplorerSecurityManager.PERMIT_ALL,
+            FIND, ExplorerSecurityManager.PERMIT_ALL,
+            CREATE, ExplorerSecurityManager.PERMIT_ALL,
+            UPDATE, ExplorerSecurityManager.PERMIT_ALL,
+            DELETE, ExplorerSecurityManager.PERMIT_ALL
     );
 
     /**
@@ -51,7 +51,7 @@ public enum Action {
      * No role need.
      */
     public static final Map<Action, String> READ_ONLY = Map.of(
-            FILTER, SecurityManager.PERMIT_ALL,
-            FIND, SecurityManager.PERMIT_ALL
+            FILTER, ExplorerSecurityManager.PERMIT_ALL,
+            FIND, ExplorerSecurityManager.PERMIT_ALL
     );
 }

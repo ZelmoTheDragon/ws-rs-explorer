@@ -9,11 +9,10 @@ import jakarta.persistence.EntityManager;
 @Singleton
 public class GenericDAO {
 
-    private final EntityManager em;
-
     @Inject
-    public GenericDAO(final EntityManager em) {
-        this.em = em;
+    private EntityManager em;
+
+    public GenericDAO() {
     }
 
     public <E> Optional<E> find(Class<E> entityClass, Object id) {

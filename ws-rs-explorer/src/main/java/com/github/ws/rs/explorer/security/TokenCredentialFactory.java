@@ -1,14 +1,12 @@
 package com.github.ws.rs.explorer.security;
 
 import java.util.Map;
-import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
+import jakarta.enterprise.inject.spi.CDI;
 import jakarta.security.enterprise.credential.Credential;
 
 /**
  * Factory class for construct token credential.
  */
-@Singleton
 final class TokenCredentialFactory {
 
     /**
@@ -26,19 +24,11 @@ final class TokenCredentialFactory {
     );
 
     /**
-     * Security manager for this module.
+     * Internal constructor.
+     * Instance not allowed.
      */
-    private final SecurityManager securityManager;
-
-    /**
-     * Injection constructor.
-     * This class is injectable, don't call this constructor explicitly.
-     *
-     * @param securityManager Security manager for this module.
-     */
-    @Inject
-    TokenCredentialFactory(final SecurityManager securityManager) {
-        this.securityManager = securityManager;
+    private TokenCredentialFactory() {
+        throw new UnsupportedOperationException("Instance not allowed");
     }
 
     /**
@@ -47,8 +37,9 @@ final class TokenCredentialFactory {
      * @param token Raw encoded token
      * @return A token credential
      */
-    Credential of(final String token) {
-        var secret = this.securityManager.getConfiguration(SecurityManager.Configuration.SECRET);
+    static Credential of(final String token) {
+        var securityManader = CDI.current().select(ExplorerSecurityManager.class).get();
+        var secret = securityManader.getConfiguration(ExplorerSecurityManager.Configuration.SECRET);
         return new TokenCredential(token, secret);
     }
 
@@ -57,7 +48,7 @@ final class TokenCredentialFactory {
      *
      * @return An empty and invalid token credential
      */
-    Credential of() {
+    static Credential of() {
         return new EmptyTokenCredential();
     }
 
