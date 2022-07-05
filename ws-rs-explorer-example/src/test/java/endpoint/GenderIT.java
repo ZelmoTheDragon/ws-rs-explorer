@@ -41,8 +41,6 @@ class GenderIT {
     void testFilter() {
         var jwt = TokenGenerator.generateNewToken();
 
-        // FIXME: query parameter value -code became [-code] why ?
-
         RestAssured
                 .given()
                 .contentType(ContentType.JSON)

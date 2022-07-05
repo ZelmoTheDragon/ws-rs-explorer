@@ -1,9 +1,12 @@
 package com.github.ws.rs.explorer.persistence;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * Web query.
@@ -172,7 +175,13 @@ public final class FilterQuery {
 
     Map<String, Boolean> getSortedValues() {
         var orders = new HashMap<String, Boolean>();
-        for (var v : this.values.values()) {
+        var values = this.values
+                .values()
+                .stream()
+                .flatMap(Collection::stream)
+                .toList();
+
+        for (var v : values) {
 
             var name = String.valueOf(v);
             boolean asc;
@@ -186,7 +195,11 @@ public final class FilterQuery {
                 asc = true;
             }
             orders.put(name, asc);
+
+            Logger.getLogger(FilterQuery.class.getName()).info("OrderBy: " + v + " : " + asc + " : " + name);
         }
+
+
         return orders;
     }
 
