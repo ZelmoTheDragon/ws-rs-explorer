@@ -151,19 +151,6 @@
             <scope>compile</scope>
         </dependency>
 
-        <!--        <dependency>-->
-        <!--            <groupId>org.glassfish.exousia</groupId>-->
-        <!--            <artifactId>exousia</artifactId>-->
-        <!--            <version>1.0.1</version>-->
-        <!--            <scope>compile</scope>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.glassfish.exousia</groupId>-->
-        <!--            <artifactId>exousia.spi.tomcat</artifactId>-->
-        <!--            <version>1.0.1</version>-->
-        <!--            <scope>compile</scope>-->
-        <!--        </dependency>-->
-
         <!-- Extra -->
         <dependency>
             <groupId>commons-io</groupId>
@@ -235,6 +222,14 @@
                         </deployable>
                     </deployables>
                     <configuration>
+                        <files>
+                            <copy>
+                                <file>${project.build.testOutputDirectory}/server.xml</file>
+                                <tofile>conf/server.xml</tofile>
+                                <configfile>true</configfile>
+                                <overwrite>true</overwrite>
+                            </copy>
+                        </files>
                         <properties>
                             <cargo.start.jvmargs>
                                 -Xdebug
