@@ -1,6 +1,6 @@
-# ws-rs-explorer
+# happy-explorer
 
-Jakarta RESTful Web Services Explorer.  
+**H**yper **A**pplication **P**owerful **P**rogramming **I**nterface - **E**xplorer
 A generic and dynamic endpoint for basic **CRUD** *(Create, Read, Update, Delete)* operation.  
 
 ## Showcase
@@ -35,7 +35,7 @@ attributName[operator]=value
 
 * The attributName should be present in **DTO** *(Data Transfer Object)* class.  
 * The logical operator should be in bracket.  
-  * See `com.github.ws.rs.explorer.persistence.Operator` for more details.  
+  * See `com.github.happy.explorer.persistence.Operator` for more details.  
 * The result is a pagination **JSON** *(JavaScrip Object Notation)*.  
 
 Example:
@@ -139,13 +139,13 @@ See `src/main/resources/derby-init.sql`.
 ### Step 2: Model your class
 
 Create your entity class using **JPA** *(Java Persistence API)*  
-See `com.github.ws.rs.explorer.example.customer.CustomerEntity`.  
+See `com.github.happy.explorer.example.customer.CustomerEntity`.  
 
 Create your data class using **JSON-B** *(JSON Binding)*  
-See `com.github.ws.rs.explorer.example.customer.CustomerDTO`.  
+See `com.github.happy.explorer.example.customer.CustomerDTO`.  
 
 Create your mapper class between entity and data class.  
-See `com.github.ws.rs.explorer.example.customer.CustomerMapper`.  
+See `com.github.happy.explorer.example.customer.CustomerMapper`.  
 
 > Simplify writing Java beans with [Lombok](https://projectlombok.org/).  
 > You can generate mappers using [Mapstruct](https://mapstruct.org/).  
@@ -153,7 +153,7 @@ See `com.github.ws.rs.explorer.example.customer.CustomerMapper`.
 ### Step 3: Register your entry point
 
 Register your classes for publish your entry point.  
-See `com.github.ws.rs.explorer.example.StartUp`.  
+See `com.github.happy.explorer.example.StartUp`.  
 
 ___
 

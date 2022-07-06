@@ -1,0 +1,42 @@
+package com.github.happy.explorer.endpoint;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import jakarta.json.Json;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.ext.ExceptionMapper;
+import jakarta.ws.rs.ext.Provider;
+
+import com.github.happy.explorer.ExplorerException;
+
+/**
+ * Generic exception mapper for this module.
+ */
+@Provider
+public final class ExplorerExceptionMapper implements ExceptionMapper<ExplorerException> {
+
+    /**
+     * Default constructor.
+     * This class is injectable, don't call this constructor explicitly.
+     */
+    public ExplorerExceptionMapper() {
+        // NO-OP
+    }
+
+    @Override
+    public Response toResponse(final ExplorerException exception) {
+
+        var json = Json.createObjectBuilder()
+                .add("error", exception.getClass().getName())
+                .add("message", exception.getMessage())
+                .add("date", LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME))
+                .build();
+
+        return Response
+                .status(Response.Status.BAD_REQUEST)
+                .type(MediaType.APPLICATION_JSON_TYPE)
+                .entity(json)
+                .build();
+    }
+}
