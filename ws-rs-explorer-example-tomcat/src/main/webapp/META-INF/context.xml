@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/example">
+
+    <!-- JDBC -->
+    <Resource
+            name="jdbc/ExplorerDS"
+            auth="Container"
+            driverClassName="org.h2.Driver"
+            type="javax.sql.DataSource"
+            username="sa"
+            password="sa"
+            url="jdbc:h2:mem:explorer;DB_CLOSE_DELAY=-1"
+    />
+
+    <!-- CDI Support -->
+    <Resource
+            name="BeanManager"
+            auth="Container"
+            type="jakarta.enterprise.inject.spi.BeanManager"
+            factory="org.jboss.weld.resources.ManagerObjectFactory"/>
+
+    <!-- JTA Support -->
+    <Resource
+            name="TransactionManager"
+            type="jakarta.transaction.TransactionManager"
+            factory="com.arjuna.ats.internal.jta.transaction.arjunacore.TransactionManagerImple"
+    />
+
+    <Resource
+            name="TransactionSynchronizationRegistry"
+            type="jakarta.transaction.TransactionSynchronizationRegistry"
+            factory="com.arjuna.ats.internal.jta.transaction.arjunacore.TransactionSynchronizationRegistryImple"
+    />
+
+    <Transaction
+            factory="com.arjuna.ats.internal.jta.transaction.arjunacore.UserTransactionImple"
+    />
+
+
+</Context>
