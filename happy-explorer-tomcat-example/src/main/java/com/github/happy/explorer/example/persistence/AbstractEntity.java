@@ -17,14 +17,14 @@ public abstract class AbstractEntity implements Serializable {
 
     @Id
     @Column(name = "id", nullable = false, unique = true, columnDefinition = "VARCHAR(36)")
-    protected UUID id;
+    protected String id;
 
     @Version
     @Column(name = "version", nullable = false, unique = true)
     protected Long version;
 
     protected AbstractEntity() {
-        this.id = UUID.randomUUID();
+        this.id = UUID.randomUUID().toString();
         this.version = 0L;
     }
 
@@ -49,11 +49,11 @@ public abstract class AbstractEntity implements Serializable {
     }
 
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(final UUID id) {
+    public void setId(final String id) {
         this.id = id;
     }
 

@@ -1,7 +1,6 @@
 package com.github.happy.explorer.example.customer;
 
 import java.util.Objects;
-import java.util.UUID;
 import jakarta.json.bind.annotation.JsonbProperty;
 import jakarta.json.bind.annotation.JsonbPropertyOrder;
 import jakarta.json.bind.config.PropertyOrderStrategy;
@@ -16,7 +15,7 @@ public class CustomerDTO {
 
     @JsonbProperty("id")
     @XmlElement(name = "id")
-    private UUID id;
+    private String id;
 
     @JsonbProperty("givenName")
     @XmlElement(name = "givenName")
@@ -65,11 +64,11 @@ public class CustomerDTO {
         return Objects.hash(id, givenName, familyName, email, phoneNumber, gender);
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(final UUID id) {
+    public void setId(final String id) {
         this.id = id;
     }
 

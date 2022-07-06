@@ -1,9 +1,9 @@
 package com.github.happy.explorer.example.persistence;
 
-import jakarta.persistence.AttributeConverter;
-import jakarta.persistence.Converter;
 import java.util.Objects;
 import java.util.UUID;
+import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 
 @Converter(autoApply = true)
 public class UUIDConverter implements AttributeConverter<UUID, String> {

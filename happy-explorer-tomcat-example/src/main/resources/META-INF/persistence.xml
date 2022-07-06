@@ -21,7 +21,6 @@
             <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
             <property name="jakarta.persistence.schema-generation.scripts.create-source" value="metadata"/>
             <property name="jakarta.persistence.schema-generation.scripts.drop-source" value="metadata"/>
-            <property name="jakarta.persistence.sql-load-script-source" value="h2-init.sql"/>
 
             <!--
                 /!\ Hibernate property:
@@ -31,6 +30,7 @@
             -->
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="false"/>
         </properties>
 
     </persistence-unit>

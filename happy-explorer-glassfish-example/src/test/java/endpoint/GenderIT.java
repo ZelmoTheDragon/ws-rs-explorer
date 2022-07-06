@@ -80,7 +80,7 @@ class GenderIT {
                 .when()
                 .post(ENDPOINT)
                 .then()
-                .body("error", Matchers.is("com.github.ws.rs.explorer.service.ActionDeniedException"))
+                .body("error", Matchers.is("com.github.happy.explorer.service.ActionDeniedException"))
                 .body("message", Matchers.is("On [gender] action [CREATE] is denied ! Unauthorized operation"))
                 .statusCode(HttpStatus.SC_BAD_REQUEST);
     }
@@ -99,7 +99,7 @@ class GenderIT {
                 .when()
                 .put(path)
                 .then()
-                .body("error", Matchers.is("com.github.ws.rs.explorer.service.ActionDeniedException"))
+                .body("error", Matchers.is("com.github.happy.explorer.service.ActionDeniedException"))
                 .body("message", Matchers.is("On [gender] action [UPDATE] is denied ! Unauthorized operation"))
                 .statusCode(HttpStatus.SC_BAD_REQUEST);
     }
@@ -114,7 +114,7 @@ class GenderIT {
                 .when()
                 .delete(path)
                 .then()
-                .body("error", Matchers.is("com.github.ws.rs.explorer.service.ActionDeniedException"))
+                .body("error", Matchers.is("com.github.happy.explorer.service.ActionDeniedException"))
                 .body("message", Matchers.is("On [gender] action [DELETE] is denied ! Unauthorized operation"))
                 .statusCode(HttpStatus.SC_BAD_REQUEST);
     }

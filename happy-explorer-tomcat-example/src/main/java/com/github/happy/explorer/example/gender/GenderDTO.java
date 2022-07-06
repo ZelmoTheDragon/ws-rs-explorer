@@ -1,14 +1,11 @@
 package com.github.happy.explorer.example.gender;
 
 import java.util.Objects;
-import java.util.UUID;
 import jakarta.json.bind.annotation.JsonbProperty;
 import jakarta.json.bind.annotation.JsonbPropertyOrder;
 import jakarta.json.bind.config.PropertyOrderStrategy;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
-
-
 
 @JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
 @XmlRootElement
@@ -16,7 +13,7 @@ public class GenderDTO {
 
     @JsonbProperty("id")
     @XmlElement(name = "id")
-    private UUID id;
+    private String id;
 
     @JsonbProperty("name")
     @XmlElement(name = "name")
@@ -55,11 +52,11 @@ public class GenderDTO {
         return Objects.hash(id, name, code, description);
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(final UUID id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
