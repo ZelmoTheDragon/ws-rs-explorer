@@ -2,8 +2,8 @@ package com.github.ws.rs.explorer.security;
 
 import java.util.EnumSet;
 import java.util.Set;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
 import jakarta.security.enterprise.credential.Credential;
 import jakarta.security.enterprise.identitystore.CredentialValidationResult;
 import jakarta.security.enterprise.identitystore.IdentityStore;
@@ -11,7 +11,7 @@ import jakarta.security.enterprise.identitystore.IdentityStore;
 /**
  * An identity store for validate token credential.
  */
-@Singleton
+@ApplicationScoped
 public class TokenIdentityStore implements IdentityStore {
 
     /**

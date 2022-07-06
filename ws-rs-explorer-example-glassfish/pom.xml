@@ -9,13 +9,13 @@
     <parent>
         <groupId>com.github.zelmothedragon.ws-rs-explorer</groupId>
         <artifactId>ws-rs-explorer-parent</artifactId>
-        <version>0.0.4-SNAPSHOT</version>
+        <version>0.0.5-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>ws-rs-explorer-example</artifactId>
+    <artifactId>ws-rs-explorer-example-glassfish</artifactId>
     <packaging>war</packaging>
-    <name>ws-rs-explorer-example</name>
+    <name>ws-rs-explorer-example-glassfish</name>
 
     <properties>
         <!-- Configuration -->
@@ -25,20 +25,30 @@
     </properties>
 
     <dependencies>
-        <!-- Jakarta Platform -->
+        <dependency>
+            <groupId>com.github.zelmothedragon.ws-rs-explorer</groupId>
+            <artifactId>ws-rs-explorer</artifactId>
+            <version>0.0.5-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!--
+            ====================
+            Jakarta Platform
+            ====================
+        -->
+
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>com.github.zelmothedragon.ws-rs-explorer</groupId>
-            <artifactId>ws-rs-explorer</artifactId>
-            <version>0.0.4-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
 
-        <!-- TEST -->
+        <!--
+            ====================
+            TEST
+            ====================
+        -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -84,7 +94,7 @@
                     <deployables>
                         <deployable>
                             <groupId>com.github.zelmothedragon.ws-rs-explorer</groupId>
-                            <artifactId>ws-rs-explorer-example</artifactId>
+                            <artifactId>ws-rs-explorer-example-glassfish</artifactId>
                             <type>war</type>
                             <properties>
                                 <context>/example</context>

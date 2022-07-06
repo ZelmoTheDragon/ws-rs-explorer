@@ -3,8 +3,8 @@ package com.github.ws.rs.explorer;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.spi.CDI;
-import jakarta.inject.Singleton;
 
 import com.github.ws.rs.explorer.service.ExplorerService;
 
@@ -12,7 +12,7 @@ import com.github.ws.rs.explorer.service.ExplorerService;
  * The manager for all entry point.
  * This class should register dynamics entries when the initializing phase is call.
  */
-@Singleton
+@ApplicationScoped
 public class ExplorerManager {
 
     /**

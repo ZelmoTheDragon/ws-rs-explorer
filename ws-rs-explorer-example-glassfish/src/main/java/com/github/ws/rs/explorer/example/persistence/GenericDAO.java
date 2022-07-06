@@ -10,7 +10,7 @@ import jakarta.persistence.EntityManager;
 public class GenericDAO {
 
     @Inject
-    private EntityManager em;
+    private transient EntityManager em;
 
     public GenericDAO() {
     }

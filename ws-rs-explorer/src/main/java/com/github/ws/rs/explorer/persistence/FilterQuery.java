@@ -195,11 +195,7 @@ public final class FilterQuery {
                 asc = true;
             }
             orders.put(name, asc);
-
-            Logger.getLogger(FilterQuery.class.getName()).info("OrderBy: " + v + " : " + asc + " : " + name);
         }
-
-
         return orders;
     }
 

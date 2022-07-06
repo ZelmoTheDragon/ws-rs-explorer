@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.persistence.EntityManager;
@@ -23,7 +24,7 @@ import jakarta.persistence.metamodel.SingularAttribute;
 /**
  * Generic and dynamic repository for explorer logic.
  */
-@Singleton
+@ApplicationScoped
 public class ExplorerDAO {
 
     /**
@@ -36,7 +37,6 @@ public class ExplorerDAO {
      * Default constructor.
      * This class is injectable, don't call this constructor explicitly.
      */
-    @Inject
     public ExplorerDAO() {
         // NO-OP
     }

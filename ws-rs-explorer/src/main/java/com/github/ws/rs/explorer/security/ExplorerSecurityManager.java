@@ -5,12 +5,12 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
 import jakarta.annotation.security.DeclareRoles;
-import jakarta.inject.Singleton;
+import jakarta.enterprise.context.ApplicationScoped;
 
 /**
  * Simple security manager.
  */
-@Singleton
+@ApplicationScoped
 public class ExplorerSecurityManager {
 
     /**

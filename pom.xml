@@ -41,13 +41,14 @@
 
     <groupId>com.github.zelmothedragon.ws-rs-explorer</groupId>
     <artifactId>ws-rs-explorer-parent</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>ws-rs-explorer-parent</name>
 
     <modules>
         <module>ws-rs-explorer</module>
-        <module>ws-rs-explorer-example</module>
+        <module>ws-rs-explorer-example-glassfish</module>
+        <module>ws-rs-explorer-example-tomcat</module>
     </modules>
 
     <properties>
@@ -190,4 +191,25 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+        <profile>
+            <id>tomcat</id>
+            <modules>
+                <module>ws-rs-explorer</module>
+                <module>ws-rs-explorer-example-tomcat</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>glassfish</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>ws-rs-explorer</module>
+                <module>ws-rs-explorer-example-glassfish</module>
+            </modules>
+        </profile>
+    </profiles>
 </project>
