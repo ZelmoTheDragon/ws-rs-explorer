@@ -21,7 +21,7 @@
 
     <issueManagement>
         <system>Github</system>
-        <url>https://github.com/ZelmoTheDragon/happy-explorer/issues</url>
+        <url>https://github.com/ZelmoTheDragon/happi-explorer/issues</url>
     </issueManagement>
 
     <developers>
@@ -39,16 +39,16 @@
         </developer>
     </developers>
 
-    <groupId>com.github.zelmothedragon.happy-explorer</groupId>
-    <artifactId>happy-explorer-parent</artifactId>
-    <version>0.0.6-SNAPSHOT</version>
+    <groupId>com.github.zelmothedragon.happi-explorer</groupId>
+    <artifactId>happi-explorer-parent</artifactId>
+    <version>0.0.7-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>happy-explorer-parent</name>
+    <name>happi-explorer-parent</name>
 
     <modules>
-        <module>happy-explorer</module>
-        <module>happy-explorer-glassfish-example</module>
-        <module>happy-explorer-tomcat-example</module>
+        <module>happi-explorer</module>
+        <module>happi-explorer-glassfish-example</module>
+        <module>happi-explorer-tomcat-example</module>
     </modules>
 
     <properties>
@@ -196,8 +196,8 @@
         <profile>
             <id>tomcat</id>
             <modules>
-                <module>happy-explorer</module>
-                <module>happy-explorer-tomcat-example</module>
+                <module>happi-explorer</module>
+                <module>happi-explorer-tomcat-example</module>
             </modules>
         </profile>
 
@@ -207,8 +207,8 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <modules>
-                <module>happy-explorer</module>
-                <module>happy-explorer-glassfish-example</module>
+                <module>happi-explorer</module>
+                <module>happi-explorer-glassfish-example</module>
             </modules>
         </profile>
     </profiles>
