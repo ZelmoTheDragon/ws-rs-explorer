@@ -24,10 +24,10 @@ import com.github.ws.rs.explorer.service.BasicExplorerService;
 public class StartUp {
 
     @Inject
-    private  ExplorerSecurityManager explorerSecurityManager;
+    private ExplorerSecurityManager explorerSecurityManager;
 
     @Inject
-    private  ExplorerManager explorerManager;
+    private ExplorerManager explorerManager;
 
     public StartUp() {
     }
@@ -42,7 +42,10 @@ public class StartUp {
 
         this.explorerManager.register(new DynamicEntry<>(
                 "gender",
-                Action.READ_ONLY,
+                Map.of(
+                        Action.FILTER, ExplorerSecurityManager.PUBLIC,
+                        Action.FIND, ExplorerSecurityManager.PUBLIC
+                ),
                 GenderEntity.class,
                 GenderDTO.class,
                 GenderMapper.class,
@@ -52,7 +55,7 @@ public class StartUp {
         this.explorerManager.register(new DynamicEntry<>(
                 "customer",
                 Map.of(
-                        Action.FILTER, ExplorerSecurityManager.PERMIT_ALL,
+                        Action.FILTER, ExplorerSecurityManager.PUBLIC,
                         Action.FIND, ExplorerSecurityManager.PERMIT_ALL,
                         Action.CREATE, Roles.CUSTOMER_MANAGER,
                         Action.UPDATE, Roles.CUSTOMER_MANAGER,

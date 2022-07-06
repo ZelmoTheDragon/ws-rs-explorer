@@ -19,6 +19,16 @@ public class ExplorerSecurityManager {
     public static final String PERMIT_ALL = "@PermitAll";
 
     /**
+     * Unauthorized operation.
+     */
+    public static final String DENY_ALL = "@DenyAll";
+
+    /**
+     * Public access, no authenticate user required.
+     */
+    public static final String PUBLIC = "@Public";
+
+    /**
      * Application roles.
      */
     private final Set<String> roles;

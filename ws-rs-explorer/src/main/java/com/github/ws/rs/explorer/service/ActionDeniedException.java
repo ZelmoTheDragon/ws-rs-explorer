@@ -28,8 +28,8 @@ public final class ActionDeniedException extends ExplorerException {
      * @param action  Business action
      * @param message Specific message can be visible by the client
      */
-    public ActionDeniedException(final Action action, final String message) {
-        super(String.format("Action type [%s] denied ! %s", action, message).trim());
+    public ActionDeniedException(final String entity, final Action action, final String message) {
+        super(String.format("On [%s] action [%s] is denied ! %s", entity, action, message).trim());
         this.action = action;
     }
 
@@ -38,8 +38,8 @@ public final class ActionDeniedException extends ExplorerException {
      *
      * @param action Business action
      */
-    public ActionDeniedException(final Action action) {
-        this(action, "");
+    public ActionDeniedException(final String entity, final Action action) {
+        this(entity, action, "");
     }
 
     // Getter

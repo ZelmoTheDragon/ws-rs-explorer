@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.logging.Logger;
 import jakarta.inject.Inject;
 import jakarta.json.JsonObject;
 import jakarta.security.enterprise.SecurityContext;
@@ -186,22 +187,27 @@ public abstract class AbstractExplorerService implements ExplorerService {
             final DynamicEntry<?, ?, ?, ?> entry,
             final Action action) {
 
-        if (entry.getActions().containsKey(action)) {
+        var principal = this.securityContext.getCallerPrincipal();
+        var role = entry.getActions().getOrDefault(action, ExplorerSecurityManager.DENY_ALL);
 
-            var principal = this.securityContext.getCallerPrincipal();
-            if (Objects.isNull(principal)) {
-                throw new ActionDeniedException(action, "User not authenticate");
-            }
+        var authAccess = Objects.nonNull(principal);
+        var publicAccess = Objects.equals(role, ExplorerSecurityManager.PUBLIC);
+        var permitAccess = Objects.equals(role, ExplorerSecurityManager.PERMIT_ALL) && Objects.nonNull(principal);
+        var denyAccess = Objects.equals(role, ExplorerSecurityManager.DENY_ALL);
+        var roleAccess = Objects.nonNull(principal) && this.securityContext.isCallerInRole(role);
 
-            var role = entry.getActions().get(action);
-            if (!Objects.equals(ExplorerSecurityManager.PERMIT_ALL, role)
-                    && !this.securityContext.isCallerInRole(role)) {
-
-                throw new ActionDeniedException(action, "Insufficient authorization");
-            }
-            // NO-OP: OK
+        if (denyAccess) {
+            throw new ActionDeniedException(entry.getPath(), action, "Unauthorized operation");
         } else {
-            throw new ActionDeniedException(action);
+            if (!publicAccess) {
+                if (!authAccess) {
+                    throw new ActionDeniedException(entry.getPath(), action, "User not authenticate");
+                } else {
+                    if (!roleAccess || !permitAccess) {
+                        throw new ActionDeniedException(entry.getPath(), action, "Insufficient authorization");
+                    }
+                }
+            }
         }
     }
 }

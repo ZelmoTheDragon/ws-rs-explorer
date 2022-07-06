@@ -145,17 +145,24 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>jakarta.authorization</groupId>
-            <artifactId>jakarta.authorization-api</artifactId>
-            <version>2.1.0</version>
+            <groupId>org.omnifaces</groupId>
+            <artifactId>exousia</artifactId>
+            <version>1.1</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>org.glassfish.exousia</groupId>
-            <artifactId>exousia.spi.tomcat</artifactId>
-            <version>1.0.1</version>
-            <scope>compile</scope>
-        </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.glassfish.exousia</groupId>-->
+        <!--            <artifactId>exousia</artifactId>-->
+        <!--            <version>1.0.1</version>-->
+        <!--            <scope>compile</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.glassfish.exousia</groupId>-->
+        <!--            <artifactId>exousia.spi.tomcat</artifactId>-->
+        <!--            <version>1.0.1</version>-->
+        <!--            <scope>compile</scope>-->
+        <!--        </dependency>-->
 
         <!-- Extra -->
         <dependency>

@@ -1,7 +1,5 @@
 package endpoint;
 
-import java.util.List;
-
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.apache.http.HttpHeaders;
@@ -39,14 +37,12 @@ class GenderIT {
 
     @Test
     void testFilter() {
-        var jwt = TokenGenerator.generateNewToken();
 
         RestAssured
                 .given()
                 .contentType(ContentType.JSON)
                 .queryParams("code[eq]", "M|F")
                 .queryParam("orderBy", "-code")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
                 .when()
                 .get(ENDPOINT)
                 .then()
@@ -85,7 +81,7 @@ class GenderIT {
                 .post(ENDPOINT)
                 .then()
                 .body("error", Matchers.is("com.github.ws.rs.explorer.service.ActionDeniedException"))
-                .body("message", Matchers.is("Action type [CREATE] denied !"))
+                .body("message", Matchers.is("On [gender] action [CREATE] is denied ! Unauthorized operation"))
                 .statusCode(HttpStatus.SC_BAD_REQUEST);
     }
 
@@ -104,7 +100,7 @@ class GenderIT {
                 .put(path)
                 .then()
                 .body("error", Matchers.is("com.github.ws.rs.explorer.service.ActionDeniedException"))
-                .body("message", Matchers.is("Action type [UPDATE] denied !"))
+                .body("message", Matchers.is("On [gender] action [UPDATE] is denied ! Unauthorized operation"))
                 .statusCode(HttpStatus.SC_BAD_REQUEST);
     }
 
@@ -119,7 +115,7 @@ class GenderIT {
                 .delete(path)
                 .then()
                 .body("error", Matchers.is("com.github.ws.rs.explorer.service.ActionDeniedException"))
-                .body("message", Matchers.is("Action type [DELETE] denied !"))
+                .body("message", Matchers.is("On [gender] action [DELETE] is denied ! Unauthorized operation"))
                 .statusCode(HttpStatus.SC_BAD_REQUEST);
     }
 

@@ -43,7 +43,10 @@ public class StartUp {
 
         this.explorerManager.register(new DynamicEntry<>(
                 "gender",
-                Action.READ_ONLY,
+                Map.of(
+                        Action.FILTER, ExplorerSecurityManager.PUBLIC,
+                        Action.FIND, ExplorerSecurityManager.PUBLIC
+                ),
                 GenderEntity.class,
                 GenderDTO.class,
                 GenderMapper.class,
@@ -53,8 +56,8 @@ public class StartUp {
         this.explorerManager.register(new DynamicEntry<>(
                 "customer",
                 Map.of(
-                        Action.FILTER, ExplorerSecurityManager.PERMIT_ALL,
-                        Action.FIND, ExplorerSecurityManager.PERMIT_ALL,
+                        Action.FILTER, ExplorerSecurityManager.PUBLIC,
+                        Action.FIND, ExplorerSecurityManager.PUBLIC,
                         Action.CREATE, Roles.CUSTOMER_MANAGER,
                         Action.UPDATE, Roles.CUSTOMER_MANAGER,
                         Action.DELETE, Roles.CUSTOMER_MANAGER
