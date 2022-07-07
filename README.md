@@ -36,6 +36,7 @@ attributName[operator]=value
 * The attributName should be present in **DTO** *(Data Transfer Object)* class.  
 * The logical operator should be in bracket.  
   * See `Operator` for more details.  
+  * Logical operator `OR` can be used with **pipe** in value (e.g. `familyName[eq]=MINT|DOE`)
 * The result is a pagination **JSON** *(JavaScrip Object Notation)*.  
 
 Example:
@@ -129,7 +130,7 @@ The result contains nothing.
 
 Example for a customer entry point: `Customer`.  
 You need a *Jakarta 9.1* web project.  
-See `ws-rs-exeplorer-example` for more details.  
+See `happi-exeplorer-xxxx-example` for more details.  
 
 ### Step 1: Create your table in database
 
