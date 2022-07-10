@@ -1,4 +1,4 @@
-package com.github.happi.explorer.security;
+package com.github.happi.security;
 
 import java.util.Objects;
 import jakarta.json.JsonObject;

@@ -1,4 +1,4 @@
-package com.github.happi.explorer.security;
+package com.github.happi.security;
 
 import java.util.EnumSet;
 import java.util.Set;
@@ -18,7 +18,7 @@ public class TokenIdentityStore implements IdentityStore {
      * Security manager for this module.
      */
     @Inject
-    private ExplorerSecurityManager explorerSecurityManager;
+    private HappiSecurityManager happiSecurityManager;
 
     /**
      * Default constructor.
@@ -38,11 +38,11 @@ public class TokenIdentityStore implements IdentityStore {
             var payload = tokenCredential.decodePayload();
             var jsonObject = payload.getRawData();
 
-            var claimUsername = explorerSecurityManager
-                    .getConfiguration(ExplorerSecurityManager.Configuration.TOKEN_CLAIM_USERNAME);
+            var claimUsername = happiSecurityManager
+                    .getConfiguration(HappiSecurityManager.Configuration.TOKEN_CLAIM_USERNAME);
 
-            var claimGroups = explorerSecurityManager
-                    .getConfiguration(ExplorerSecurityManager.Configuration.TOKEN_CLAIM_GROUPS);
+            var claimGroups = happiSecurityManager
+                    .getConfiguration(HappiSecurityManager.Configuration.TOKEN_CLAIM_GROUPS);
 
             var callerName = jsonObject.getJsonString(claimUsername).getString();
             var groups = Set.copyOf(jsonObject.getJsonArray(claimGroups).getValuesAs(String::valueOf));

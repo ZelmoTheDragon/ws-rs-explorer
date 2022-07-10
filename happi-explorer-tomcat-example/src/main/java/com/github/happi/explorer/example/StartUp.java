@@ -17,14 +17,14 @@ import com.github.happi.explorer.example.gender.GenderDTO;
 import com.github.happi.explorer.example.gender.GenderEntity;
 import com.github.happi.explorer.example.gender.GenderMapper;
 import com.github.happi.explorer.example.security.Roles;
-import com.github.happi.explorer.security.ExplorerSecurityManager;
+import com.github.happi.security.HappiSecurityManager;
 import com.github.happi.explorer.service.BasicExplorerService;
 
 @ApplicationScoped
 public class StartUp {
 
     @Inject
-    private ExplorerSecurityManager explorerSecurityManager;
+    private HappiSecurityManager happiSecurityManager;
 
     @Inject
     private ExplorerManager explorerManager;
@@ -34,17 +34,17 @@ public class StartUp {
 
     public void start(@Observes @Initialized(ApplicationScoped.class) final Object pointless) {
 
-        this.explorerSecurityManager.scanRoleClassConfiguration(WebConfiguration.class);
-        this.explorerSecurityManager.putConfiguration(ExplorerSecurityManager.Configuration.MANAGER_ENDPOINT, "true");
-        this.explorerSecurityManager.putConfiguration(ExplorerSecurityManager.Configuration.SECRET, "secret");
-        this.explorerSecurityManager.putConfiguration(ExplorerSecurityManager.Configuration.TOKEN_CLAIM_USERNAME, "preferred_username");
-        this.explorerSecurityManager.putConfiguration(ExplorerSecurityManager.Configuration.TOKEN_CLAIM_GROUPS, "groups");
+        this.happiSecurityManager.scanRoleClassConfiguration(WebConfiguration.class);
+        this.happiSecurityManager.putConfiguration(HappiSecurityManager.Configuration.MANAGER_ENDPOINT, "true");
+        this.happiSecurityManager.putConfiguration(HappiSecurityManager.Configuration.SECRET, "secret");
+        this.happiSecurityManager.putConfiguration(HappiSecurityManager.Configuration.TOKEN_CLAIM_USERNAME, "preferred_username");
+        this.happiSecurityManager.putConfiguration(HappiSecurityManager.Configuration.TOKEN_CLAIM_GROUPS, "groups");
 
         this.explorerManager.register(new DynamicEntry<>(
                 "gender",
                 Map.of(
-                        Action.FILTER, ExplorerSecurityManager.PUBLIC,
-                        Action.FIND, ExplorerSecurityManager.PUBLIC
+                        Action.FILTER, HappiSecurityManager.PUBLIC,
+                        Action.FIND, HappiSecurityManager.PUBLIC
                 ),
                 GenderEntity.class,
                 GenderDTO.class,
@@ -55,8 +55,8 @@ public class StartUp {
         this.explorerManager.register(new DynamicEntry<>(
                 "customer",
                 Map.of(
-                        Action.FILTER, ExplorerSecurityManager.PUBLIC,
-                        Action.FIND, ExplorerSecurityManager.PERMIT_ALL,
+                        Action.FILTER, HappiSecurityManager.PUBLIC,
+                        Action.FIND, HappiSecurityManager.PERMIT_ALL,
                         Action.CREATE, Roles.CUSTOMER_MANAGER,
                         Action.UPDATE, Roles.CUSTOMER_MANAGER,
                         Action.DELETE, Roles.CUSTOMER_MANAGER

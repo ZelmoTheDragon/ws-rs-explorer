@@ -1,4 +1,4 @@
-package com.github.happi.explorer.security;
+package com.github.happi.security;
 
 import jakarta.security.enterprise.credential.Credential;
 

@@ -16,7 +16,7 @@ import com.github.happi.explorer.EntityMapper;
 import com.github.happi.explorer.Jsons;
 import com.github.happi.explorer.persistence.ExplorerDAO;
 import com.github.happi.explorer.persistence.Queries;
-import com.github.happi.explorer.security.ExplorerSecurityManager;
+import com.github.happi.security.HappiSecurityManager;
 
 /**
  * Base class with basic business logic.
@@ -187,12 +187,12 @@ public abstract class AbstractExplorerService implements ExplorerService {
             final Action action) {
 
         var principal = this.securityContext.getCallerPrincipal();
-        var role = entry.getActions().getOrDefault(action, ExplorerSecurityManager.DENY_ALL);
+        var role = entry.getActions().getOrDefault(action, HappiSecurityManager.DENY_ALL);
 
         var authAccess = Objects.nonNull(principal);
-        var publicAccess = Objects.equals(role, ExplorerSecurityManager.PUBLIC);
-        var permitAccess = Objects.equals(role, ExplorerSecurityManager.PERMIT_ALL) && Objects.nonNull(principal);
-        var denyAccess = Objects.equals(role, ExplorerSecurityManager.DENY_ALL);
+        var publicAccess = Objects.equals(role, HappiSecurityManager.PUBLIC);
+        var permitAccess = Objects.equals(role, HappiSecurityManager.PERMIT_ALL) && Objects.nonNull(principal);
+        var denyAccess = Objects.equals(role, HappiSecurityManager.DENY_ALL);
         var roleAccess = Objects.nonNull(principal) && this.securityContext.isCallerInRole(role);
 
         if (denyAccess) {

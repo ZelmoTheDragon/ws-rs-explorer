@@ -4,7 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.UUID;
 
-import com.github.happi.explorer.security.HashMac;
+import com.github.happi.security.HashMac;
 
 public final class TokenGenerator {
 

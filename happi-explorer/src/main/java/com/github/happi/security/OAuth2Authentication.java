@@ -1,4 +1,4 @@
-package com.github.happi.explorer.security;
+package com.github.happi.security;
 
 import java.util.Optional;
 import jakarta.enterprise.context.ApplicationScoped;

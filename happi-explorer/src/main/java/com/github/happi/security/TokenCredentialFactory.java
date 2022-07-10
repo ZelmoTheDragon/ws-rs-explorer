@@ -1,4 +1,4 @@
-package com.github.happi.explorer.security;
+package com.github.happi.security;
 
 import java.util.Map;
 import jakarta.enterprise.inject.spi.CDI;
@@ -38,8 +38,8 @@ final class TokenCredentialFactory {
      * @return A token credential
      */
     static Credential of(final String token) {
-        var securityManader = CDI.current().select(ExplorerSecurityManager.class).get();
-        var secret = securityManader.getConfiguration(ExplorerSecurityManager.Configuration.SECRET);
+        var securityManader = CDI.current().select(HappiSecurityManager.class).get();
+        var secret = securityManader.getConfiguration(HappiSecurityManager.Configuration.SECRET);
         return new TokenCredential(token, secret);
     }
 

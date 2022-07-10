@@ -11,11 +11,11 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import com.github.happi.explorer.ExplorerManager;
-import com.github.happi.explorer.security.ExplorerSecurityManager;
+import com.github.happi.security.HappiSecurityManager;
 
 /**
  * Basic controller exposing registered dynamic entry.
- * This feature must be enabled in {@link ExplorerSecurityManager}.
+ * This feature must be enabled in {@link HappiSecurityManager}.
  */
 @RequestScoped
 @Path("manager")
@@ -27,7 +27,7 @@ public class ManagerEndpoint {
      * Security manager for this module.
      */
     @Inject
-    private ExplorerSecurityManager explorerSecurityManager;
+    private HappiSecurityManager securityManager;
 
     /**
      * Dynamic entry manager.
@@ -53,8 +53,8 @@ public class ManagerEndpoint {
     public Response entries() {
 
         Response response;
-        var permission = this.explorerSecurityManager
-                .getConfiguration(ExplorerSecurityManager.Configuration.MANAGER_ENDPOINT);
+        var permission = this.securityManager
+                .getConfiguration(HappiSecurityManager.Configuration.MANAGER_ENDPOINT);
 
         if (Objects.equals(Boolean.parseBoolean(permission), Boolean.TRUE)) {
             var entries = this.explorerManager.entries();
@@ -76,11 +76,11 @@ public class ManagerEndpoint {
     public Response roles() {
 
         Response response;
-        var permission = this.explorerSecurityManager
-                .getConfiguration(ExplorerSecurityManager.Configuration.MANAGER_ENDPOINT);
+        var permission = this.securityManager
+                .getConfiguration(HappiSecurityManager.Configuration.MANAGER_ENDPOINT);
 
         if (Objects.equals(Boolean.parseBoolean(permission), Boolean.TRUE)) {
-            var roles = this.explorerSecurityManager.roles();
+            var roles = this.securityManager.roles();
             response = Response.ok(roles).build();
         } else {
             response = Response.status(Response.Status.FORBIDDEN).build();

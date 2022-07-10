@@ -1,4 +1,4 @@
-package com.github.happi.explorer.security;
+package com.github.happi.security;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -11,7 +11,7 @@ import jakarta.enterprise.context.ApplicationScoped;
  * Simple security manager.
  */
 @ApplicationScoped
-public class ExplorerSecurityManager {
+public class HappiSecurityManager {
 
     /**
      * Role required only an authenticated user without specific privileges.
@@ -42,7 +42,7 @@ public class ExplorerSecurityManager {
      * Default constructor.
      * This class is injectable, don't call this constructor explicitly.
      */
-    public ExplorerSecurityManager() {
+    public HappiSecurityManager() {
         this.roles = new HashSet<>();
         this.configuration = new Properties();
     }

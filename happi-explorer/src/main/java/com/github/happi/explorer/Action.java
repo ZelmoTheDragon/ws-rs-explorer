@@ -2,7 +2,7 @@ package com.github.happi.explorer;
 
 import java.util.Map;
 
-import com.github.happi.explorer.security.ExplorerSecurityManager;
+import com.github.happi.security.HappiSecurityManager;
 
 /**
  * Possible action on an entry point.
@@ -39,11 +39,11 @@ public enum Action {
      * No role need.
      */
     public static final Map<Action, String> ALL = Map.of(
-            FILTER, ExplorerSecurityManager.PERMIT_ALL,
-            FIND, ExplorerSecurityManager.PERMIT_ALL,
-            CREATE, ExplorerSecurityManager.PERMIT_ALL,
-            UPDATE, ExplorerSecurityManager.PERMIT_ALL,
-            DELETE, ExplorerSecurityManager.PERMIT_ALL
+            FILTER, HappiSecurityManager.PERMIT_ALL,
+            FIND, HappiSecurityManager.PERMIT_ALL,
+            CREATE, HappiSecurityManager.PERMIT_ALL,
+            UPDATE, HappiSecurityManager.PERMIT_ALL,
+            DELETE, HappiSecurityManager.PERMIT_ALL
     );
 
     /**
@@ -51,7 +51,7 @@ public enum Action {
      * No role need.
      */
     public static final Map<Action, String> READ_ONLY = Map.of(
-            FILTER, ExplorerSecurityManager.PERMIT_ALL,
-            FIND, ExplorerSecurityManager.PERMIT_ALL
+            FILTER, HappiSecurityManager.PERMIT_ALL,
+            FIND, HappiSecurityManager.PERMIT_ALL
     );
 }
