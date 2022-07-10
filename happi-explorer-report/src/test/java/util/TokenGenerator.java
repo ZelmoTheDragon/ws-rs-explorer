@@ -4,7 +4,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.UUID;
 
-import com.github.happi.explorer.example.security.Roles;
 import com.github.happi.explorer.security.HashMac;
 
 public final class TokenGenerator {
@@ -13,8 +12,8 @@ public final class TokenGenerator {
 
     private static final String GROUPS = String.join(
             ", ",
-            wrap(Roles.GENDER_MANAGER),
-            wrap(Roles.CUSTOMER_MANAGER)
+            wrap("customer-manager"),
+            wrap("gender-manager")
     );
 
     private static final String SECRET = "secret";

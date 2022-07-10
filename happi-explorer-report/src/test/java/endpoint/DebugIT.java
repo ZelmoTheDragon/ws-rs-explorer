@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import io.restassured.RestAssured;
 import org.apache.http.HttpStatus;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import util.WebContext;
 
@@ -22,7 +23,11 @@ class DebugIT {
                 .get(WebContext.BASE_URL)
                 .then()
                 .assertThat()
-                .statusCode(HttpStatus.SC_NOT_FOUND);
+                .statusCode(
+                        Matchers.anyOf(
+                                Matchers.is(HttpStatus.SC_OK),
+                                Matchers.is(HttpStatus.SC_NOT_FOUND)
+                        ));
     }
 
     @Test
