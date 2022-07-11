@@ -9,6 +9,7 @@ import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 
 import com.github.happi.explorer.ExplorerException;
+import com.github.happi.explorer.ValidationException;
 
 /**
  * Generic exception mapper for this module.
@@ -30,13 +31,27 @@ public final class ExplorerExceptionMapper implements ExceptionMapper<ExplorerEx
         var json = Json.createObjectBuilder()
                 .add("error", exception.getClass().getName())
                 .add("message", exception.getMessage())
-                .add("date", LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME))
-                .build();
+                .add("date", LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
+
+        if (exception instanceof ValidationException validation) {
+            var constraints = validation.getViolations();
+            var violations = Json.createArrayBuilder();
+            for (var c : constraints) {
+                var violation = Json
+                        .createObjectBuilder()
+                        .add("message", c.getMessage())
+                        .add("property", String.valueOf(c.getPropertyPath()))
+                        .build();
+
+                violations.add(violation);
+            }
+            json.add("violations", violations.build());
+        }
 
         return Response
                 .status(Response.Status.BAD_REQUEST)
                 .type(MediaType.APPLICATION_JSON_TYPE)
-                .entity(json)
+                .entity(json.build())
                 .build();
     }
 }

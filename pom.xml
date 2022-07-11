@@ -41,15 +41,13 @@
 
     <groupId>com.github.zelmothedragon.happi-explorer</groupId>
     <artifactId>happi-explorer-parent</artifactId>
-    <version>0.0.8-SNAPSHOT</version>
+    <version>0.0.9-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>happi-explorer-parent</name>
 
     <modules>
         <module>happi-explorer</module>
-        <module>happi-explorer-glassfish-example</module>
-        <module>happi-explorer-tomcat-example</module>
-        <module>happi-explorer-report</module>
+        <module>happi-explorer-example</module>
     </modules>
 
     <properties>
@@ -275,6 +273,11 @@
                     <artifactId>cargo-maven3-plugin</artifactId>
                     <version>1.9.11</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>3.3.0</version>
+                </plugin>
 
                 <!-- Extension Maven  -->
                 <plugin>
@@ -344,53 +347,6 @@
     <profiles>
         <profile>
             <id>tomcat</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.cargo</groupId>
-                        <artifactId>cargo-maven3-plugin</artifactId>
-                        <configuration>
-                            <container>
-                                <containerId>tomcat10x</containerId>
-                                <artifactInstaller>
-                                    <groupId>org.apache.tomcat</groupId>
-                                    <artifactId>tomcat</artifactId>
-                                    <version>${version.tomcat}</version>
-                                </artifactInstaller>
-                            </container>
-                            <deployables>
-                                <deployable>
-                                    <groupId>com.github.zelmothedragon.happi-explorer</groupId>
-                                    <artifactId>happi-explorer-tomcat-example</artifactId>
-                                    <type>war</type>
-                                    <properties>
-                                        <context>/example</context>
-                                    </properties>
-                                </deployable>
-                            </deployables>
-                            <configuration>
-                                <files>
-                                    <copy>
-                                        <file>${project.build.testOutputDirectory}/server.xml</file>
-                                        <tofile>conf/server.xml</tofile>
-                                        <configfile>true</configfile>
-                                        <overwrite>true</overwrite>
-                                    </copy>
-                                </files>
-                                <properties>
-                                    <cargo.start.jvmargs>
-                                        -Xdebug
-                                        -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=9999
-                                        -Xnoagent
-                                        -Djava.compiler=NONE
-                                    </cargo.start.jvmargs>
-                                </properties>
-                            </configuration>
-                        </configuration>
-                    </plugin>
-                </plugins>
-
-            </build>
         </profile>
 
         <profile>
@@ -398,45 +354,6 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.cargo</groupId>
-                        <artifactId>cargo-maven3-plugin</artifactId>
-                        <configuration>
-                            <container>
-                                <containerId>glassfish6x</containerId>
-                                <artifactInstaller>
-                                    <groupId>org.glassfish.main.distributions</groupId>
-                                    <artifactId>glassfish</artifactId>
-                                    <version>${version.glassfish}</version>
-                                </artifactInstaller>
-                            </container>
-                            <deployables>
-                                <deployable>
-                                    <groupId>com.github.zelmothedragon.happi-explorer</groupId>
-                                    <artifactId>happi-explorer-glassfish-example</artifactId>
-                                    <type>war</type>
-                                    <properties>
-                                        <context>/example</context>
-                                    </properties>
-                                </deployable>
-                            </deployables>
-                            <configuration>
-                                <properties>
-                                    <cargo.glassfish.domain.debug>true</cargo.glassfish.domain.debug>
-                                    <cargo.start.jvmargs>
-                                        -Xdebug
-                                        -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=9999
-                                        -Xnoagent
-                                        -Djava.compiler=NONE
-                                    </cargo.start.jvmargs>
-                                </properties>
-                            </configuration>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
         </profile>
     </profiles>
 </project>

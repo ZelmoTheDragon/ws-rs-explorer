@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence
+        xmlns="https://jakarta.ee/xml/ns/persistence"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+        version="3.0">
+
+    <persistence-unit name="explorer-pu" transaction-type="JTA">
+
+        <jta-data-source>java:app/jdbc/ExplorerDS</jta-data-source>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+        <validation-mode>CALLBACK</validation-mode>
+
+        <properties>
+            <!--
+                JPA property:
+
+                Populate the database during deployment.
+            -->
+            <property name="jakarta.persistence.schema-generation.database.action" value="none" />
+            <property name="jakarta.persistence.schema-generation.scripts.create-source"  value="metadata" />
+            <property name="jakarta.persistence.schema-generation.scripts.drop-source" value="metadata" />
+            <property name="jakarta.persistence.sql-load-script-source" value="derby-init.sql" />
+
+            <!--
+                /!\ EclipseLink property:
+
+                DEBUG only.
+                Print queries to console output.
+            -->
+            <property name="eclipselink.logging.level" value="FINE"/>
+            <property name="eclipselink.logging.level.sql" value="FINE"/>
+            <property name="eclipselink.logging.parameters" value="TRUE"/>
+        </properties>
+
+    </persistence-unit>
+</persistence>

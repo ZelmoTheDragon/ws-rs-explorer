@@ -14,6 +14,7 @@ import com.github.happi.explorer.ExplorerManager;
 import com.github.happi.explorer.DynamicEntry;
 import com.github.happi.explorer.EntityMapper;
 import com.github.happi.explorer.Jsons;
+import com.github.happi.explorer.Validations;
 import com.github.happi.explorer.persistence.ExplorerDAO;
 import com.github.happi.explorer.persistence.Queries;
 import com.github.happi.security.HappiSecurityManager;
@@ -110,6 +111,7 @@ public abstract class AbstractExplorerService implements ExplorerService {
         var mapper = this.explorerManager.invokeMapper(entry);
 
         var data = Jsons.parse(dataClass, document);
+        Validations.validate(data);
         var entity = mapper.toEntity(data);
 
         if (this.dao.contains(entity)) {
@@ -137,6 +139,7 @@ public abstract class AbstractExplorerService implements ExplorerService {
         var uuid = mapper.mapId(id);
 
         var data = Jsons.parse(dataClass, document);
+        Validations.validate(data);
         var entity = this.dao
                 .find(entityClass, uuid)
                 .orElseThrow(() -> new ServiceExplorerException("Entity not exist !"));
