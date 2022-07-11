@@ -166,11 +166,6 @@
                     <artifactId>hibernate-envers-jakarta</artifactId>
                     <scope>compile</scope>
                 </dependency>
-                <dependency>
-                    <groupId>org.hibernate</groupId>
-                    <artifactId>hibernate-jpamodelgen-jakarta</artifactId>
-                    <scope>provided</scope>
-                </dependency>
 
                 <!-- JTA -->
                 <dependency>
@@ -286,7 +281,7 @@
                             <configuration>
                                 <files>
                                     <copy>
-                                        <file>${project.build.testOutputDirectory}/server.xml</file>
+                                        <file>${project.basedir}/src/tomcat/resources/server.xml</file>
                                         <tofile>conf/server.xml</tofile>
                                         <configfile>true</configfile>
                                         <overwrite>true</overwrite>
@@ -315,6 +310,24 @@
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>src/tomcat/resources</directory>
+                                    <excludes>
+                                        <exclude>server.xml</exclude>
+                                    </excludes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
                         <configuration>
                             <compilerArgument>-Xlint:all</compilerArgument>
@@ -334,18 +347,8 @@
                         <artifactId>maven-war-plugin</artifactId>
                         <configuration>
                             <webResources>
-                                <resource>
-                                    <directory>src/tomcat/resources</directory>
-                                    <includes>
-                                        <include>**/*.sql</include>
-                                    </includes>
-                                    <targetPath>WEB-INF/classes</targetPath>
-                                </resource>
                                 <webResource>
                                     <directory>src/tomcat/webapp</directory>
-                                    <includes>
-                                        <include>**/*.xml</include>
-                                    </includes>
                                 </webResource>
                             </webResources>
                         </configuration>
@@ -412,6 +415,21 @@
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>src/glassfish/resources</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
                         <configuration>
                             <compilerArgument>-Xlint:all</compilerArgument>
@@ -431,18 +449,8 @@
                         <artifactId>maven-war-plugin</artifactId>
                         <configuration>
                             <webResources>
-                                <resource>
-                                    <directory>src/glassfish/resources</directory>
-                                    <includes>
-                                        <include>**/*.sql</include>
-                                    </includes>
-                                    <targetPath>WEB-INF/classes</targetPath>
-                                </resource>
                                 <webResource>
                                     <directory>src/glassfish/webapp</directory>
-                                    <includes>
-                                        <include>**/*.xml</include>
-                                    </includes>
                                 </webResource>
                             </webResources>
                         </configuration>

@@ -53,8 +53,11 @@ public class HappiSecurityManager {
      * @param role A role
      */
     public void addRole(final String role) {
-        if (Objects.equals(PERMIT_ALL, role)) {
-            throw new IllegalArgumentException("Role not allow");
+        if (Objects.equals(PUBLIC, role)
+                || Objects.equals(PERMIT_ALL, role)
+                || Objects.equals(DENY_ALL, role)) {
+
+            throw new IllegalArgumentException("Role name not allow");
         }
         this.roles.add(role);
     }

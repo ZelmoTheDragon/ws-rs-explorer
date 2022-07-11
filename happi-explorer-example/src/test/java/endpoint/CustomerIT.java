@@ -49,10 +49,12 @@ class CustomerIT {
 
     @Test
     void testCreate() {
+        var jwt = TokenGenerator.generateNewToken();
 
         RestAssured
                 .given()
                 .contentType(ContentType.JSON)
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
                 .body(DataSet.SAMPLE_JSON_DATA)
                 .when()
                 .post(ENDPOINT)
@@ -68,10 +70,12 @@ class CustomerIT {
                 .replace("johnny.doe@example.com", "johnathan.doe@example.com");
 
         var path = String.join("/", ENDPOINT, DataSet.JOHN_DOE_ID);
+        var jwt = TokenGenerator.generateNewToken();
 
         RestAssured
                 .given()
                 .contentType(ContentType.JSON)
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
                 .body(updatedData)
                 .when()
                 .put(path)
@@ -81,11 +85,13 @@ class CustomerIT {
 
     @Test
     void testDelete() {
-        var path = String.join("/", ENDPOINT, DataSet.JOHN_DOE_ID);
+        var path = String.join("/", ENDPOINT, DataSet.JANE_DOE_ID);
+        var jwt = TokenGenerator.generateNewToken();
 
         RestAssured
                 .given()
                 .contentType(ContentType.JSON)
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
                 .when()
                 .delete(path)
                 .then()
@@ -96,6 +102,8 @@ class CustomerIT {
 
         private static final String JOHN_DOE_ID = "0d5be73c-55f4-4379-accb-a7dcef0e9f2d";
 
+        private static final String JANE_DOE_ID = "6eb7cd4a-dbb4-4a7e-9bce-e3c959739c53";
+
         private static final String SAMPLE_JSON_DATA = """
                 {
                     "givenName": "Johnny",
@@ -103,6 +111,7 @@ class CustomerIT {
                     "email": "johnny.doe@example.com",
                     "phoneNumber": "0000000000",
                     "gender": {
+                        "id": "09ee5d9d-bf9b-4b5d-aad0-19117eb8da34",
                         "name": "Male",
                         "code": "M",
                         "description": "A male humain"

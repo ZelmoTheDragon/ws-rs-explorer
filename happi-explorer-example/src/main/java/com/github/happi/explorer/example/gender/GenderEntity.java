@@ -36,6 +36,7 @@ public class GenderEntity extends AbstractEntity {
     private String description;
 
     public GenderEntity() {
+        super();
     }
 
     public String getName() {

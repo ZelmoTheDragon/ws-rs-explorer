@@ -4,6 +4,7 @@ import java.util.EnumSet;
 import java.util.Set;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.json.JsonString;
 import jakarta.security.enterprise.credential.Credential;
 import jakarta.security.enterprise.identitystore.CredentialValidationResult;
 import jakarta.security.enterprise.identitystore.IdentityStore;
@@ -45,7 +46,7 @@ public class TokenIdentityStore implements IdentityStore {
                     .getConfiguration(HappiSecurityManager.Configuration.TOKEN_CLAIM_GROUPS);
 
             var callerName = jsonObject.getJsonString(claimUsername).getString();
-            var groups = Set.copyOf(jsonObject.getJsonArray(claimGroups).getValuesAs(String::valueOf));
+            var groups = Set.copyOf(jsonObject.getJsonArray(claimGroups).getValuesAs(JsonString::getString));
 
             result = new CredentialValidationResult(callerName, groups);
         } else {

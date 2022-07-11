@@ -1,5 +1,6 @@
 package com.github.happi.explorer.example.gender;
 
+import java.util.Optional;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -17,8 +18,9 @@ public class GenderMapper implements EntityMapper<GenderEntity, GenderDTO> {
 
     @Override
     public GenderEntity toEntity(final GenderDTO data) {
-        var entity = this.dao
-                .find(GenderEntity.class, data.getId())
+        var entity = Optional
+                .ofNullable(data.getId())
+                .flatMap(e -> this.dao.find(GenderEntity.class, e))
                 .orElseGet(GenderEntity::new);
 
         this.updateEntity(data, entity);

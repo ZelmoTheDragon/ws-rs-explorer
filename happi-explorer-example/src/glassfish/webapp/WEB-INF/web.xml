@@ -16,4 +16,21 @@
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
 
+    <!-- Security -->
+    <security-role>
+        <role-name>customer-manager</role-name>
+    </security-role>
+    <security-role>
+        <role-name>gender-manager</role-name>
+    </security-role>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Explorer</web-resource-name>
+            <url-pattern>/api/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
 </web-app>

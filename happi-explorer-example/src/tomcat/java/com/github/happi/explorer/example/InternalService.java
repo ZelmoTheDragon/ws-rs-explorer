@@ -37,7 +37,7 @@ public class InternalService {
 
             var sqlScriptFile = this.getClass()
                     .getClassLoader()
-                    .getResource("src/tomcat/resources/h2-init.sql")
+                    .getResource("/h2-init.sql")
                     .toURI();
 
             var sqlScriptPath = Path.of(sqlScriptFile);

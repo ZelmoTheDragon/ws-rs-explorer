@@ -4,15 +4,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.logging.Logger;
 import jakarta.inject.Inject;
 import jakarta.json.JsonObject;
 import jakarta.security.enterprise.SecurityContext;
 
-
 import com.github.happi.explorer.Action;
-import com.github.happi.explorer.ExplorerManager;
 import com.github.happi.explorer.DynamicEntry;
 import com.github.happi.explorer.EntityMapper;
+import com.github.happi.explorer.ExplorerManager;
 import com.github.happi.explorer.Jsons;
 import com.github.happi.explorer.Validations;
 import com.github.happi.explorer.persistence.ExplorerDAO;
@@ -194,22 +194,25 @@ public abstract class AbstractExplorerService implements ExplorerService {
 
         var authAccess = Objects.nonNull(principal);
         var publicAccess = Objects.equals(role, HappiSecurityManager.PUBLIC);
-        var permitAccess = Objects.equals(role, HappiSecurityManager.PERMIT_ALL) && Objects.nonNull(principal);
+        var permitAccess = Objects.equals(role, HappiSecurityManager.PERMIT_ALL);
         var denyAccess = Objects.equals(role, HappiSecurityManager.DENY_ALL);
-        var roleAccess = Objects.nonNull(principal) && this.securityContext.isCallerInRole(role);
+        var roleAccess = this.securityContext.isCallerInRole(role);
 
         if (denyAccess) {
             throw new ActionDeniedException(entry.getPath(), action, "Unauthorized operation");
-        } else {
-            if (!publicAccess) {
-                if (!authAccess) {
-                    throw new ActionDeniedException(entry.getPath(), action, "User not authenticate");
-                } else {
-                    if (!roleAccess || !permitAccess) {
-                        throw new ActionDeniedException(entry.getPath(), action, "Insufficient authorization");
-                    }
-                }
-            }
+        } else if (!authAccess && !publicAccess) {
+            throw new ActionDeniedException(entry.getPath(), action, "User not authenticate");
+        } else if (authAccess && !permitAccess && !roleAccess) {
+            throw new ActionDeniedException(entry.getPath(), action, "Insufficient authorization");
         }
+
+        // Authorization granted:
+        // with role @Public
+        // OR
+        // authenticate user with role @PermitAll
+        // OR
+        // authenticate user with in role
+
     }
 }
+

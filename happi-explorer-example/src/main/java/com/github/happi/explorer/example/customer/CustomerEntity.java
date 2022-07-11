@@ -54,6 +54,7 @@ public class CustomerEntity extends AbstractEntity {
 
 
     public CustomerEntity() {
+        super();
     }
 
     public String getGivenName() {

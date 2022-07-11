@@ -8,6 +8,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Version;
+import jakarta.validation.constraints.NotNull;
 
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
@@ -15,10 +16,12 @@ public abstract class AbstractEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    @NotNull
     @Id
     @Column(name = "id", nullable = false, unique = true, columnDefinition = "VARCHAR(36)")
     protected String id;
 
+    @NotNull
     @Version
     @Column(name = "version", nullable = false, unique = true)
     protected Long version;
@@ -47,7 +50,6 @@ public abstract class AbstractEntity implements Serializable {
     public int hashCode() {
         return Objects.hash(id, version);
     }
-
 
     public String getId() {
         return id;
