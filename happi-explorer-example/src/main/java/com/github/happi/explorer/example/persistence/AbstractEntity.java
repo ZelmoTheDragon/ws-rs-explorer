@@ -18,7 +18,7 @@ public abstract class AbstractEntity implements Serializable {
 
     @NotNull
     @Id
-    @Column(name = "id", nullable = false, unique = true, columnDefinition = "VARCHAR(36)")
+    @Column(name = "id", nullable = false, unique = true, columnDefinition = UUIDConverter.COLUMN_DEFINITION)
     protected String id;
 
     @NotNull

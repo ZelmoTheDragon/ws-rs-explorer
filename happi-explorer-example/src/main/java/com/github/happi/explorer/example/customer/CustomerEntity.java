@@ -52,7 +52,6 @@ public class CustomerEntity extends AbstractEntity {
     @JoinColumn(name = "gender_id", nullable = false)
     private GenderEntity gender;
 
-
     public CustomerEntity() {
         super();
     }
