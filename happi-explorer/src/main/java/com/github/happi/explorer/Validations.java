@@ -18,19 +18,19 @@ public final class Validations {
     /**
      * Validate any object using <i>Bean Validation</i>.
      *
-     * @param entity Any object to valide
+     * @param bean Any object to valide
      * @throws ValidationException if the parameter is invalid
      */
-    public static void validate(final Object entity) {
+    public static void validate(final Object bean) {
 
         var validatorFactory = Validation.buildDefaultValidatorFactory();
 
         try (validatorFactory) {
             var validator = validatorFactory.getValidator();
-            var violations = validator.validate(entity);
+            var violations = validator.validate(bean);
 
             if (!violations.isEmpty()) {
-                var typeName = entity.getClass().getSimpleName();
+                var typeName = bean.getClass().getSimpleName();
                 var exception = new ValidationException(
                         "Validation failed for object type : " + typeName + " ",
                         violations

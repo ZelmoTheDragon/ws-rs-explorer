@@ -140,6 +140,11 @@ public class HappiSecurityManager {
         MANAGER_ENDPOINT,
 
         /**
+         * Indicates if the discovery endpoint is available.
+         */
+        DISCOVERY_ENDPOINT,
+
+        /**
          * Secret value for compute the <i>JWT</i> signature.
          */
         SECRET

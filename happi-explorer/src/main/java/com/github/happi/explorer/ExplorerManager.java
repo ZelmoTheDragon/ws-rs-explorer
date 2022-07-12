@@ -5,7 +5,9 @@ import java.util.Objects;
 import java.util.Set;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.spi.CDI;
+import jakarta.inject.Inject;
 
+import com.github.happi.discovery.DiscoveryService;
 import com.github.happi.explorer.service.ExplorerService;
 
 /**
@@ -19,6 +21,12 @@ public class ExplorerManager {
      * Dynamics entries.
      */
     private final Set<DynamicEntry<?, ?, ?, ?>> entries;
+
+    /**
+     * Discovery service.
+     */
+    @Inject
+    private DiscoveryService discoveryService;
 
     /**
      * Default constructor.
@@ -43,6 +51,7 @@ public class ExplorerManager {
             throw new ExplorerException("Entry already registered : " + entry);
         } else {
             this.entries.add(entry);
+            this.discoveryService.scan(entry.getDataClass());
         }
     }
 

@@ -1,6 +1,7 @@
-package com.github.happi.explorer.endpoint;
+package com.github.happi.discovery;
 
 import java.util.Objects;
+import java.util.Set;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -9,20 +10,17 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 
-import com.github.happi.explorer.ExplorerManager;
 import com.github.happi.security.HappiSecurityManager;
 
 /**
- * Basic controller exposing registered dynamic entry.
- * This feature must be enabled in {@link HappiSecurityManager}.
+ * A controller for registered entities.
  */
 @RequestScoped
-@Path("manager")
+@Path("discovery")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class ManagerEndpoint {
+public class DiscoveryEndpoint {
 
     /**
      * Security manager for this module.
@@ -31,44 +29,28 @@ public class ManagerEndpoint {
     private HappiSecurityManager securityManager;
 
     /**
-     * Dynamic entry manager.
+     * Discovery service.
      */
     @Inject
-    private ExplorerManager explorerManager;
+    private DiscoveryService service;
 
     /**
      * Default constructor.
      * This class is injectable, don't call this constructor explicitly.
      */
-    public ManagerEndpoint() {
+    public DiscoveryEndpoint() {
         // NO-OP
     }
 
     /**
-     * Show all registered entries.
+     * Show all registered entities.
      *
-     * @return A <i>JSON</i> object of all registered entries.
+     * @return A set of registered entities
      */
     @GET
-    @Path("entry")
-    public Response entries() {
+    public Set<Entity> discover() {
         checkIfEndpointEnable();
-        var entries = this.explorerManager.entries();
-        var document = DynamicEntryMapper.toJson(entries);
-        return Response.ok(document).build();
-    }
-
-    /**
-     * Show all registered roles.
-     *
-     * @return A <i>JSON</i> object of all registered roles.
-     */
-    @GET
-    @Path("role")
-    public Response roles() {
-        checkIfEndpointEnable();
-        var roles = this.securityManager.roles();
-        return Response.ok(roles).build();
+        return this.service.getEntities();
     }
 
     /**
@@ -78,11 +60,10 @@ public class ManagerEndpoint {
      */
     private void checkIfEndpointEnable() {
         var permission = this.securityManager
-                .getConfiguration(HappiSecurityManager.Configuration.MANAGER_ENDPOINT);
+                .getConfiguration(HappiSecurityManager.Configuration.DISCOVERY_ENDPOINT);
 
         if (Objects.equals(Boolean.parseBoolean(permission), Boolean.FALSE)) {
             throw new ForbiddenException();
         }
     }
-
 }
