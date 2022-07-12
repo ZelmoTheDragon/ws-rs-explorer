@@ -196,7 +196,10 @@ public class StartUp {
     private HappiSecurityManager securityManager;
     
     public void start(@Observes @Initialized(ApplicationScoped.class) final Object pointless) {
-      this.securityManager.putConfiguration(HappiSecurityManager.Configuration.MANAGER_ENDPOINT, "true");
+      this.securityManager.putConfiguration(
+                  HappiSecurityManager.Configuration.MANAGER_ENDPOINT, 
+                  "true"
+      );
     }
 }
 ~~~
@@ -270,7 +273,10 @@ public class StartUp {
     private HappiSecurityManager securityManager;
     
     public void start(@Observes @Initialized(ApplicationScoped.class) final Object pointless) {
-      this.securityManager.putConfiguration(HappiSecurityManager.Configuration.DISCOVERY_ENDPOINT, "true");
+      this.securityManager.putConfiguration(
+                  HappiSecurityManager.Configuration.DISCOVERY_ENDPOINT, 
+                  "true"
+      );
     }
 }
 ~~~
