@@ -182,6 +182,14 @@ public class StartUp {
 }
 ~~~
 
+> **Note :**  
+> Special roles :   
+> `HappiSecurityManager.PUBLIC` : Full access, no authentication needed.  
+> `HappiSecurityManager.PERMIT_ALL` : Full access for authenticated user, no role needed.  
+> `HappiSecurityManager.DENY_ALL` : Unauthorized operation.  
+> By default, if an action is not specified, the role is `HappiSecurityManager.DENY_ALL`.  
+> **Semantic :** `role`, `group` and `permission` are synonym.  
+
 ## Extra features
 
 ### Manager endpoint

@@ -14,14 +14,14 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class HappiSecurityManager {
 
     /**
-     * Role required only an authenticated user without specific privileges.
-     */
-    public static final String PERMIT_ALL = "@PermitAll";
-
-    /**
      * Unauthorized operation.
      */
     public static final String DENY_ALL = "@DenyAll";
+
+    /**
+     * Role required only an authenticated user without specific privileges.
+     */
+    public static final String PERMIT_ALL = "@PermitAll";
 
     /**
      * Public access, no authenticate user required.
