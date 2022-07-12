@@ -130,7 +130,7 @@ The result contains nothing.
 
 Example for a customer entry point: `Customer`.  
 You need a *Jakarta 9.1* web project.  
-See `happi-exeplorer-xxxx-example` for more details.  
+See `happi-exeplorer-example` for more details.  
 
 ### Step 1: Create your table in database
 
@@ -140,13 +140,13 @@ See `src/main/resources/derby-init.sql`.
 ### Step 2: Model your class
 
 Create your entity class using **JPA** *(Java Persistence API)*  
-See `CustomerEntity`.  
+See `CustomerEntity` class.  
 
 Create your data class using **JSON-B** *(JSON Binding)*  
-See `CustomerDTO`.  
+See `CustomerDTO` class.  
 
 Create your mapper class between entity and data class.  
-See `CustomerMapper`.  
+See `CustomerMapper` class.  
 
 > Simplify writing Java beans with [Lombok](https://projectlombok.org/).  
 > You can generate mappers using [Mapstruct](https://mapstruct.org/).  
@@ -154,7 +154,233 @@ See `CustomerMapper`.
 ### Step 3: Register your entry point
 
 Register your classes for publish your entry point.  
-See `StartUp`.  
+See `StartUp` class.  
+
+~~~
+@ApplicationScoped
+public class StartUp {
+
+    @Inject
+    private ExplorerManager explorerManager;
+    
+    public void start(@Observes @Initialized(ApplicationScoped.class) final Object pointless) {
+        this.explorerManager.register(new DynamicEntry<>(
+                "customer",
+                Map.of(
+                        Action.FILTER, HappiSecurityManager.PERMIT_ALL,
+                        Action.FIND, HappiSecurityManager.PERMIT_ALL,
+                        Action.CREATE, Roles.CUSTOMER_MANAGER,
+                        Action.UPDATE, Roles.CUSTOMER_MANAGER,
+                        Action.DELETE, Roles.CUSTOMER_MANAGER
+                ),
+                CustomerEntity.class,
+                CustomerDTO.class,
+                CustomerMapper.class,
+                BasicExplorerService.class
+        ));
+    }
+}
+~~~
+
+## Extra features
+
+### Manager endpoint
+
+Enable manager endpoint feature in `StartUp` class :  
+
+~~~
+@ApplicationScoped
+public class StartUp {
+
+    @Inject
+    private HappiSecurityManager securityManager;
+    
+    public void start(@Observes @Initialized(ApplicationScoped.class) final Object pointless) {
+      this.securityManager.putConfiguration(HappiSecurityManager.Configuration.MANAGER_ENDPOINT, "true");
+    }
+}
+~~~
+
+This endpoint will show all registered entry in `ExplorerManager` class.  
+
+~~~
+GET    <your-path>/manager/entry
+Content-Type: application/json
+
+# Result:
+[
+  {
+    "path":"customer",
+    "entity":"CustomerEntity",
+    "data":"CustomerDTO",
+    "mapper":"CustomerMapper",
+    "service":"BasicExplorerService",
+    "actions":[
+      { "action":"UPDATE", "role":"customer-manager" },
+      { "action":"DELETE", "role":"customer-manager" },
+      { "action":"FIND",   "role":"@PermitAll" },
+      { "action":"CREATE", "role":"customer-manager" },
+      { "action":"FILTER", "role":"@PermitAll" }]
+    }
+]
+~~~
+
+Use `@DeclareRoles` annotation in your web configuration class:   
+
+~~~
+@DeclareRoles({ "customer-manager" })
+@ApplicationPath("api")
+public class WebConfiguration extends Application { }
+~~~
+
+And register this configuration class by `HappiSecurityManager` class in `StartUp` class:  
+
+~~~
+@ApplicationScoped
+public class StartUp {
+
+    @Inject
+    private HappiSecurityManager securityManager;
+    
+    public void start(@Observes @Initialized(ApplicationScoped.class) final Object pointless) {
+      this.securityManager.scanRoleClassConfiguration(WebConfiguration.class);
+    }
+}
+~~~
+
+Now this endpoint will show all declared roles.
+
+~~~
+GET    <your-path>/manager/role
+Content-Type: application/json
+
+# Result:
+[ "customer-manager" ]
+~~~
+
+## Discovery
+
+Enable discovery endpoint feature in `StartUp` class :
+
+~~~
+@ApplicationScoped
+public class StartUp {
+
+    @Inject
+    private HappiSecurityManager securityManager;
+    
+    public void start(@Observes @Initialized(ApplicationScoped.class) final Object pointless) {
+      this.securityManager.putConfiguration(HappiSecurityManager.Configuration.DISCOVERY_ENDPOINT, "true");
+    }
+}
+~~~
+
+Now this endpoint will show all declared data class used by entries points.
+
+~~~
+GET    <your-path>/discovery
+Content-Type: application/json
+
+# Result:
+[
+  {
+    "type": "CustomerDTO",
+    "attributes": [
+      {
+        "name": "email",
+        "type": "String",
+        "constraints": [
+          {
+            "name": "jakarta.validation.constraints.Email",
+            "specifications": {
+              "regexp": ".*",
+              "flags": []
+            }
+          },
+          {
+            "name": "jakarta.validation.constraints.NotBlank",
+            "specifications": {}
+          },
+          {
+            "name": "jakarta.validation.constraints.Size",
+            "specifications": {
+              "min": 0,
+              "max": 255
+            }
+          }
+        ]
+      },
+      {
+        "name": "gender",
+        "type": "GenderDTO",
+        "constraints": [
+          {
+            "name": "jakarta.validation.constraints.NotNull",
+            "specifications": {}
+          }
+        ]
+      },
+      {
+        "name": "givenName",
+        "type": "String",
+        "constraints": [
+          {
+            "name": "jakarta.validation.constraints.NotBlank",
+            "specifications": {}
+          },
+          {
+            "name": "jakarta.validation.constraints.Size",
+            "specifications": {
+              "min": 0,
+              "max": 255
+            }
+          }
+        ]
+      },
+      {
+        "constraints": [],
+        "name": "id",
+        "type": "String"
+      },
+      {
+        "name": "phoneNumber",
+        "type": "String",
+        "constraints": [
+          {
+            "name": "jakarta.validation.constraints.NotBlank",
+            "specifications": {}
+          },
+          {
+            "name": "jakarta.validation.constraints.Size",
+            "specifications": {
+              "min": 0,
+              "max": 255
+            }
+          }
+        ]
+      },
+      {
+        "name": "familyName",
+        "type": "String",
+        "constraints": [
+          {
+            "name": "jakarta.validation.constraints.NotBlank",
+            "specifications": {}
+          },
+          {
+            "name": "jakarta.validation.constraints.Size",
+            "specifications": {
+              "min": 0,
+              "max": 255
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
+~~~
+
 
 ___
 

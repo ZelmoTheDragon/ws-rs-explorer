@@ -24,7 +24,7 @@ import com.github.happi.explorer.service.BasicExplorerService;
 public class StartUp {
 
     @Inject
-    private HappiSecurityManager happiSecurityManager;
+    private HappiSecurityManager securityManager;
 
     @Inject
     private ExplorerManager explorerManager;
@@ -34,12 +34,12 @@ public class StartUp {
 
     public void start(@Observes @Initialized(ApplicationScoped.class) final Object pointless) {
 
-        this.happiSecurityManager.scanRoleClassConfiguration(WebConfiguration.class);
-        this.happiSecurityManager.putConfiguration(HappiSecurityManager.Configuration.MANAGER_ENDPOINT, "true");
-        this.happiSecurityManager.putConfiguration(HappiSecurityManager.Configuration.DISCOVERY_ENDPOINT, "true");
-        this.happiSecurityManager.putConfiguration(HappiSecurityManager.Configuration.SECRET, "secret");
-        this.happiSecurityManager.putConfiguration(HappiSecurityManager.Configuration.TOKEN_CLAIM_USERNAME, "preferred_username");
-        this.happiSecurityManager.putConfiguration(HappiSecurityManager.Configuration.TOKEN_CLAIM_GROUPS, "groups");
+        this.securityManager.scanRoleClassConfiguration(WebConfiguration.class);
+        this.securityManager.putConfiguration(HappiSecurityManager.Configuration.MANAGER_ENDPOINT, "true");
+        this.securityManager.putConfiguration(HappiSecurityManager.Configuration.DISCOVERY_ENDPOINT, "true");
+        this.securityManager.putConfiguration(HappiSecurityManager.Configuration.SECRET, "secret");
+        this.securityManager.putConfiguration(HappiSecurityManager.Configuration.TOKEN_CLAIM_USERNAME, "preferred_username");
+        this.securityManager.putConfiguration(HappiSecurityManager.Configuration.TOKEN_CLAIM_GROUPS, "groups");
 
         this.explorerManager.register(new DynamicEntry<>(
                 "gender",
