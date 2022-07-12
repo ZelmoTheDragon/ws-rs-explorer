@@ -4,6 +4,9 @@ import java.util.Objects;
 import jakarta.json.bind.annotation.JsonbProperty;
 import jakarta.json.bind.annotation.JsonbPropertyOrder;
 import jakarta.json.bind.config.PropertyOrderStrategy;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
@@ -15,14 +18,20 @@ public class GenderDTO {
     @XmlElement(name = "id")
     private String id;
 
+    @NotBlank
+    @Size(max = 255)
     @JsonbProperty("name")
     @XmlElement(name = "name")
     private String name;
 
+    @NotBlank
+    @Size(max = 10)
     @JsonbProperty("code")
     @XmlElement(name = "code")
     private String code;
 
+    @NotNull
+    @Size(max = 255)
     @JsonbProperty("description")
     @XmlElement(name = "description")
     private String description;

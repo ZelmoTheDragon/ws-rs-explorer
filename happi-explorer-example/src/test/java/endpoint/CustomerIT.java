@@ -98,6 +98,22 @@ class CustomerIT {
                 .statusCode(HttpStatus.SC_NO_CONTENT);
     }
 
+    @Test
+    void testBadCreate() {
+        var jwt = TokenGenerator.generateNewToken();
+
+        RestAssured
+                .given()
+                .contentType(ContentType.JSON)
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwt)
+                .body(DataSet.BAD_JSON_DATA)
+                .when()
+                .post(ENDPOINT)
+                .then()
+                .body("violations", Matchers.hasSize(3))
+                .statusCode(HttpStatus.SC_BAD_REQUEST);
+    }
+
     private static final class DataSet {
 
         private static final String JOHN_DOE_ID = "0d5be73c-55f4-4379-accb-a7dcef0e9f2d";
@@ -116,6 +132,15 @@ class CustomerIT {
                         "code": "M",
                         "description": "A male humain"
                     }
+                }
+                """;
+
+        private static final String BAD_JSON_DATA = """
+                {
+                    "givenName": "Johnny",
+                    "familyName": "",
+                    "email": "@bad.email.org",
+                    "phoneNumber": "0000000000"
                 }
                 """;
     }

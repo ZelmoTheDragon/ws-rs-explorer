@@ -4,6 +4,10 @@ import java.util.Objects;
 import jakarta.json.bind.annotation.JsonbProperty;
 import jakarta.json.bind.annotation.JsonbPropertyOrder;
 import jakarta.json.bind.config.PropertyOrderStrategy;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
@@ -17,22 +21,32 @@ public class CustomerDTO {
     @XmlElement(name = "id")
     private String id;
 
+    @NotBlank
+    @Size(max = 255)
     @JsonbProperty("givenName")
     @XmlElement(name = "givenName")
     private String givenName;
 
+    @NotBlank
+    @Size(max = 255)
     @JsonbProperty("familyName")
     @XmlElement(name = "familyName")
     private String familyName;
 
+    @NotBlank
+    @Email
+    @Size(max = 255)
     @JsonbProperty("email")
     @XmlElement(name = "email")
     private String email;
 
+    @NotBlank
+    @Size(max = 255)
     @JsonbProperty("phoneNumber")
     @XmlElement(name = "phoneNumber")
     private String phoneNumber;
 
+    @NotNull
     @JsonbProperty("gender")
     @XmlElement(name = "gender")
     private GenderDTO gender;

@@ -19,6 +19,14 @@ public class ValidationException extends ExplorerException {
     private final Set<ConstraintViolation<Object>> violations;
 
     /**
+     * {@inheritDoc}
+     */
+    public ValidationException(final String message) {
+        super(message);
+        this.violations = Set.of();
+    }
+
+    /**
      * Construct an exception for validation object.
      *
      * @param message    Validation message

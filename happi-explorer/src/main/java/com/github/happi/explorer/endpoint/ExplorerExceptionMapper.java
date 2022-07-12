@@ -39,8 +39,8 @@ public final class ExplorerExceptionMapper implements ExceptionMapper<ExplorerEx
             for (var c : constraints) {
                 var violation = Json
                         .createObjectBuilder()
-                        .add("message", c.getMessage())
                         .add("property", String.valueOf(c.getPropertyPath()))
+                        .add("message", c.getMessage())
                         .build();
 
                 violations.add(violation);

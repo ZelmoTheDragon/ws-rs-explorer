@@ -31,10 +31,19 @@ public final class Validations {
 
             if (!violations.isEmpty()) {
                 var typeName = entity.getClass().getSimpleName();
-                throw new ValidationException(
-                        "Validation failed for object type :" + typeName,
+                var exception = new ValidationException(
+                        "Validation failed for object type : " + typeName + " ",
                         violations
                 );
+
+                for (var v : violations) {
+                    var p = String.valueOf(v.getPropertyPath());
+                    var m = v.getMessage();
+                    var ex = new ValidationException("Field: [" + p + "], details: " + m);
+                    exception.addSuppressed(ex);
+                }
+
+                throw exception;
             }
         }
     }
