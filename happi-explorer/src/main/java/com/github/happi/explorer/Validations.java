@@ -9,7 +9,7 @@ public final class Validations {
 
     /**
      * Internal constructor.
-     * Instance not allowed.
+     * Instance does not allow.
      */
     private Validations() {
         throw new UnsupportedOperationException("Instance not allowed");

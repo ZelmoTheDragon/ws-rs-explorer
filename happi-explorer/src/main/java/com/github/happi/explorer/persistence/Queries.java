@@ -9,7 +9,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * Utility class for web query.
+ * Utility class for a web query.
  */
 public final class Queries {
 
@@ -39,7 +39,7 @@ public final class Queries {
 
     /**
      * Internal constructor.
-     * Instance not allowed.
+     * Instance does not allow.
      */
     private Queries() {
         throw new UnsupportedOperationException("Instance not allowed");
@@ -60,7 +60,7 @@ public final class Queries {
     /**
      * Convert a raw value in the correct type.
      *
-     * @param type  Desired basic type
+     * @param type  Desired a basic type
      * @param query Web query
      * @param <T>   Basic type
      * @return The raw value converted
@@ -72,10 +72,10 @@ public final class Queries {
     /**
      * Convert a raw value in the correct type.
      *
-     * @param type  Desired basic type
+     * @param type  Desired a basic type
      * @param query Web query
      * @param <T>   Basic type
-     * @return The raw value converted as list
+     * @return The raw value converted as a list
      */
     static <T> Map<WebOperator, List<T>> asValues(final Class<T> type, final FilterQuery query) {
 
@@ -94,7 +94,7 @@ public final class Queries {
     }
 
     /**
-     * Check if web queries has a distinct query to {@code true}.
+     * Check if web queries have a distinct query to {@code true}.
      *
      * @param queries Web queries
      * @return The value {@code true} if web queries has a distinct query otherwise the value {@code false} is returned
@@ -109,7 +109,7 @@ public final class Queries {
     }
 
     /**
-     * Check if web queries has a page number query to {@code true}.
+     * Check if web queries have a page number query to {@code true}.
      *
      * @param queries Web queries
      * @return The page number if web queries has a page number query otherwise the value {@link #DEFAULT_PAGE_NUMBER} is returned
@@ -124,7 +124,7 @@ public final class Queries {
     }
 
     /**
-     * Check if web queries has a page size query to {@code true}.
+     * Check if web queries have a page size query to {@code true}.
      *
      * @param queries Web queries
      * @return The value {@code true} if web queries has a page size query otherwise the value {@link #DEFAULT_PAGE_SIZE} is returned
@@ -142,7 +142,7 @@ public final class Queries {
      * Compute the page count based on the page size.
      *
      * @param queries Web queries
-     * @param count   Number of element based of web queries
+     * @param count   Number of elements based of web queries
      * @return The page count
      */
     public static int getPageCount(final Set<FilterQuery> queries, final long count) {
@@ -166,7 +166,7 @@ public final class Queries {
     }
 
     /**
-     * Convert raw parameter to web query.
+     * Convert raw parameter to a web query.
      *
      * @param parameterName Attribut name with or without operator symbol
      * @param values        Web parameters values

@@ -28,7 +28,7 @@ public final class EntityMappers {
 
     /**
      * Internal constructor.
-     * Instance not allowed.
+     * Instance does not allow.
      */
     private EntityMappers() {
         throw new UnsupportedOperationException("Instance not allowed");

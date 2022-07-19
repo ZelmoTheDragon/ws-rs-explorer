@@ -6,7 +6,7 @@ A generic and dynamic endpoint for basic **CRUD** *(Create, Read, Update, Delete
 ## Showcase
 
 For example, you want an endpoint for a `Customer` entity.  
-This project provide full *CRUD* operation.  
+This project provides full *CRUD* operation.  
 So, you have dynamically this endpoint:  
 
 ~~~
@@ -26,7 +26,7 @@ OPTIONS <your-path>/entity/customer/{id}
 GET     <your-path>/entity/customer
 ~~~
 
-This endpoint provides an advance filter query with multiple operator.  
+This endpoint provides an advance filter query with a multiple operator.  
 It's following this principe:  
 
 ~~~
@@ -87,8 +87,8 @@ Content-Type: application/json
 201: Created /entity/{id}
 ~~~
 
-This endpoint provides a simple create operation.  
-The unique identifier attribut don't need to be defined.  
+This endpoint provides a simple created operation.  
+The unique identifier attribut doesn't need to be defined.  
 The *JSON* object of the entity is in the body of the request.  
 The result contains the location of the new resource.  
 
@@ -122,7 +122,7 @@ Content-Type: application/json
 204: No content
 ~~~
 
-This endpoint provides a simple delete operation.  
+This endpoint provides a simple deleted operation.  
 The unique identifier should be defined in the path parameter.  
 The result contains nothing.  
 
@@ -132,10 +132,10 @@ Example for a customer entry point: `Customer`.
 You need a *Jakarta 9.1* web project.  
 See `happi-exeplorer-example` for more details.  
 
-### Step 1: Create your table in database
+### Step 1: Create your table in a database
 
 Create your table.  
-See `src/main/resources/derby-init.sql`.  
+See `src/glassfish/resources/derby-init.sql`.  
 
 ### Step 2: Model your class
 
@@ -212,7 +212,7 @@ public class StartUp {
 }
 ~~~
 
-This endpoint will show all registered entry in `ExplorerManager` class.  
+This endpoint will show all registered entries in `ExplorerManager` class.  
 
 ~~~
 GET    <your-path>/manager/entry
@@ -289,7 +289,7 @@ public class StartUp {
 }
 ~~~
 
-Now this endpoint will show all declared data class used by entries points.
+Now this endpoint will show all declared data classes used by entry points.
 
 ~~~
 GET    <your-path>/discovery

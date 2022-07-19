@@ -397,7 +397,7 @@ public class ExplorerDAO {
      * @param entityClass Entity class
      * @param query       Web query
      * @param <E>         Type of persistent entity
-     * @return The value {@code true} if the web query is  applicable on this persistent entity otherwise the value {@code false} is returned
+     * @return The value {@code true} if the web query is applicable on this persistent entity otherwise the value {@code false} is returned
      */
     private static <E> boolean isSafeSearchQuery(
             final EntityManager em,

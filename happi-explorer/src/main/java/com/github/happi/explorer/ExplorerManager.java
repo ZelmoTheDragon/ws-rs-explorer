@@ -44,7 +44,7 @@ public class ExplorerManager {
      * @param <D>   Type of data transfer object
      * @param <M>   Type of mapper
      * @param <S>   Type of service
-     * @throws IllegalArgumentException If the entry already exist
+     * @throws IllegalArgumentException If the entry already exists
      */
     public <E, D, M extends EntityMapper<E, D>, S extends ExplorerService> void register(final DynamicEntry<E, D, M, S> entry) {
         if (this.entries.contains(entry)) {

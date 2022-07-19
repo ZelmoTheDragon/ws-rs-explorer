@@ -13,7 +13,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 
 /**
  * A discovery service.
- * Any data class used in explorer service should be registered by this service.
+ * This service shows any data class used in explorer service.
  */
 @ApplicationScoped
 public class DiscoveryService {

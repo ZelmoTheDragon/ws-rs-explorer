@@ -37,6 +37,7 @@ public class StartUp {
         this.securityManager.scanRoleClassConfiguration(WebConfiguration.class);
         this.securityManager.putConfiguration(HappiSecurityManager.Configuration.MANAGER_ENDPOINT, "true");
         this.securityManager.putConfiguration(HappiSecurityManager.Configuration.DISCOVERY_ENDPOINT, "true");
+        this.securityManager.putConfiguration(HappiSecurityManager.Configuration.JAKARTA_SECURITY, "true");
         this.securityManager.putConfiguration(HappiSecurityManager.Configuration.SECRET, "secret");
         this.securityManager.putConfiguration(HappiSecurityManager.Configuration.TOKEN_CLAIM_USERNAME, "preferred_username");
         this.securityManager.putConfiguration(HappiSecurityManager.Configuration.TOKEN_CLAIM_GROUPS, "groups");

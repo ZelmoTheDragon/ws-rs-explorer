@@ -35,25 +35,25 @@ enum Operator {
 
     /**
      * Greater than.
-     * Work with text, number and date.
+     * Work with a text, number and date.
      */
     GREATER_THAN("gt"),
 
     /**
      * Greater than or equal.
-     * Work with text, number and date.
+     * Work with a text, number and date.
      */
     GREATER_THAN_OR_EQUAL("ge"),
 
     /**
      * Less than.
-     * Work with text, number and date.
+     * Work with a text, number and date.
      */
     LESS_THAN("lt"),
 
     /**
      * Less than or equal.
-     * Work with text, number and date.
+     * Work with a text, number and date.
      */
     LESS_THAN_OR_EQUAL("le"),
 
@@ -72,7 +72,7 @@ enum Operator {
     /**
      * Between.
      * Exact match.
-     * Work with text, number and date.
+     * Work with a text, number and date.
      */
     BETWEEN("bt"),
 
@@ -84,7 +84,7 @@ enum Operator {
 
     /**
      * None.
-     * No operator, only for specific web query.
+     * No operator, only for a specific web query.
      */
     NONE("");
 

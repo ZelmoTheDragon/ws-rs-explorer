@@ -5,7 +5,7 @@ import jakarta.enterprise.inject.spi.CDI;
 import jakarta.security.enterprise.credential.Credential;
 
 /**
- * Factory class for construct token credential.
+ * Factory class for constructed token credentials.
  */
 final class TokenCredentialFactory {
 
@@ -25,7 +25,7 @@ final class TokenCredentialFactory {
 
     /**
      * Internal constructor.
-     * Instance not allowed.
+     * Instance does not allow.
      */
     private TokenCredentialFactory() {
         throw new UnsupportedOperationException("Instance not allowed");
@@ -38,8 +38,8 @@ final class TokenCredentialFactory {
      * @return A token credential
      */
     static Credential of(final String token) {
-        var securityManader = CDI.current().select(HappiSecurityManager.class).get();
-        var secret = securityManader.getConfiguration(HappiSecurityManager.Configuration.SECRET);
+        var securityManager = CDI.current().select(HappiSecurityManager.class).get();
+        var secret = securityManager.getConfiguration(HappiSecurityManager.Configuration.SECRET);
         return new TokenCredential(token, secret);
     }
 

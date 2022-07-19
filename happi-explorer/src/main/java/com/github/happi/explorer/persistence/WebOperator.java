@@ -4,7 +4,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.Predicate;
 
 /**
- * Logical operator for web query.
+ * Logical operator for a web query.
  */
 enum WebOperator {
 

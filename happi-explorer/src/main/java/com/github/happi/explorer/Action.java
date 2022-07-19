@@ -36,7 +36,7 @@ public enum Action {
 
     /**
      * Allows all actions on an entry point.
-     * No role need.
+     * No role needs it.
      */
     public static final Map<Action, String> ALL = Map.of(
             FILTER, HappiSecurityManager.PERMIT_ALL,
@@ -47,8 +47,8 @@ public enum Action {
     );
 
     /**
-     * Allows read only actions on an entry point.
-     * No role need.
+     * Allows reading only actions on an entry point.
+     * No role needs it.
      */
     public static final Map<Action, String> READ_ONLY = Map.of(
             FILTER, HappiSecurityManager.PERMIT_ALL,

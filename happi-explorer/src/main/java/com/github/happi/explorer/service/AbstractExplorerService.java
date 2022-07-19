@@ -26,10 +26,17 @@ import com.github.happi.security.HappiSecurityManager;
 public abstract class AbstractExplorerService implements ExplorerService {
 
     /**
-     * Security manager for this module.
+     * Security context for this module.
      */
     @Inject
     protected SecurityContext securityContext;
+
+
+    /**
+     * Security manager for this module.
+     */
+    @Inject
+    protected HappiSecurityManager securityManager;
 
     /**
      * Manager for all entry point.
@@ -183,7 +190,7 @@ public abstract class AbstractExplorerService implements ExplorerService {
      *
      * @param entry  dynamic entry point
      * @param action business action
-     * @throws ActionDeniedException If the user is not authenticate or has not enough authorization
+     * @throws ActionDeniedException If the user is not authenticated or has not enough authorizations
      */
     protected void checkAuthorization(
             final DynamicEntry<?, ?, ?, ?> entry,
@@ -192,18 +199,21 @@ public abstract class AbstractExplorerService implements ExplorerService {
         var principal = this.securityContext.getCallerPrincipal();
         var role = entry.getActions().getOrDefault(action, HappiSecurityManager.DENY_ALL);
 
+        var isSecured = this.isSecured();
         var authAccess = Objects.nonNull(principal);
         var publicAccess = Objects.equals(role, HappiSecurityManager.PUBLIC);
         var permitAccess = Objects.equals(role, HappiSecurityManager.PERMIT_ALL);
         var denyAccess = Objects.equals(role, HappiSecurityManager.DENY_ALL);
         var roleAccess = this.securityContext.isCallerInRole(role);
 
-        if (denyAccess) {
-            throw new ActionDeniedException(entry.getPath(), action, "Unauthorized operation");
-        } else if (!authAccess && !publicAccess) {
-            throw new ActionDeniedException(entry.getPath(), action, "User not authenticate");
-        } else if (authAccess && !permitAccess && !roleAccess) {
-            throw new ActionDeniedException(entry.getPath(), action, "Insufficient authorization");
+        if (isSecured) {
+            if (denyAccess) {
+                throw new ActionDeniedException(entry.getPath(), action, "Unauthorized operation");
+            } else if (!authAccess && !publicAccess) {
+                throw new ActionDeniedException(entry.getPath(), action, "User not authenticate");
+            } else if (authAccess && !permitAccess && !roleAccess) {
+                throw new ActionDeniedException(entry.getPath(), action, "Insufficient authorization");
+            }
         }
 
         // Authorization granted:
@@ -211,8 +221,15 @@ public abstract class AbstractExplorerService implements ExplorerService {
         // OR
         // authenticate user with role @PermitAll
         // OR
-        // authenticate user with in role
+        // authenticate user with in a role
 
+    }
+
+    private boolean isSecured() {
+        var secured = this.securityManager
+                .getConfiguration(HappiSecurityManager.Configuration.JAKARTA_SECURITY);
+
+        return Objects.equals(Boolean.parseBoolean(secured), Boolean.TRUE);
     }
 }
 

@@ -13,7 +13,7 @@ public final class Jsons {
 
     /**
      * Internal constructor.
-     * Instance not allowed.
+     * Instance does not allow.
      */
     private Jsons() {
         throw new UnsupportedOperationException("Instance not allowed");

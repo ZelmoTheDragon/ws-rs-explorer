@@ -71,7 +71,7 @@ public interface EntityMapper<E, D> {
      * Convert an entity to data transfer objet.
      *
      * @param entities entity list
-     * @return A data transfer object list with entities data
+     * @return A data transfer object list with entity data
      */
     default List<D> fromEntity(List<E> entities) {
         return Optional

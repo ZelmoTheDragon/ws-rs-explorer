@@ -16,7 +16,7 @@ final class DynamicEntryMapper {
 
     /**
      * Internal constructor.
-     * Instance not allowed.
+     * Instance does not allow.
      */
     private DynamicEntryMapper() {
         throw new UnsupportedOperationException("Instance not allowed");
@@ -25,7 +25,7 @@ final class DynamicEntryMapper {
     /**
      * Convert to <i>JSON</i> array.
      *
-     * @param entries Collection of entry point
+     * @param entries Collection of entry points
      * @return A <i>JSON</i> array of entry point
      */
     static JsonArray toJson(final Collection<DynamicEntry<?, ?, ?, ?>> entries) {
@@ -60,7 +60,7 @@ final class DynamicEntryMapper {
     /**
      * Convert to <i>JSON</i> array.
      *
-     * @param actions Action with role
+     * @param actions Action with a role
      * @return A <i>JSON</i> array of action
      */
     private static JsonArray toJson(final Map<Action, String> actions) {

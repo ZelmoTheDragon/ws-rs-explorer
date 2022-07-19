@@ -8,13 +8,13 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * Utility class for hashing text.
+ * Utility class for a hashing text.
  */
 public final class HashMac {
 
     /**
      * Internal constructor.
-     * Instance not allowed.
+     * Instance does not allow.
      */
     private HashMac() {
         throw new UnsupportedOperationException("Instance not allowed");

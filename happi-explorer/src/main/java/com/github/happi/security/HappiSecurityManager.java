@@ -145,6 +145,12 @@ public class HappiSecurityManager {
         DISCOVERY_ENDPOINT,
 
         /**
+         * Indicates if the security is enabled in this module.
+         * If security is turned off, then role checking will be ignored.
+         */
+        JAKARTA_SECURITY,
+
+        /**
          * Secret value for compute the <i>JWT</i> signature.
          */
         SECRET
