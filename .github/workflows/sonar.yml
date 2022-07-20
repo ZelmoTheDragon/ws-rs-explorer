@@ -21,7 +21,7 @@ jobs:
         with:
           java-version: 17
           maven-version: 3.8.1
-          - run: mvn clean install
+      - run: mvn clean install
 
       # Triggering SonarQube analysis as results of it are required by Quality Gate check.
       - name: SonarQube Scan
