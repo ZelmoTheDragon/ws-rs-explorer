@@ -17,7 +17,7 @@ jobs:
           fetch-depth: 0
 
       - name: build
-        uses: s4u/setup-maven-action@1.4.0
+        uses: s4u/setup-maven-action@v1.4.0
         with:
           java-version: 17
           maven-version: 3.8.1
