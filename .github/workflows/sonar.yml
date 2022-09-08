@@ -15,6 +15,14 @@ jobs:
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting.
           fetch-depth: 0
+      - name: postgres
+        uses: harmon758/postgresql-action@v1
+        with:
+          postgresql version: '14.5'
+          postgresql db: explorer
+          postgresql user: user
+          postgresql password: pwd
+
 
       - name: build
         uses: s4u/setup-maven-action@v1.4.0
