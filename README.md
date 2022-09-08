@@ -126,6 +126,24 @@ This endpoint provides a simple deleted operation.
 The unique identifier should be defined in the path parameter.  
 The result contains nothing.  
 
+## Testing
+
+Build the project and execute tests:  
+
+~~~
+clean install -U
+~~~
+
+Run `happi-explorer-example` with **Glassfish** server:  
+
+~~~
+clean install -U -DskipITs cargo:run
+~~~
+
+> **Note:**
+> Use argument: `-P tomcat` to work with **Tomcat**.  
+> Be careful, it's a prototype !  
+
 ## Setup
 
 Example for a customer entry point: `Customer`.  
@@ -399,6 +417,7 @@ Content-Type: application/json
 ___
 
 > This project is writing in **Java 17** with **Jakarta 9.1**.  
-> It uses **Glassfish 6.X** as standard implementation.  
 > Build with **Maven 3.8.X**.  
+> It uses **Glassfish 6.X** as standard implementation.  
+> **Tomcat10x** is available as a prototype.  
 

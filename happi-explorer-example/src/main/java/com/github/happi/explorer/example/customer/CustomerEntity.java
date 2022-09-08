@@ -1,6 +1,7 @@
 package com.github.happi.explorer.example.customer;
 
 import java.io.Serial;
+import java.util.Objects;
 import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
 import jakarta.persistence.CascadeType;
@@ -54,6 +55,31 @@ public class CustomerEntity extends AbstractEntity {
 
     public CustomerEntity() {
         super();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        final boolean equality;
+        if (this == o) {
+            equality = true;
+        } else if (o == null || getClass() != o.getClass()) {
+            equality = false;
+        } else {
+            var that = (CustomerEntity) o;
+            equality = Objects.equals(id, that.id)
+                    && Objects.equals(version, that.version)
+                    && Objects.equals(givenName, that.givenName)
+                    && Objects.equals(familyName, that.familyName)
+                    && Objects.equals(email, that.email)
+                    && Objects.equals(phoneNumber, that.phoneNumber)
+                    && Objects.equals(gender, that.gender);
+        }
+        return equality;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, version, givenName, familyName, email, phoneNumber, gender);
     }
 
     public String getGivenName() {

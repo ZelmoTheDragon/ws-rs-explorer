@@ -17,7 +17,10 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Version;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+
+import com.github.happi.explorer.example.persistence.UUIDConverter;
 
 @Entity
 @Table(name = "application_user")
@@ -27,9 +30,10 @@ public class ApplicationUser implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotNull
+    @Pattern(regexp = "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}")
     @Id
-    @Column(name = "id", nullable = false, unique = true, columnDefinition = "VARCHAR(36)")
-    private UUID id;
+    @Column(name = "id", nullable = false, unique = true, columnDefinition = UUIDConverter.COLUMN_DEFINITION)
+    private String id;
 
     @NotNull
     @Version
@@ -54,14 +58,14 @@ public class ApplicationUser implements Serializable {
     private Set<String> roles;
 
     public ApplicationUser() {
-        this.id = UUID.randomUUID();
+        this.id = UUID.randomUUID().toString();
         this.version = 0L;
         this.roles = new HashSet<>();
     }
 
     @Override
     public boolean equals(final Object o) {
-        boolean equality;
+        final boolean equality;
         if (this == o) {
             equality = true;
         } else if (o == null || getClass() != o.getClass()) {
@@ -82,11 +86,11 @@ public class ApplicationUser implements Serializable {
         return Objects.hash(id, version, username, password, roles);
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(final UUID id) {
+    public void setId(final String id) {
         this.id = id;
     }
 

@@ -1,5 +1,6 @@
 package com.github.happi.security;
 
+import java.util.Objects;
 import java.util.Optional;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -30,6 +31,12 @@ public class OAuth2Authentication implements HttpAuthenticationMechanism {
     private IdentityStoreHandler identityStoreHandler;
 
     /**
+     * Security manager for this module.
+     */
+    @Inject
+    private HappiSecurityManager securityManager;
+
+    /**
      * Default constructor.
      * This class is injectable, don't call this constructor explicitly.
      */
@@ -50,7 +57,9 @@ public class OAuth2Authentication implements HttpAuthenticationMechanism {
                 .map(e -> e.startsWith(BEARER_TOKEN))
                 .orElse(Boolean.FALSE);
 
-        if (isBearer) {
+        if (!this.isSecured()) {
+            authenticationStatus = httpMessageContext.doNothing();
+        } else if (isBearer) {
 
             var credential = authorization
                     .map(e -> e.replace(BEARER_TOKEN, ""))
@@ -76,6 +85,18 @@ public class OAuth2Authentication implements HttpAuthenticationMechanism {
         }
 
         return authenticationStatus;
+    }
+
+    /**
+     * Check if security is enabled in this module.
+     *
+     * @return The value {@code true} if security is enabled, otherwise the value {@code false} is returned
+     */
+    private boolean isSecured() {
+        var secured = this.securityManager
+                .getConfiguration(HappiSecurityManager.Configuration.JAKARTA_SECURITY);
+
+        return Objects.equals(Boolean.parseBoolean(secured), Boolean.TRUE);
     }
 
 }

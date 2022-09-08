@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.logging.Logger;
 import jakarta.inject.Inject;
 import jakarta.json.JsonObject;
 import jakarta.security.enterprise.SecurityContext;
@@ -225,6 +224,11 @@ public abstract class AbstractExplorerService implements ExplorerService {
 
     }
 
+    /**
+     * Check if security is enabled in this module.
+     *
+     * @return The value {@code true} if security is enabled, otherwise the value {@code false} is returned
+     */
     private boolean isSecured() {
         var secured = this.securityManager
                 .getConfiguration(HappiSecurityManager.Configuration.JAKARTA_SECURITY);

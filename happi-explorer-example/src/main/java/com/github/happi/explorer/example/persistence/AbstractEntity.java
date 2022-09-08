@@ -4,19 +4,24 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Version;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 @MappedSuperclass
+@Access(AccessType.FIELD)
 public abstract class AbstractEntity implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
     @NotNull
+    @Pattern(regexp = "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}")
     @Id
     @Column(name = "id", nullable = false, unique = true, columnDefinition = UUIDConverter.COLUMN_DEFINITION)
     protected String id;
@@ -33,17 +38,17 @@ public abstract class AbstractEntity implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        boolean eq;
+        final boolean equality;
         if (this == o) {
-            eq = true;
+            equality = true;
         } else if (o == null || getClass() != o.getClass()) {
-            eq = false;
+            equality = false;
         } else {
             var that = (AbstractEntity) o;
-            eq = Objects.equals(id, that.id)
+            equality = Objects.equals(id, that.id)
                     && Objects.equals(version, that.version);
         }
-        return eq;
+        return equality;
     }
 
     @Override

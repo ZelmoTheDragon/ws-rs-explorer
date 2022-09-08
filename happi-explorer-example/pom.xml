@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.github.zelmothedragon.happi-explorer</groupId>
         <artifactId>happi-explorer-parent</artifactId>
-        <version>0.0.9-SNAPSHOT</version>
+        <version>0.0.10-SNAPSHOT</version>
     </parent>
 
     <artifactId>happi-explorer-example</artifactId>
@@ -30,13 +30,18 @@
         <dependency>
             <groupId>com.github.zelmothedragon.happi-explorer</groupId>
             <artifactId>happi-explorer</artifactId>
-            <version>0.0.9-SNAPSHOT</version>
+            <version>0.0.10-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core-jakarta</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -161,11 +166,6 @@
                     <artifactId>hibernate-core-jakarta</artifactId>
                     <scope>compile</scope>
                 </dependency>
-                <dependency>
-                    <groupId>org.hibernate</groupId>
-                    <artifactId>hibernate-envers-jakarta</artifactId>
-                    <scope>compile</scope>
-                </dependency>
 
                 <!-- JTA -->
                 <dependency>
@@ -242,6 +242,25 @@
                     <scope>compile</scope>
                 </dependency>
 
+                <!-- Config -->
+                <dependency>
+                    <groupId>io.smallrye.config</groupId>
+                    <artifactId>smallrye-config</artifactId>
+                    <scope>compile</scope>
+                </dependency>
+
+                <!-- OpenAPI -->
+                <dependency>
+                    <groupId>io.smallrye</groupId>
+                    <artifactId>smallrye-open-api-core</artifactId>
+                    <scope>compile</scope>
+                </dependency>
+                <dependency>
+                    <groupId>io.smallrye</groupId>
+                    <artifactId>smallrye-open-api-jaxrs</artifactId>
+                    <scope>compile</scope>
+                </dependency>
+
                 <!-- Miscellaneous -->
                 <dependency>
                     <groupId>commons-io</groupId>
@@ -286,7 +305,20 @@
                                         <configfile>true</configfile>
                                         <overwrite>true</overwrite>
                                     </copy>
+                                    <copy>
+                                        <file>${project.basedir}/src/tomcat/resources/logging.properties</file>
+                                        <tofile>conf/logging.properties</tofile>
+                                        <configfile>true</configfile>
+                                        <overwrite>true</overwrite>
+                                    </copy>
                                 </files>
+                                <properties>
+                                    <cargo.start.jvmargs>
+                                        --add-opens=java.base/java.io=ALL-UNNAMED
+                                        --add-opens=java.base/java.lang=ALL-UNNAMED
+                                        --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+                                    </cargo.start.jvmargs>
+                                </properties>
                             </configuration>
                         </configuration>
                     </plugin>
@@ -322,6 +354,7 @@
                                     <directory>src/tomcat/resources</directory>
                                     <excludes>
                                         <exclude>server.xml</exclude>
+                                        <exclude>logging.properties</exclude>
                                     </excludes>
                                 </resource>
                             </resources>

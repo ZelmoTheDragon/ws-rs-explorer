@@ -1,6 +1,7 @@
 package com.github.happi.explorer.example.gender;
 
 import java.io.Serial;
+import java.util.Objects;
 import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
 import jakarta.persistence.Column;
@@ -37,6 +38,29 @@ public class GenderEntity extends AbstractEntity {
 
     public GenderEntity() {
         super();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        final boolean equality;
+        if (this == o) {
+            equality = true;
+        } else if (o == null || getClass() != o.getClass()) {
+            equality = false;
+        } else if (!super.equals(o)) {
+            equality = false;
+        } else {
+            var that = (GenderEntity) o;
+            equality = Objects.equals(name, that.name)
+                    && Objects.equals(code, that.code)
+                    && Objects.equals(description, that.description);
+        }
+        return equality;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), name, code, description);
     }
 
     public String getName() {
