@@ -1,6 +1,10 @@
 package com.github.happi.explorer.example;
 
 import java.util.Map;
+
+import com.github.happi.explorer.example.device.DeviceDTO;
+import com.github.happi.explorer.example.device.DeviceEntity;
+import com.github.happi.explorer.example.device.DeviceMapper;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Initialized;
 import jakarta.enterprise.event.Observes;
@@ -68,5 +72,21 @@ public class StartUp {
                 CustomerMapper.class,
                 BasicExplorerService.class
         ));
+
+        this.explorerManager.register(new DynamicEntry<>(
+                "device",
+                Map.of(
+                        Action.FILTER, HappiSecurityManager.PERMIT_ALL,
+                        Action.FIND, HappiSecurityManager.PERMIT_ALL,
+                        Action.CREATE, Roles.DEVICE_MANAGER,
+                        Action.UPDATE, Roles.DEVICE_MANAGER,
+                        Action.DELETE, Roles.DEVICE_MANAGER
+                ),
+                DeviceEntity.class,
+                DeviceDTO.class,
+                DeviceMapper.class,
+                BasicExplorerService.class
+        ));
+
     }
 }
