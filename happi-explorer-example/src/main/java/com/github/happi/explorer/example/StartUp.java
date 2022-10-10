@@ -57,8 +57,8 @@ public class StartUp {
         this.explorerManager.register(new DynamicEntry<>(
                 "customer",
                 Map.of(
-                        Action.FILTER, HappiSecurityManager.PERMIT_ALL,
-                        Action.FIND, HappiSecurityManager.PERMIT_ALL,
+                        Action.FILTER, Roles.CUSTOMER_MANAGER,
+                        Action.FIND, Roles.CUSTOMER_MANAGER,
                         Action.CREATE, Roles.CUSTOMER_MANAGER,
                         Action.UPDATE, Roles.CUSTOMER_MANAGER,
                         Action.DELETE, Roles.CUSTOMER_MANAGER
