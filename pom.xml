@@ -55,34 +55,54 @@
         <version.java>17</version.java>
         <version.jakarta>9.1.0</version.jakarta>
         <version.glassfish>6.2.5</version.glassfish>
-        <version.tomcat>10.0.22</version.tomcat>
+        <version.tomcat>10.0.27</version.tomcat>
 
         <!-- Jakarta Implementation -->
-        <weld.version>4.0.3.Final</weld.version>
+        <version.weld>4.0.3.Final</version.weld>
         <version.eclipselink>3.0.2</version.eclipselink>
-        <hibernate.version>5.6.10.Final</hibernate.version>
-        <hibernate-validator.version>7.0.4.Final</hibernate-validator.version>
-        <narayana-jta.version>5.12.7.Final</narayana-jta.version>
-        <resteasy.version>6.0.1.Final</resteasy.version>
-        <soteria.version>2.0.1</soteria.version>
-        <exousia.version>1.1</exousia.version>
-        <jabx-impl.version>3.0.2</jabx-impl.version>
+        <version.hibernate>5.6.12.Final</version.hibernate>
+        <version.hibernate-validator>8.0.0.Final</version.hibernate-validator>
+        <version.narayana-jta>5.12.7.Final</version.narayana-jta>
+        <version.resteasy>6.2.0.Final</version.resteasy>
+        <version.soteria>2.0.1</version.soteria>
+        <version.exousia>1.1</version.exousia>
+        <version.jabx-impl>3.0.2</version.jabx-impl>
 
         <!-- MicroProfile Implementation -->
-        <smallrye-config.version>2.11.0</smallrye-config.version>
-        <smallrye-openapi.version>2.1.23</smallrye-openapi.version>
-        <smallrye-jwt.version>3.5.3</smallrye-jwt.version>
+        <version.smallrye-config>2.11.0</version.smallrye-config>
+        <version.smallrye-openapi>2.1.23</version.smallrye-openapi>
+        <version.smallrye-jwt>3.5.3</version.smallrye-jwt>
 
         <!-- Miscellaneous -->
-        <slf4j.version>1.7.36</slf4j.version>
-        <commons-io.version>2.6</commons-io.version>
-        <h2.version>2.1.214</h2.version>
+        <version.slf4j>2.0.3</version.slf4j>
+        <version.commons-io>2.6</version.commons-io>
+        <version.h2>2.1.214</version.h2>
 
         <!-- TEST versions -->
-        <version.junit>5.8.2</version.junit>
-        <version.rest-assured>5.1.0</version.rest-assured>
+        <version.junit>5.9.1</version.junit>
+        <version.rest-assured>5.2.0</version.rest-assured>
         <version.hamcrest>2.2</version.hamcrest>
         <version.httpclient>4.5.13</version.httpclient>
+
+        <!-- Maven plugins -->
+        <version.maven-clean-plugin>3.1.0</version.maven-clean-plugin>
+        <version.maven-compiler-plugin>3.10.1</version.maven-compiler-plugin>
+        <version.maven-dependency-plugin>3.3.0</version.maven-dependency-plugin>
+        <version.maven-deploy-plugin>2.8.2</version.maven-deploy-plugin>
+        <version.maven-enforcer-plugin>3.0.0</version.maven-enforcer-plugin>
+        <version.maven-failsafe-plugin>2.22.2</version.maven-failsafe-plugin>
+        <version.maven-install-plugin>2.5.2</version.maven-install-plugin>
+        <version.maven-jar-plugin>3.2.2</version.maven-jar-plugin>
+        <version.maven-resources-plugin>3.2.0</version.maven-resources-plugin>
+        <version.maven-site-plugin>3.12.0</version.maven-site-plugin>
+        <version.maven-surefire-plugin>2.22.2</version.maven-surefire-plugin>
+        <version.maven-war-plugin>3.3.2</version.maven-war-plugin>
+
+        <!-- Additional plugins -->
+        <version.build-helper-maven-plugin>3.3.0</version.build-helper-maven-plugin>
+        <version.cargo-maven3-plugin>1.9.11</version.cargo-maven3-plugin>
+        <version.versions-maven-plugin>2.12.0</version.versions-maven-plugin>
+        <version.docker-maven-plugin>0.40.2</version.docker-maven-plugin>
 
         <!-- Configuration -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -109,7 +129,7 @@
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-jpamodelgen-jakarta</artifactId>
-                <version>${hibernate.version}</version>
+                <version>${version.hibernate}</version>
             </dependency>
 
             <!--
@@ -122,26 +142,26 @@
             <dependency>
                 <groupId>io.smallrye.config</groupId>
                 <artifactId>smallrye-config</artifactId>
-                <version>${smallrye-config.version}</version>
+                <version>${version.smallrye-config}</version>
             </dependency>
 
             <!-- OpenAPI -->
             <dependency>
                 <groupId>io.smallrye</groupId>
                 <artifactId>smallrye-open-api-core</artifactId>
-                <version>${smallrye-openapi.version}</version>
+                <version>${version.smallrye-openapi}</version>
             </dependency>
             <dependency>
                 <groupId>io.smallrye</groupId>
                 <artifactId>smallrye-open-api-jaxrs</artifactId>
-                <version>${smallrye-openapi.version}</version>
+                <version>${version.smallrye-openapi}</version>
             </dependency>
 
             <!-- JWT -->
             <dependency>
                 <groupId>io.smallrye</groupId>
                 <artifactId>smallrye-jwt</artifactId>
-                <version>${smallrye-jwt.version}</version>
+                <version>${version.smallrye-jwt}</version>
             </dependency>
 
 
@@ -154,96 +174,96 @@
             <dependency>
                 <groupId>org.jboss.weld.servlet</groupId>
                 <artifactId>weld-servlet-core</artifactId>
-                <version>${weld.version}</version>
+                <version>${version.weld}</version>
             </dependency>
             <dependency>
                 <groupId>org.jboss.weld.servlet</groupId>
                 <artifactId>weld-servlet-shaded</artifactId>
-                <version>${weld.version}</version>
+                <version>${version.weld}</version>
             </dependency>
 
             <!-- JPA 3.0 -->
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-core-jakarta</artifactId>
-                <version>${hibernate.version}</version>
+                <version>${version.hibernate}</version>
             </dependency>
 
             <!-- JTA 2.0 -->
             <dependency>
                 <groupId>org.jboss.narayana.jta</groupId>
                 <artifactId>narayana-jta-jakarta</artifactId>
-                <version>${narayana-jta.version}</version>
+                <version>${version.narayana-jta}</version>
             </dependency>
 
             <!-- Bean Validation 3.0 -->
             <dependency>
                 <groupId>org.hibernate.validator</groupId>
                 <artifactId>hibernate-validator-cdi</artifactId>
-                <version>${hibernate-validator.version}</version>
+                <version>${version.hibernate-validator}</version>
             </dependency>
             <dependency>
                 <groupId>org.hibernate.validator</groupId>
                 <artifactId>hibernate-validator</artifactId>
-                <version>${hibernate-validator.version}</version>
+                <version>${version.hibernate-validator}</version>
             </dependency>
             <dependency>
                 <groupId>org.hibernate.validator</groupId>
                 <artifactId>hibernate-validator-annotation-processor</artifactId>
-                <version>${hibernate-validator.version}</version>
+                <version>${version.hibernate-validator}</version>
             </dependency>
 
             <!-- JAX RS 3.0 -->
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-cdi</artifactId>
-                <version>${resteasy.version}</version>
+                <version>${version.resteasy}</version>
             </dependency>
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-servlet-initializer</artifactId>
-                <version>${resteasy.version}</version>
+                <version>${version.resteasy}</version>
             </dependency>
             <dependency>
                 <!-- JSON-B 2.0 -->
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-json-binding-provider</artifactId>
-                <version>${resteasy.version}</version>
+                <version>${version.resteasy}</version>
             </dependency>
             <dependency>
                 <!-- JSON-P 2.0 -->
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-json-p-provider</artifactId>
-                <version>${resteasy.version}</version>
+                <version>${version.resteasy}</version>
             </dependency>
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-validator-provider</artifactId>
-                <version>${resteasy.version}</version>
+                <version>${version.resteasy}</version>
             </dependency>
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-jaxb-provider</artifactId>
-                <version>${resteasy.version}</version>
+                <version>${version.resteasy}</version>
             </dependency>
 
             <!-- Security 2.0 -->
             <dependency>
                 <groupId>org.glassfish.soteria</groupId>
                 <artifactId>jakarta.security.enterprise</artifactId>
-                <version>${soteria.version}</version>
+                <version>${version.soteria}</version>
             </dependency>
             <dependency>
                 <groupId>org.omnifaces</groupId>
                 <artifactId>exousia</artifactId>
-                <version>${exousia.version}</version>
+                <version>${version.exousia}</version>
             </dependency>
 
             <!-- JAXB -->
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-impl</artifactId>
-                <version>${jabx-impl.version}</version>
+                <version>${version.jabx-impl}</version>
             </dependency>
 
             <!--
@@ -256,24 +276,24 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>${slf4j.version}</version>
+                <version>${version.slf4j}</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-jdk14</artifactId>
-                <version>${slf4j.version}</version>
+                <version>${version.slf4j}</version>
             </dependency>
 
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>${commons-io.version}</version>
+                <version>${version.commons-io}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
-                <version>${h2.version}</version>
+                <version>${version.h2}</version>
             </dependency>
 
             <!--
@@ -315,77 +335,88 @@
         <pluginManagement>
             <plugins>
 
+                <!-- Maven plugins  -->
                 <plugin>
-                    <groupId>org.codehaus.cargo</groupId>
-                    <artifactId>cargo-maven3-plugin</artifactId>
-                    <version>1.9.11</version>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${version.maven-clean-plugin}</version>
                 </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.3.0</version>
-                </plugin>
-
-                <!-- Extension Maven  -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.10.1</version>
+                    <version>${version.maven-compiler-plugin}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.3.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.22.2</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>2.22.2</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.2</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>3.3.2</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.0.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-install-plugin</artifactId>
-                    <version>2.5.2</version>
+                    <version>${version.maven-dependency-plugin}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.2</version>
+                    <version>${version.maven-deploy-plugin}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>3.12.0</version>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${version.maven-enforcer-plugin}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${version.maven-failsafe-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${version.maven-install-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${version.maven-jar-plugin}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>${version.maven-resources-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${version.maven-site-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${version.maven-surefire-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${version.maven-war-plugin}</version>
+                </plugin>
+
+                <!-- Additional plugins -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${version.build-helper-maven-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.cargo</groupId>
+                    <artifactId>cargo-maven3-plugin</artifactId>
+                    <version>${version.cargo-maven3-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.cargo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>${version.versions-maven-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>io.fabric8</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>${version.docker-maven-plugin}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

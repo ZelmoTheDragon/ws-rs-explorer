@@ -249,18 +249,6 @@
                     <scope>compile</scope>
                 </dependency>
 
-                <!-- OpenAPI -->
-                <dependency>
-                    <groupId>io.smallrye</groupId>
-                    <artifactId>smallrye-open-api-core</artifactId>
-                    <scope>compile</scope>
-                </dependency>
-                <dependency>
-                    <groupId>io.smallrye</groupId>
-                    <artifactId>smallrye-open-api-jaxrs</artifactId>
-                    <scope>compile</scope>
-                </dependency>
-
                 <!-- Miscellaneous -->
                 <dependency>
                     <groupId>commons-io</groupId>
@@ -371,7 +359,7 @@
                                 <path>
                                     <groupId>org.hibernate</groupId>
                                     <artifactId>hibernate-jpamodelgen-jakarta</artifactId>
-                                    <version>${hibernate.version}</version>
+                                    <version>${version.hibernate}</version>
                                 </path>
                             </annotationProcessorPaths>
                         </configuration>
