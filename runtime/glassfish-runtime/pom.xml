@@ -18,12 +18,26 @@
     <name>glassfish-runtime</name>
 
     <properties>
-        <!-- Configuration -->
-        <skipITs>false</skipITs>
+        <!-- Server -->
+        <version.glassfish>6.2.5</version.glassfish>
 
         <!-- Jakarta -->
-        <version.group.eclipselink>3.0.2</version.group.eclipselink>
+        <version.group.eclipselink>3.0.3</version.group.eclipselink>
+
+        <!-- Configuration -->
+        <skipITs>false</skipITs>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.glassfish.main.distributions</groupId>
+                <artifactId>glassfish</artifactId>
+                <version>${version.glassfish}</version>
+                <type>zip</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
 
@@ -49,11 +63,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!--
-            ====================
-            TEST
-            ====================
-        -->
+        <!-- === TEST === -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>

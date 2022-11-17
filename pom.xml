@@ -100,6 +100,14 @@
                 <version>${version.group.jakarta}</version>
             </dependency>
 
+            <!-- JPA Metamodel -->
+            <dependency>
+                <groupId>org.eclipse.persistence</groupId>
+                <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
+                <version>${version.group.eclipselink}</version>
+                <scope>provided</scope>
+            </dependency>
+
             <!--
                 ==============================
                 TEST

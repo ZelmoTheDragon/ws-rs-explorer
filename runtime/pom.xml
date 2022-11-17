@@ -24,28 +24,7 @@
 
     <properties>
 
-        <!-- Runtime -->
-        <version.glassfish>6.2.5</version.glassfish>
-        <version.tomcat>10.0.27</version.tomcat>
     </properties>
 
-    <dependencyManagement>
-        <dependencies>
-
-            <!-- Runtime -->
-            <dependency>
-                <groupId>org.glassfish.main.distributions</groupId>
-                <artifactId>glassfish</artifactId>
-                <version>${version.glassfish}</version>
-                <type>zip</type>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.tomcat</groupId>
-                <artifactId>tomcat</artifactId>
-                <version>${version.tomcat}</version>
-                <type>zip</type>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
 </project>

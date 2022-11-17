@@ -18,8 +18,9 @@
     <name>tomcat-runtime</name>
 
     <properties>
-        <!-- Configuration -->
-        <skipITs>false</skipITs>
+
+        <!-- Server -->
+        <version.tomcat>10.1.2</version.tomcat>
 
         <!-- Jakarta -->
         <version.group.weld>5.0.1.Final</version.group.weld>
@@ -34,7 +35,21 @@
         <!-- Miscellaneous -->
         <version.commons-io>2.6</version.commons-io>
         <version.h2>2.1.214</version.h2>
+
+        <!-- Configuration -->
+        <skipITs>false</skipITs>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat</artifactId>
+                <version>${version.tomcat}</version>
+                <type>zip</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
 
@@ -162,11 +177,7 @@
             <version>${version.h2}</version>
         </dependency>
 
-        <!--
-            ====================
-            TEST
-            ====================
-        -->
+        <!-- === TEST === -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
