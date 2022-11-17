@@ -1,4 +1,4 @@
-package com.github.happi.explorer.example;
+package com.github.happi.server;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

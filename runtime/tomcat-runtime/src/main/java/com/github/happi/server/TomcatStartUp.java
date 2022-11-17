@@ -1,4 +1,4 @@
-package com.github.happi.explorer.example;
+package com.github.happi.server;
 
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
