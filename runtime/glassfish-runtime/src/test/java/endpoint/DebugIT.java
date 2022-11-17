@@ -37,7 +37,13 @@ class DebugIT {
                 .get(WebContext.APP_BASE_URL)
                 .then()
                 .assertThat()
-                .statusCode(HttpStatus.SC_UNAUTHORIZED);
+                .statusCode(
+                        Matchers.anyOf(
+                                Matchers.is(HttpStatus.SC_OK),
+                                Matchers.is(HttpStatus.SC_UNAUTHORIZED),
+                                Matchers.is(HttpStatus.SC_NOT_FOUND)
+                        )
+                );
     }
 
     @Test

@@ -23,17 +23,18 @@
         <version.tomcat>10.1.2</version.tomcat>
 
         <!-- Jakarta -->
-        <version.group.weld>5.0.1.Final</version.group.weld>
-        <version.group.hibernate>5.6.12.Final</version.group.hibernate>
+        <version.group.weld>5.1.0.Final</version.group.weld>
+        <version.group.hibernate>5.6.14.Final</version.group.hibernate>
         <version.group.hibernate-validator>8.0.0.Final</version.group.hibernate-validator>
-        <version.narayana-jta>5.12.7.Final</version.narayana-jta>
-        <version.group.resteasy>6.2.0.Final</version.group.resteasy>
+        <version.narayana-jta>5.13.1.Final</version.narayana-jta>
+        <version.group.resteasy>6.2.1.Final</version.group.resteasy>
         <version.soteria>2.0.1</version.soteria>
         <version.exousia>1.1</version.exousia>
         <version.jabx-impl>3.0.2</version.jabx-impl>
 
         <!-- Miscellaneous -->
-        <version.commons-io>2.6</version.commons-io>
+        <version.jandex>3.0.3</version.jandex>
+        <version.commons-io>2.11.0</version.commons-io>
         <version.h2>2.1.214</version.h2>
 
         <!-- Configuration -->
@@ -65,17 +66,25 @@
             <artifactId>weld-servlet-core</artifactId>
             <version>${version.group.weld}</version>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.jboss.weld.servlet</groupId>
             <artifactId>weld-servlet-shaded</artifactId>
             <version>${version.group.weld}</version>
         </dependency>
+        -->
 
         <!-- JPA 3.0 -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core-jakarta</artifactId>
             <version>${version.group.hibernate}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss</groupId>
+                    <artifactId>jandex</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- JPA Metamodel -->
@@ -84,6 +93,12 @@
             <artifactId>hibernate-jpamodelgen-jakarta</artifactId>
             <version>${version.group.hibernate}</version>
             <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.glassfish.jaxb</groupId>
+                    <artifactId>jaxb-runtime</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- JTA 2.0 -->
@@ -115,6 +130,16 @@
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-cdi</artifactId>
             <version>${version.group.resteasy}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss</groupId>
+                    <artifactId>jandex</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.angus</groupId>
+                    <artifactId>angus-activation</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
@@ -159,13 +184,20 @@
         </dependency>
 
         <!-- JAXB -->
+        <!--
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
             <version>${version.jabx-impl}</version>
         </dependency>
+        -->
 
         <!-- Miscellaneous -->
+        <dependency>
+            <groupId>io.smallrye</groupId>
+            <artifactId>jandex</artifactId>
+            <version>${version.jandex}</version>
+        </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
@@ -181,6 +213,11 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -237,13 +274,6 @@
                 <configuration>
                     <skipTests>true</skipTests>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.junit.jupiter</groupId>
-                        <artifactId>junit-jupiter-engine</artifactId>
-                        <version>${version.group.junit}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -268,13 +298,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.junit.jupiter</groupId>
-                        <artifactId>junit-jupiter-engine</artifactId>
-                        <version>${version.group.junit}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
             <plugin>

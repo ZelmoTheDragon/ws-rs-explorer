@@ -64,7 +64,7 @@ public class ExplorerDAO {
 
     /**
      * Save an entity.
-     * If the entity already exists it will be updated, otherwise it will be inserted.
+     * If the entity already exists, it will be updated, otherwise it will be inserted.
      *
      * @param entity Persistent entity
      * @param <E>    Type of persistent entity
@@ -135,7 +135,7 @@ public class ExplorerDAO {
      * @param queries                     Web queries
      * @param additionalCriteriaPredicate additional function for filtering data
      * @param <E>                         Type of persistent entity
-     * @return The number of entity filtered
+     * @return The number of entities filtered
      */
     public <E> long size(
             final Class<E> entityClass,
