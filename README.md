@@ -134,15 +134,11 @@ Build the project and execute tests:
 clean install -U
 ~~~
 
-Run `happi-explorer-example` with **Glassfish** server:  
+Run `glassfish-runtime` projet with **Glassfish** server:  
 
 ~~~
 clean install -U -DskipITs cargo:run
 ~~~
-
-> **Note:**
-> Use argument: `-P tomcat` to work with **Tomcat**.  
-> Be careful, it's a prototype !  
 
 ## Setup
 
@@ -153,7 +149,7 @@ See `happi-exeplorer-example` for more details.
 ### Step 1: Create your table in a database
 
 Create your table.  
-See `src/glassfish/resources/derby-init.sql`.  
+See `src/main/resources/derby-init.sql`.  
 
 ### Step 2: Model your class
 

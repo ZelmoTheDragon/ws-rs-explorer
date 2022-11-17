@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.github.zelmothedragon.happi-explorer</groupId>
+        <artifactId>happi-explorer-parent</artifactId>
+        <version>0.0.11-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <modules>
+        <module>glassfish-runtime</module>
+        <module>tomcat-runtime</module>
+    </modules>
+
+    <artifactId>runtime</artifactId>
+    <packaging>pom</packaging>
+    <name>runtime</name>
+
+    <properties>
+
+        <!-- Runtime -->
+        <version.glassfish>6.2.5</version.glassfish>
+        <version.tomcat>10.0.27</version.tomcat>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- Runtime -->
+            <dependency>
+                <groupId>org.glassfish.main.distributions</groupId>
+                <artifactId>glassfish</artifactId>
+                <version>${version.glassfish}</version>
+                <type>zip</type>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat</artifactId>
+                <version>${version.tomcat}</version>
+                <type>zip</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

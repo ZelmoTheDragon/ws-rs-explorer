@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.github.zelmothedragon.happi-explorer</groupId>
+        <artifactId>runtime</artifactId>
+        <version>0.0.11-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>tomcat-runtime</artifactId>
+    <packaging>war</packaging>
+    <name>tomcat-runtime</name>
+
+    <properties>
+        <!-- Configuration -->
+        <skipITs>false</skipITs>
+
+        <!-- Jakarta -->
+        <version.group.weld>5.0.1.Final</version.group.weld>
+        <version.group.hibernate>5.6.12.Final</version.group.hibernate>
+        <version.group.hibernate-validator>8.0.0.Final</version.group.hibernate-validator>
+        <version.narayana-jta>5.12.7.Final</version.narayana-jta>
+        <version.group.resteasy>6.2.0.Final</version.group.resteasy>
+        <version.soteria>2.0.1</version.soteria>
+        <version.exousia>1.1</version.exousia>
+        <version.jabx-impl>3.0.2</version.jabx-impl>
+
+        <!-- Miscellaneous -->
+        <version.commons-io>2.6</version.commons-io>
+        <version.h2>2.1.214</version.h2>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.github.zelmothedragon.happi-explorer</groupId>
+            <artifactId>happi-explorer-example</artifactId>
+            <version>0.0.11-SNAPSHOT</version>
+        </dependency>
+
+        <!-- CDI 3.0 -->
+        <dependency>
+            <groupId>org.jboss.weld.servlet</groupId>
+            <artifactId>weld-servlet-core</artifactId>
+            <version>${version.group.weld}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.weld.servlet</groupId>
+            <artifactId>weld-servlet-shaded</artifactId>
+            <version>${version.group.weld}</version>
+        </dependency>
+
+        <!-- JPA 3.0 -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core-jakarta</artifactId>
+            <version>${version.group.hibernate}</version>
+        </dependency>
+
+        <!-- JPA Metamodel -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jpamodelgen-jakarta</artifactId>
+            <version>${version.group.hibernate}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JTA 2.0 -->
+        <dependency>
+            <groupId>org.jboss.narayana.jta</groupId>
+            <artifactId>narayana-jta-jakarta</artifactId>
+            <version>${version.narayana-jta}</version>
+        </dependency>
+
+        <!-- Bean Validation 3.0 -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator-cdi</artifactId>
+            <version>${version.group.hibernate-validator}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${version.group.hibernate-validator}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator-annotation-processor</artifactId>
+            <version>${version.group.hibernate-validator}</version>
+        </dependency>
+
+        <!-- JAX RS 3.0 -->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-cdi</artifactId>
+            <version>${version.group.resteasy}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-servlet-initializer</artifactId>
+            <version>${version.group.resteasy}</version>
+        </dependency>
+
+        <!-- JSON-B 2.0 -->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-json-binding-provider</artifactId>
+            <version>${version.group.resteasy}</version>
+        </dependency>
+
+        <!-- JSON-P 2.0 -->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-json-p-provider</artifactId>
+            <version>${version.group.resteasy}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-validator-provider</artifactId>
+            <version>${version.group.resteasy}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxb-provider</artifactId>
+            <version>${version.group.resteasy}</version>
+        </dependency>
+
+        <!-- Security 2.0 -->
+        <dependency>
+            <groupId>org.glassfish.soteria</groupId>
+            <artifactId>jakarta.security.enterprise</artifactId>
+            <version>${version.soteria}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.omnifaces</groupId>
+            <artifactId>exousia</artifactId>
+            <version>${version.exousia}</version>
+        </dependency>
+
+        <!-- JAXB -->
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>${version.jabx-impl}</version>
+        </dependency>
+
+        <!-- Miscellaneous -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${version.commons-io}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${version.h2}</version>
+        </dependency>
+
+        <!--
+            ====================
+            TEST
+            ====================
+        -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <compilerArgument>-Xlint:all</compilerArgument>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.hibernate</groupId>
+                            <artifactId>hibernate-jpamodelgen-jakarta</artifactId>
+                            <version>${version.group.hibernate}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <overwrite>true</overwrite>
+                    <resources>
+                        <resource>
+                            <directory>src/main/resources</directory>
+                            <filtering>true</filtering>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <skipITs>${skipITs}</skipITs>
+                    <excludes>
+                        <exclude>**/*Test.java</exclude>
+                    </excludes>
+                    <includes>
+                        <include>**/*IT.java</include>
+                        <include>**/*IT*.java</include>
+                        <include>**/*ITCase.java</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>webapp-integration</id>
+                        <goals>
+                            <goal>verify</goal>
+                            <goal>integration-test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven3-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>webapp-start</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipITs}</skip>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>webapp-stop</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipITs}</skip>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <container>
+                        <containerId>tomcat10x</containerId>
+                        <artifactInstaller>
+                            <groupId>org.apache.tomcat</groupId>
+                            <artifactId>tomcat</artifactId>
+                            <version>${version.tomcat}</version>
+                        </artifactInstaller>
+                    </container>
+                    <deployables>
+                        <deployable>
+                            <groupId>com.github.zelmothedragon.happi-explorer</groupId>
+                            <artifactId>tomcat-runtime</artifactId>
+                            <type>war</type>
+                            <properties>
+                                <context>/example</context>
+                            </properties>
+                        </deployable>
+                    </deployables>
+                    <configuration>
+                        <files>
+                            <copy>
+                                <file>${project.basedir}/src/main/resources/server.xml</file>
+                                <tofile>conf/server.xml</tofile>
+                                <configfile>true</configfile>
+                                <overwrite>true</overwrite>
+                            </copy>
+                            <copy>
+                                <file>${project.basedir}/src/main/resources/logging.properties</file>
+                                <tofile>conf/logging.properties</tofile>
+                                <configfile>true</configfile>
+                                <overwrite>true</overwrite>
+                            </copy>
+                        </files>
+                        <properties>
+                            <cargo.start.jvmargs>
+                                --add-opens=java.base/java.io=ALL-UNNAMED
+                                --add-opens=java.base/java.lang=ALL-UNNAMED
+                                --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+                                -Xdebug
+                                -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005
+                                -Xnoagent
+                                -Djava.compiler=NONE
+                            </cargo.start.jvmargs>
+                        </properties>
+                    </configuration>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

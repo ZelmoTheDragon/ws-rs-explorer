@@ -8,6 +8,13 @@
     <persistence-unit name="explorer-pu" transaction-type="JTA">
 
         <jta-data-source>java:app/jdbc/ExplorerDS</jta-data-source>
+
+        <!-- External classes -->
+        <class>com.github.happi.explorer.example.customer.CustomerEntity</class>
+        <class>com.github.happi.explorer.example.gender.GenderEntity</class>
+        <class>com.github.happi.explorer.example.persistence.AbstractEntity</class>
+        <class>com.github.happi.explorer.example.persistence.UUIDConverter</class>
+
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
         <validation-mode>CALLBACK</validation-mode>
@@ -33,6 +40,7 @@
             <property name="eclipselink.logging.level.sql" value="FINE"/>
             <property name="eclipselink.logging.parameters" value="TRUE"/>
         </properties>
+
 
     </persistence-unit>
 </persistence>
