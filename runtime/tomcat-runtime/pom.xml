@@ -66,13 +66,6 @@
             <artifactId>weld-servlet-core</artifactId>
             <version>${version.group.weld}</version>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>org.jboss.weld.servlet</groupId>
-            <artifactId>weld-servlet-shaded</artifactId>
-            <version>${version.group.weld}</version>
-        </dependency>
-        -->
 
         <!-- JPA 3.0 -->
         <dependency>
@@ -183,15 +176,6 @@
             <version>${version.exousia}</version>
         </dependency>
 
-        <!-- JAXB -->
-        <!--
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <version>${version.jabx-impl}</version>
-        </dependency>
-        -->
-
         <!-- Miscellaneous -->
         <dependency>
             <groupId>io.smallrye</groupId>
@@ -254,6 +238,30 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.apache.tomcat</groupId>
+                                    <artifactId>tomcat</artifactId>
+                                    <type>zip</type>
+                                    <overWrite>false</overWrite>
+                                    <outputDirectory>${project.build.directory}</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
