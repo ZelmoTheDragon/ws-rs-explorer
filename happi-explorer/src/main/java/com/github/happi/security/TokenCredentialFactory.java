@@ -7,7 +7,7 @@ import jakarta.security.enterprise.credential.Credential;
 /**
  * Factory class for constructed token credentials.
  */
-final class TokenCredentialFactory {
+public final class TokenCredentialFactory {
 
     /**
      * Supporter token format.
@@ -37,7 +37,7 @@ final class TokenCredentialFactory {
      * @param token Raw encoded token
      * @return A token credential
      */
-    static Credential of(final String token) {
+    public static Credential of(final String token) {
         var securityManager = CDI.current().select(HappiSecurityManager.class).get();
         var secret = securityManager.getConfiguration(HappiSecurityManager.Configuration.SECRET);
         return new TokenCredential(token, secret);
@@ -48,7 +48,7 @@ final class TokenCredentialFactory {
      *
      * @return An empty and invalid token credential
      */
-    static Credential of() {
+    public static Credential of() {
         return new EmptyTokenCredential();
     }
 

@@ -15,7 +15,7 @@ import com.github.happi.explorer.Jsons;
  * Credential for token authentication.
  * The token format is: {@code <header>.<payload>.<sign>}
  */
-final class TokenCredential implements Credential {
+public final class TokenCredential implements Credential {
 
     /**
      * Header index in encoded token.
@@ -85,7 +85,7 @@ final class TokenCredential implements Credential {
      *
      * @return The header as object
      */
-    Header decodeHeader() {
+    public Header decodeHeader() {
         return decode(Header.class, Header::setRawData, this.tokens[HEADER_INDEX]);
     }
 
@@ -94,7 +94,7 @@ final class TokenCredential implements Credential {
      *
      * @return The payload as object
      */
-    Payload decodePayload() {
+    public Payload decodePayload() {
         return decode(Payload.class, Payload::setRawData, this.tokens[PAYLOAD_INDEX]);
     }
 
@@ -103,7 +103,7 @@ final class TokenCredential implements Credential {
      *
      * @return The signature
      */
-    String getSignature() {
+    public String getSignature() {
         return this.tokens[SIGNATURE_INDEX];
     }
 

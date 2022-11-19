@@ -22,7 +22,7 @@ public class OAuth2Authentication implements HttpAuthenticationMechanism {
     /**
      * Keyword in <i>HTTP</i> header.
      */
-    private static final String BEARER_TOKEN = "Bearer ";
+    private static final String BEARER_TOKEN = "Bearer";
 
     /**
      * Service handler for authentification validation.
