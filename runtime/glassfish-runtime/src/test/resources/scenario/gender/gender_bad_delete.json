@@ -1,0 +1,34 @@
+{
+  "title": "Gender bad delete",
+  "method": "DELETE",
+  "url": "http://localhost:8080/example/api/entity/gender/{id}",
+  "requiredGeneratedJWT": true,
+  "skip": false,
+  "body": null,
+  "statusCode": 400,
+  "paths": [
+    {
+      "name": "id",
+      "value": "337ac663-48da-4a97-ad55-062a2c2ebb6d"
+    }
+  ],
+  "queries": [],
+  "headers": [
+    {
+      "name": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "matchers": [
+    {
+      "jsonPath": "error",
+      "operator": "equalTo",
+      "value": "com.github.happi.explorer.service.ActionDeniedException"
+    },
+    {
+      "jsonPath": "message",
+      "operator": "equalTo",
+      "value": "On [gender] action [DELETE] is denied ! Unauthorized operation"
+    }
+  ]
+}

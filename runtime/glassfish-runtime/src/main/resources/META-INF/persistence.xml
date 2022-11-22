@@ -28,7 +28,7 @@
             <property name="jakarta.persistence.schema-generation.database.action" value="none" />
             <property name="jakarta.persistence.schema-generation.scripts.create-source"  value="metadata" />
             <property name="jakarta.persistence.schema-generation.scripts.drop-source" value="metadata" />
-            <property name="jakarta.persistence.sql-load-script-source" value="derby-init.sql" />
+            <property name="jakarta.persistence.sql-load-script-source" value="META-INF/database/derby-init.sql" />
 
             <!--
                 /!\ EclipseLink property:

@@ -1,0 +1,39 @@
+{
+  "title": "Customer find",
+  "method": "GET",
+  "url": "http://localhost:8080/example/api/entity/customer/{id}",
+  "requiredGeneratedJWT": true,
+  "skip": false,
+  "body": null,
+  "statusCode": 200,
+  "paths": [
+    {
+      "name": "id",
+      "value": "0d5be73c-55f4-4379-accb-a7dcef0e9f2d"
+    }
+  ],
+  "queries": [],
+  "headers": [
+    {
+      "name": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "matchers": [
+    {
+      "jsonPath": "givenName",
+      "operator": "equalTo",
+      "value": "John"
+    },
+    {
+      "jsonPath": "familyName",
+      "operator": "equalTo",
+      "value": "DOE"
+    },
+    {
+      "jsonPath": "email",
+      "operator": "equalTo",
+      "value": "john.doe@example.com"
+    }
+  ]
+}

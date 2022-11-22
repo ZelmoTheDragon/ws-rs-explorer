@@ -1,0 +1,29 @@
+{
+  "title": "Customer create",
+  "method": "POST",
+  "url": "http://localhost:8080/example/api/entity/customer",
+  "requiredGeneratedJWT": true,
+  "skip": false,
+  "body": {
+    "givenName": "Johnny",
+    "familyName": "DOE",
+    "email": "johnny.doe@example.com",
+    "phoneNumber": "0000000000",
+    "gender": {
+      "id": "09ee5d9d-bf9b-4b5d-aad0-19117eb8da34",
+      "name": "Male",
+      "code": "M",
+      "description": "A male humain"
+    }
+  },
+  "statusCode": 201,
+  "paths": [],
+  "queries": [],
+  "headers": [
+    {
+      "name": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "matchers": []
+}

@@ -1,0 +1,34 @@
+{
+  "title": "Customer update",
+  "method": "PUT",
+  "url": "http://localhost:8080/example/api/entity/customer/{id}",
+  "requiredGeneratedJWT": true,
+  "skip": false,
+  "body": {
+    "givenName": "Johnathan",
+    "familyName": "DOE",
+    "email": "johnathan.doe@example.com",
+    "phoneNumber": "0123456789",
+    "gender": {
+      "id": "09ee5d9d-bf9b-4b5d-aad0-19117eb8da34",
+      "name": "Male",
+      "code": "M",
+      "description": "A male humain"
+    }
+  },
+  "statusCode": 204,
+  "paths": [
+    {
+      "name": "id",
+      "value": "6eb7cd4a-dbb4-4a7e-9bce-e3c959739c53"
+    }
+  ],
+  "queries": [],
+  "headers": [
+    {
+      "name": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "matchers": []
+}

@@ -1,0 +1,18 @@
+{
+  "title": "Debug server is online",
+  "method": "POST",
+  "url": "http://localhost:8080",
+  "requiredGeneratedJWT": false,
+  "skip": true,
+  "body": null,
+  "statusCode": 200,
+  "paths": [],
+  "queries": [],
+  "headers": [
+    {
+      "name": "Accept",
+      "value": "text/html,application/xhtml+xml,application/xml"
+    }
+  ],
+  "matchers": []
+}

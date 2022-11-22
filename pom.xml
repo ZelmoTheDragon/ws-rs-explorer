@@ -49,12 +49,17 @@
         <module>happi-explorer</module>
         <module>happi-explorer-example</module>
         <module>runtime</module>
+        <module>test-util</module>
     </modules>
 
     <properties>
         <!-- Versions -->
         <version.java>17</version.java>
+
+        <!-- Platform Jakarta -->
         <version.group.jakarta>9.1.0</version.group.jakarta>
+        <version.jakarta.json-api>2.1.1</version.jakarta.json-api>
+        <version.jakarta.json.bind-api>2.0.0</version.jakarta.json.bind-api>
 
         <!-- TEST versions -->
         <version.group.junit>5.9.1</version.group.junit>
@@ -99,6 +104,16 @@
                 <artifactId>jakarta.jakartaee-api</artifactId>
                 <version>${version.group.jakarta}</version>
             </dependency>
+            <dependency>
+                <groupId>jakarta.json</groupId>
+                <artifactId>jakarta.json-api</artifactId>
+                <version>${version.jakarta.json-api}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.json.bind</groupId>
+                <artifactId>jakarta.json.bind-api</artifactId>
+                <version>${version.jakarta.json.bind-api}</version>
+            </dependency>
 
             <!-- JPA Metamodel -->
             <dependency>
@@ -116,6 +131,11 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-api</artifactId>
+                <version>${version.group.junit}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-params</artifactId>
                 <version>${version.group.junit}</version>
             </dependency>
             <dependency>
