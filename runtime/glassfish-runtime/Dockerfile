@@ -12,7 +12,9 @@ ENV PATH="$PATH:$GF_HOME/bin"
 
 # TODO: Optimize Glassifh internal configuration...
 RUN \
- apk add openjdk17-jre-headless &&\
+ apk update &&\
+ apk upgrade &&\
+ apk add --no-cache openjdk17-jre-headless &&\
  addgroup --system "$GF_USER" &&\
  adduser --system --disabled-password --no-create-home --home="$GF_HOME" --ingroup="$GF_USER" "$GF_USER" &&\
  unzip "/tmp/$GLASSFISH_SERVER" -d "/opt" &&\

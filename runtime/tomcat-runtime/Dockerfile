@@ -12,7 +12,9 @@ ENV PATH="$PATH:$TOMCAT_HOME/bin"
 
 # TODO: Optimize Tomcat internal configuration...
 RUN \
- apk add openjdk17-jre-headless &&\
+ apk update &&\
+ apk upgrade &&\
+ apk add --no-cache openjdk17-jre-headless &&\
  addgroup --system "$TOMCAT_USER" &&\
  adduser --system --disabled-password --no-create-home --home="$TOMCAT_HOME" --ingroup="$TOMCAT_USER" "$TOMCAT_USER" &&\
  unzip "/tmp/$TOMCAT_SERVER" -d "/opt" &&\
