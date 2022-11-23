@@ -29,7 +29,7 @@
         <dependency>
             <groupId>com.github.zelmothedragon.happi-explorer</groupId>
             <artifactId>happi-explorer</artifactId>
-            <version>0.0.10-SNAPSHOT</version>
+            <version>0.0.11-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
 
