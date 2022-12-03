@@ -18,18 +18,21 @@
     <name>tomcat-runtime</name>
 
     <properties>
-
         <!-- Server -->
-        <version.tomcat>10.1.2</version.tomcat>
+        <version.tomcat>10.0.27</version.tomcat>
 
         <!-- Jakarta API -->
+        <version.jakarta.activation-api>2.1.0</version.jakarta.activation-api>
+        <version.jakarta.annotation-api>2.1.1</version.jakarta.annotation-api>
+        <version.jakarta.transaction-api>2.0.1</version.jakarta.transaction-api>
+        <version.jakarta.xml.bind-api>3.0.1</version.jakarta.xml.bind-api>
 
         <!-- Jakarta implementation -->
         <version.group.weld>5.1.0.Final</version.group.weld>
         <version.group.hibernate>5.6.14.Final</version.group.hibernate>
         <version.group.hibernate-validator>8.0.0.Final</version.group.hibernate-validator>
         <version.narayana-jta>5.13.1.Final</version.narayana-jta>
-        <version.group.resteasy>6.1.0.Final</version.group.resteasy>
+        <version.group.resteasy>6.0.3.Final</version.group.resteasy>
         <version.soteria>2.0.1</version.soteria>
         <version.exousia>1.1</version.exousia>
         <version.jaxb-runtime>3.0.2</version.jaxb-runtime>
@@ -38,8 +41,10 @@
         <!-- Miscellaneous -->
         <version.commons-io>2.11.0</version.commons-io>
         <version.h2>2.1.214</version.h2>
-        <version.jandex>3.0.3</version.jandex>
+        <version.jandex>2.4.3.Final</version.jandex>
+        <version.jboss-logging>3.5.0.Final</version.jboss-logging>
         <version.parsson>1.1.1</version.parsson>
+        <version.yasson>2.0.4</version.yasson>
 
         <!-- Configuration -->
         <skipITs>false</skipITs>
@@ -70,21 +75,33 @@
             <version>0.0.11-SNAPSHOT</version>
         </dependency>
 
+        <!-- Jakarta API -->
+        <dependency>
+            <groupId>jakarta.activation</groupId>
+            <artifactId>jakarta.activation-api</artifactId>
+            <version>${version.jakarta.activation-api}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <version>${version.jakarta.annotation-api}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.transaction</groupId>
+            <artifactId>jakarta.transaction-api</artifactId>
+            <version>${version.jakarta.transaction-api}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>${version.jakarta.xml.bind-api}</version>
+        </dependency>
+
         <!-- CDI 3.0 -->
         <dependency>
             <groupId>org.jboss.weld.servlet</groupId>
             <artifactId>weld-servlet-core</artifactId>
             <version>${version.group.weld}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>jakarta.annotation</groupId>
-                    <artifactId>jakarta.annotation-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>jakarta.interceptor</groupId>
-                    <artifactId>jakarta.interceptor-api</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- JPA 3.0 -->
@@ -92,24 +109,6 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core-jakarta</artifactId>
             <version>${version.group.hibernate}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>jakarta.activation</groupId>
-                    <artifactId>jakarta.activation-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.glassfish.jaxb</groupId>
-                    <artifactId>jaxb-runtime</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.jboss</groupId>
-                    <artifactId>jandex</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- JPA Metamodel -->
@@ -118,16 +117,6 @@
             <artifactId>hibernate-jpamodelgen-jakarta</artifactId>
             <version>${version.group.hibernate}</version>
             <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.glassfish.jaxb</groupId>
-                    <artifactId>jaxb-runtime</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- JTA 2.0 -->
@@ -135,16 +124,6 @@
             <groupId>org.jboss.narayana.jta</groupId>
             <artifactId>narayana-jta-jakarta</artifactId>
             <version>${version.narayana-jta}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>jakarta.annotation</groupId>
-                    <artifactId>jakarta.annotation-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>jakarta.transaction</groupId>
-                    <artifactId>jakarta.transaction-api</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- Bean Validation 3.0 -->
@@ -157,12 +136,6 @@
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${version.group.hibernate-validator}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.hibernate.validator</groupId>
@@ -170,83 +143,31 @@
             <version>${version.group.hibernate-validator}</version>
         </dependency>
 
-        <!-- JAX-B 3.0 -->
-        <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>${version.jaxb-runtime}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.sun.istack</groupId>
-                    <artifactId>istack-commons-runtime</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <version>${version.jabx-impl}</version>
-        </dependency>
-
         <!-- JAX-RS 3.0 -->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-core</artifactId>
+            <version>${version.group.resteasy}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-client</artifactId>
+            <version>${version.group.resteasy}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxb-provider</artifactId>
+            <version>${version.group.resteasy}</version>
+        </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-cdi</artifactId>
             <version>${version.group.resteasy}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>jakarta.annotation</groupId>
-                    <artifactId>jakarta.annotation-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>jakarta.validation</groupId>
-                    <artifactId>jakarta.validation-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.jboss.weld</groupId>
-                    <artifactId>weld-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.jboss</groupId>
-                    <artifactId>jandex</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.eclipse.angus</groupId>
-                    <artifactId>angus-activation</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-servlet-initializer</artifactId>
             <version>${version.group.resteasy}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- JSON-B 2.0 -->
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-json-binding-provider</artifactId>
-            <version>${version.group.resteasy}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.eclipse.parsson</groupId>
-                    <artifactId>parsson</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- JSON-P 2.0 -->
@@ -254,46 +175,23 @@
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-json-p-provider</artifactId>
             <version>${version.group.resteasy}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-validator-provider</artifactId>
-            <version>${version.group.resteasy}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.eclipse.parsson</groupId>
+            <artifactId>parsson</artifactId>
+            <version>${version.parsson}</version>
         </dependency>
+
+        <!-- JSON-B 2.0 -->
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxb-provider</artifactId>
+            <artifactId>resteasy-json-binding-provider</artifactId>
             <version>${version.group.resteasy}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.glassfish.jaxb</groupId>
-                    <artifactId>jaxb-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.glassfish.jaxb</groupId>
-                    <artifactId>jaxb-runtime</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.glassfish.jaxb</groupId>
-                    <artifactId>txw2</artifactId>
-                </exclusion>
-            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>yasson</artifactId>
+            <version>${version.yasson}</version>
         </dependency>
 
         <!-- Security 2.0 -->
@@ -301,16 +199,6 @@
             <groupId>org.glassfish.soteria</groupId>
             <artifactId>jakarta.security.enterprise</artifactId>
             <version>${version.soteria}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>jakarta.annotation</groupId>
-                    <artifactId>jakarta.annotation-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>jakarta.xml.bind</groupId>
-                    <artifactId>jakarta.xml.bind-api</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.omnifaces</groupId>
@@ -330,14 +218,14 @@
             <version>${version.h2}</version>
         </dependency>
         <dependency>
-            <groupId>io.smallrye</groupId>
+            <groupId>org.jboss</groupId>
             <artifactId>jandex</artifactId>
             <version>${version.jandex}</version>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.parsson</groupId>
-            <artifactId>parsson</artifactId>
-            <version>${version.parsson}</version>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
+            <version>${version.jboss-logging}</version>
         </dependency>
 
         <!-- === TEST === -->
@@ -360,6 +248,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
+                    <release>${version.java}</release>
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>

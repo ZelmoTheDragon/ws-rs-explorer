@@ -1,9 +1,9 @@
 {
-  "title": "Debug server is online",
-  "method": "POST",
-  "url": "http://localhost:8080",
+  "title": "Debug application is online",
+  "method": "GET",
+  "url": "http://localhost:8080/example",
   "requiredGeneratedJWT": false,
-  "skip": true,
+  "skip": false,
   "body": null,
   "statusCode": 200,
   "paths": [],

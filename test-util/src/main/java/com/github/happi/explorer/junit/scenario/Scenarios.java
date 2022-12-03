@@ -1,11 +1,13 @@
 package com.github.happi.explorer.junit.scenario;
 
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import jakarta.json.bind.JsonbBuilder;
 
@@ -86,12 +88,13 @@ public final class Scenarios {
                     .sorted()
                     .map(Scenarios::loadFile)
                     .map(Scenarios::readJsonString)
-                    .filter(s -> Objects.equals(Boolean.TRUE, s.getSkip()))
-                    .map(Arguments::arguments)
-                    .toList();
+                    .filter(s -> Objects.equals(Boolean.FALSE, s.getSkip()))
+                    .collect(Collectors.toList());
 
             return scenarios
-                    .stream();
+                    .stream()
+                    .map(Arguments::arguments);
+
 
         } catch (IOException ex) {
             throw new IllegalStateException(ex);
