@@ -220,8 +220,10 @@ public class ExplorerDAO {
 
         return em.getMetamodel()
                 .entity(entityClass)
-                .getDeclaredSingularAttributes()
+                .getAttributes()
                 .stream()
+                .filter(e -> Objects.equals(Attribute.PersistentAttributeType.BASIC, e.getPersistentAttributeType()))
+                .map(e -> (SingularAttribute<E, ?>) e)
                 .filter(SingularAttribute::isId)
                 .findFirst()
                 .orElseThrow(() -> new PersistenceException("No primary key attribut found in class: " + entityClass));

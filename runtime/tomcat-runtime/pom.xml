@@ -28,15 +28,15 @@
         <version.jakarta.xml.bind-api>3.0.1</version.jakarta.xml.bind-api>
 
         <!-- Jakarta implementation -->
-        <version.group.weld>5.1.0.Final</version.group.weld>
-        <version.group.hibernate>5.6.14.Final</version.group.hibernate>
-        <version.group.hibernate-validator>8.0.0.Final</version.group.hibernate-validator>
-        <version.narayana-jta>5.13.1.Final</version.narayana-jta>
-        <version.group.resteasy>6.0.3.Final</version.group.resteasy>
-        <version.soteria>2.0.1</version.soteria>
         <version.exousia>1.1</version.exousia>
-        <version.jaxb-runtime>3.0.2</version.jaxb-runtime>
+        <version.group.hibernate>5.5.9.Final</version.group.hibernate>
+        <version.group.hibernate-validator>8.0.0.Final</version.group.hibernate-validator>
+        <version.group.resteasy>6.0.3.Final</version.group.resteasy>
+        <version.group.weld>5.1.0.Final</version.group.weld>
         <version.jabx-impl>3.0.2</version.jabx-impl>
+        <version.jaxb-runtime>3.0.2</version.jaxb-runtime>
+        <version.narayana-jta>5.13.1.Final</version.narayana-jta>
+        <version.soteria>2.0.1</version.soteria>
 
         <!-- Miscellaneous -->
         <version.commons-io>2.11.0</version.commons-io>
@@ -110,13 +110,23 @@
             <artifactId>hibernate-core-jakarta</artifactId>
             <version>${version.group.hibernate}</version>
         </dependency>
-
-        <!-- JPA Metamodel -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-envers-jakarta</artifactId>
+            <version>${version.group.hibernate}</version>
+        </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-jpamodelgen-jakarta</artifactId>
             <version>${version.group.hibernate}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- JAX-B -->
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>${version.jaxb-runtime}</version>
         </dependency>
 
         <!-- JTA 2.0 -->
