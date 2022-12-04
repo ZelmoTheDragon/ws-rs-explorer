@@ -24,7 +24,7 @@ Available Java web server:
   * [ ] Wildfly
     * **WARNING** Not implemented yet! 
 
-## Maven
+## Basic Maven commands
 
 **Building the whole project.**  
 ~~~
@@ -74,9 +74,9 @@ It's following this principe:
 attributName[operator]=value
 ~~~
 
-* The attributName should be present in **DTO** *(Data Transfer Object)* class.  
+* The attributName should be present in **DTO** *(Data Transfer Object)* and **Entity** classes.  
 * The logical operator should be in bracket.  
-  * See `Operator` for more details.  
+  * See `Operator` enumeration for more details.  
   * Logical operator `OR` can be used with **pipe** in value (e.g. `familyName[eq]=MINT|DOE`)
 * The result is a pagination **JSON** *(JavaScrip Object Notation)*.  
 
@@ -167,20 +167,6 @@ This endpoint provides a simple deleted operation.
 The unique identifier should be defined in the path parameter.  
 The result contains nothing.  
 
-## Testing
-
-Build the project and execute tests:  
-
-~~~
-clean install -U
-~~~
-
-Run `glassfish-runtime` projet with **Glassfish** server:  
-
-~~~
-clean install -U -DskipITs cargo:run
-~~~
-
 ## Setup
 
 Example for a customer entry point: `Customer`.  
@@ -189,7 +175,7 @@ See `happi-exeplorer-example` for more details.
 
 ### Step 1: Create your table in a database
 
-Create your table.  
+Create your database schema.  
 See `src/main/resources/derby-init.sql`.  
 
 ### Step 2: Model your class
@@ -203,6 +189,7 @@ See `CustomerDTO` class.
 Create your mapper class between entity and data class.  
 See `CustomerMapper` class.  
 
+> **Optional :**  
 > Simplify writing Java beans with [Lombok](https://projectlombok.org/).  
 > You can generate mappers using [Mapstruct](https://mapstruct.org/).  
 
