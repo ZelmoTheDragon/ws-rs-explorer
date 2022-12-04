@@ -1,14 +1,15 @@
 {
   "title": "Debug server is online",
   "method": "OPTIONS",
-  "url": "http://localhost:8080/example/api/entity/fake",
+  "port": 8080,
+  "path": "/example/api/entity/fake",
   "requiredGeneratedJWT": false,
   "skip": false,
   "body": null,
   "statusCode": 400,
-  "paths": [],
-  "queries": [],
-  "headers": [
+  "pathParameters": [],
+  "queryParameters": [],
+  "headerParameters": [
     {
       "name": "Content-Type",
       "value": "application/json"

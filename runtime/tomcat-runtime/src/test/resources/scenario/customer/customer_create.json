@@ -1,7 +1,8 @@
 {
   "title": "Customer create",
   "method": "POST",
-  "url": "http://localhost:8080/example/api/entity/customer",
+  "port": 8080,
+  "path": "/example/api/entity/customer",
   "requiredGeneratedJWT": true,
   "skip": false,
   "body": {
@@ -17,9 +18,9 @@
     }
   },
   "statusCode": 201,
-  "paths": [],
-  "queries": [],
-  "headers": [
+  "pathParameters": [],
+  "queryParameters": [],
+  "headerParameters": [
     {
       "name": "Content-Type",
       "value": "application/json"

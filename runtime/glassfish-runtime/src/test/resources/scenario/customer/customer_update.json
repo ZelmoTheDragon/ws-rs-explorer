@@ -1,7 +1,8 @@
 {
   "title": "Customer update",
   "method": "PUT",
-  "url": "http://localhost:8080/example/api/entity/customer/{id}",
+  "port": 8080,
+  "path": "/example/api/entity/customer/{id}",
   "requiredGeneratedJWT": true,
   "skip": false,
   "body": {
@@ -17,14 +18,14 @@
     }
   },
   "statusCode": 204,
-  "paths": [
+  "pathParameters": [
     {
       "name": "id",
       "value": "6eb7cd4a-dbb4-4a7e-9bce-e3c959739c53"
     }
   ],
-  "queries": [],
-  "headers": [
+  "queryParameters": [],
+  "headerParameters": [
     {
       "name": "Content-Type",
       "value": "application/json"

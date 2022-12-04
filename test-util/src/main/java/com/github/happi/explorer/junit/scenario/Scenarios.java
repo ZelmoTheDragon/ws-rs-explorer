@@ -1,11 +1,11 @@
 package com.github.happi.explorer.junit.scenario;
 
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -136,8 +136,8 @@ public final class Scenarios {
      * @param scenario Scenario data
      */
     private static void appendPaths(final RequestSpecification query, final Scenario scenario) {
-        if (Objects.nonNull(scenario.getPaths())) {
-            for (var h : scenario.getPaths()) {
+        if (Objects.nonNull(scenario.getPathParameters())) {
+            for (var h : scenario.getPathParameters()) {
                 query.pathParam(h.getName(), h.getValue());
             }
         }
@@ -150,8 +150,8 @@ public final class Scenarios {
      * @param scenario Scenario data
      */
     private static void appendQueries(final RequestSpecification query, final Scenario scenario) {
-        if (Objects.nonNull(scenario.getQueries())) {
-            for (var h : scenario.getPaths()) {
+        if (Objects.nonNull(scenario.getQueryParameters())) {
+            for (var h : scenario.getPathParameters()) {
                 query.queryParam(h.getName(), h.getValue());
             }
         }
@@ -165,8 +165,8 @@ public final class Scenarios {
      * @param scenario Scenario data
      */
     private static void appendHeaders(final RequestSpecification query, final Scenario scenario) {
-        if (Objects.nonNull(scenario.getHeaders())) {
-            for (var h : scenario.getHeaders()) {
+        if (Objects.nonNull(scenario.getHeaderParameters())) {
+            for (var h : scenario.getHeaderParameters()) {
                 query.header(h.getName(), h.getValue());
             }
         }
@@ -197,8 +197,10 @@ public final class Scenarios {
      */
     private static ValidatableResponse execute(final RequestSpecification query, final Scenario scenario) {
         var m = Objects.requireNonNull(scenario.getMethod(), "Missing method name !");
-        var uri = Objects.requireNonNull(scenario.getUrl(), "Missing URL !");
-        return query.request(m, uri).then();
+        var path = Objects.requireNonNull(scenario.getPath(), "Missing path !");
+        var port = Optional.ofNullable(scenario.getPort()).orElse(8080);
+        query.port(port);
+        return query.request(m, path).then();
     }
 
     /**

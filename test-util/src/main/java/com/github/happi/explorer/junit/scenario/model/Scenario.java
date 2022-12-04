@@ -32,11 +32,16 @@ public class Scenario {
     private Method method;
 
     /**
-     * Complete URL.
-     * Can contains expression like for path parameters.
+     * Resource port.
      */
-    @JsonbProperty("url")
-    private String url;
+    private Integer port;
+
+    /**
+     * Resource path.
+     * Can contain expressions like for path parameters.
+     */
+    @JsonbProperty("path")
+    private String path;
 
     /**
      * Whether the current scenario is skipped or not.
@@ -66,20 +71,20 @@ public class Scenario {
     /**
      * Query parameters.
      */
-    @JsonbProperty("queries")
-    private List<QueryParameter> queries;
+    @JsonbProperty("queryParameters")
+    private List<QueryParameter> queryParameters;
 
     /**
      * Path parameter resolutions.
      */
-    @JsonbProperty("paths")
-    private List<PathParameter> paths;
+    @JsonbProperty("pathParameters")
+    private List<PathParameter> pathParameters;
 
     /**
      * Header parameters.
      */
-    @JsonbProperty("headers")
-    private List<HeaderParameter> headers;
+    @JsonbProperty("headerParameters")
+    private List<HeaderParameter> headerParameters;
 
     /**
      * Matchers for response body.
@@ -92,9 +97,9 @@ public class Scenario {
      * Required for serialization and deserialization.
      */
     public Scenario() {
-        this.queries = new ArrayList<>();
-        this.paths = new ArrayList<>();
-        this.headers = new ArrayList<>();
+        this.queryParameters = new ArrayList<>();
+        this.pathParameters = new ArrayList<>();
+        this.headerParameters = new ArrayList<>();
         this.matchers = new ArrayList<>();
     }
 
@@ -111,7 +116,8 @@ public class Scenario {
             Scenario scenario = (Scenario) o;
             equality = Objects.equals(title, scenario.title)
                     && Objects.equals(method, scenario.method)
-                    && Objects.equals(url, scenario.url)
+                    && Objects.equals(port, scenario.port)
+                    && Objects.equals(path, scenario.path)
                     && Objects.equals(statusCode, scenario.statusCode)
                     && Objects.equals(body, scenario.body)
                     && Objects.equals(requiredGeneratedJWT, scenario.requiredGeneratedJWT);
@@ -121,7 +127,7 @@ public class Scenario {
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, method, url, statusCode, body, requiredGeneratedJWT);
+        return Objects.hash(title, method, port, path, statusCode, body, requiredGeneratedJWT);
     }
 
     @Override
@@ -129,7 +135,8 @@ public class Scenario {
         return new StringBuilder("Scenario{")
                 .append("title='").append(title).append('\'')
                 .append(", method='").append(method).append('\'')
-                .append(", uri='").append(url).append('\'')
+                .append(", port='").append(port).append('\'')
+                .append(", path='").append(path).append('\'')
                 .append(", statusCode='").append(statusCode).append('\'')
                 .append(", body='").append(body).append('\'')
                 .append(", skip='").append(skip).append('\'')
@@ -156,12 +163,20 @@ public class Scenario {
         this.method = method;
     }
 
-    public String getUrl() {
-        return url;
+    public Integer getPort() {
+        return port;
     }
 
-    public void setUrl(final String url) {
-        this.url = url;
+    public void setPort(final Integer port) {
+        this.port = port;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(final String path) {
+        this.path = path;
     }
 
     public Integer getStatusCode() {
@@ -196,28 +211,28 @@ public class Scenario {
         this.requiredGeneratedJWT = requiredGeneratedJWT;
     }
 
-    public List<QueryParameter> getQueries() {
-        return queries;
+    public List<QueryParameter> getQueryParameters() {
+        return queryParameters;
     }
 
-    public void setQueries(final List<QueryParameter> queries) {
-        this.queries = queries;
+    public void setQueryParameters(final List<QueryParameter> queryParameters) {
+        this.queryParameters = queryParameters;
     }
 
-    public List<PathParameter> getPaths() {
-        return paths;
+    public List<PathParameter> getPathParameters() {
+        return pathParameters;
     }
 
-    public void setPaths(final List<PathParameter> paths) {
-        this.paths = paths;
+    public void setPathParameters(final List<PathParameter> pathParameters) {
+        this.pathParameters = pathParameters;
     }
 
-    public List<HeaderParameter> getHeaders() {
-        return headers;
+    public List<HeaderParameter> getHeaderParameters() {
+        return headerParameters;
     }
 
-    public void setHeaders(final List<HeaderParameter> headers) {
-        this.headers = headers;
+    public void setHeaderParameters(final List<HeaderParameter> headerParameters) {
+        this.headerParameters = headerParameters;
     }
 
     public List<BodyMatcher> getMatchers() {

@@ -1,14 +1,15 @@
 {
   "title": "Gender endpoint is online",
   "method": "OPTIONS",
-  "url": "http://localhost:8080/example/api/entity/gender",
+  "port": 8080,
+  "path": "/example/api/entity/gender",
   "requiredGeneratedJWT": false,
   "skip": false,
   "body": null,
   "statusCode": 200,
-  "paths": [],
-  "queries": [],
-  "headers": [
+  "pathParameters": [],
+  "queryParameters": [],
+  "headerParameters": [
     {
       "name": "Content-Type",
       "value": "application/json"

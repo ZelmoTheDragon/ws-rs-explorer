@@ -1,14 +1,15 @@
 {
   "title": "Debug server is online",
   "method": "GET",
-  "url": "http://localhost:8080",
+  "port": 8080,
+  "path": "/",
   "requiredGeneratedJWT": false,
   "skip": false,
   "body": null,
   "statusCode": 200,
-  "paths": [],
-  "queries": [],
-  "headers": [
+  "pathParameters": [],
+  "queryParameters": [],
+  "headerParameters": [
     {
       "name": "Accept",
       "value": "text/html,application/xhtml+xml,application/xml"

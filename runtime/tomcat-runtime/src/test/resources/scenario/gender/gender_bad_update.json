@@ -1,7 +1,8 @@
 {
   "title": "Gender update",
   "method": "PUT",
-  "url": "http://localhost:8080/example/api/entity/gender/{id}",
+  "port": 8080,
+  "path": "/example/api/entity/gender/{id}",
   "requiredGeneratedJWT": true,
   "skip": false,
   "body": {
@@ -10,14 +11,14 @@
     "description": "A male humain updated"
   },
   "statusCode": 400,
-  "paths": [
+  "pathParameters": [
     {
       "name": "id",
       "value": "09ee5d9d-bf9b-4b5d-aad0-19117eb8da34"
     }
   ],
-  "queries": [],
-  "headers": [
+  "queryParameters": [],
+  "headerParameters": [
     {
       "name": "Content-Type",
       "value": "application/json"

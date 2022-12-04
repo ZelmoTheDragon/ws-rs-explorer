@@ -1,19 +1,20 @@
 {
   "title": "Customer find",
   "method": "GET",
-  "url": "http://localhost:8080/example/api/entity/customer/{id}",
+  "port": 8080,
+  "path": "/example/api/entity/customer/{id}",
   "requiredGeneratedJWT": true,
   "skip": false,
   "body": null,
   "statusCode": 200,
-  "paths": [
+  "pathParameters": [
     {
       "name": "id",
       "value": "0d5be73c-55f4-4379-accb-a7dcef0e9f2d"
     }
   ],
-  "queries": [],
-  "headers": [
+  "queryParameters": [],
+  "headerParameters": [
     {
       "name": "Content-Type",
       "value": "application/json"

@@ -1,19 +1,20 @@
 {
   "title": "Gender find",
   "method": "GET",
-  "url": "http://localhost:8080/example/api/entity/gender/{id}",
+  "port": 8080,
+  "path": "/example/api/entity/gender/{id}",
   "requiredGeneratedJWT": false,
   "skip": false,
   "body": null,
   "statusCode": 200,
-  "paths": [
+  "pathParameters": [
     {
       "name": "id",
       "value": "337ac663-48da-4a97-ad55-062a2c2ebb6d"
     }
   ],
-  "queries": [],
-  "headers": [
+  "queryParameters": [],
+  "headerParameters": [
     {
       "name": "Content-Type",
       "value": "application/json"
