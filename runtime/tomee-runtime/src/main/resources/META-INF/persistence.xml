@@ -28,6 +28,7 @@
             <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
             <property name="jakarta.persistence.schema-generation.scripts.create-source" value="metadata"/>
             <property name="jakarta.persistence.schema-generation.scripts.drop-source" value="metadata"/>
+            <property name="jakarta.persistence.sql-load-script-source" value="META-INF/database/hsqldb-init.sql" />
 
             <!--
                 /!\ OpenJPA property:
@@ -35,7 +36,8 @@
                 DEBUG only.
                 Print queries to console output.
             -->
-            <property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE"/>
+            <property name="openjpa.Log" value="openjpa.jdbc.SQL=trace"/>
+            <property name="openjpa.ConnectionFactoryProperties" value="PrintParameters=true"/>
         </properties>
 
     </persistence-unit>

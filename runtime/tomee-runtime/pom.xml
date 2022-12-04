@@ -32,9 +32,6 @@
         <!-- Jakarta -->
         <version.openjpa>3.2.2</version.openjpa>
 
-        <!-- Miscellaneous -->
-        <version.h2>2.1.214</version.h2>
-
         <!-- Configuration -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -71,13 +68,6 @@
             <groupId>org.apache.openjpa</groupId>
             <artifactId>openjpa-persistence</artifactId>
             <version>${version.openjpa}</version>
-        </dependency>
-
-        <!-- Miscellaneous -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>${version.h2}</version>
         </dependency>
 
         <!-- === TEST === -->

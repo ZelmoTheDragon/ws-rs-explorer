@@ -5,11 +5,11 @@
     <Resource
             name="jdbc/ExplorerDS"
             auth="Container"
-            driverClassName="org.h2.Driver"
+            driverClassName="org.hsqldb.jdbcDriver"
             type="javax.sql.DataSource"
             username="sa"
             password="sa"
-            url="jdbc:h2:mem:explorer;DB_CLOSE_DELAY=-1"
+            url="jdbc:hsqldb:mem:explorer"
     />
 
 </Context>
