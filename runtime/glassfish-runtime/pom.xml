@@ -40,11 +40,16 @@
     </dependencyManagement>
 
     <dependencies>
-
+        <!-- Module -->
+        <dependency>
+            <groupId>com.github.zelmothedragon.happi-explorer</groupId>
+            <artifactId>happi-explorer</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.github.zelmothedragon.happi-explorer</groupId>
             <artifactId>happi-explorer-example</artifactId>
-            <version>0.0.11-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- Jakarta Platform -->
@@ -67,7 +72,7 @@
         <dependency>
             <groupId>com.github.zelmothedragon.happi-explorer</groupId>
             <artifactId>test-util</artifactId>
-            <version>0.0.11-SNAPSHOT</version>
+            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
