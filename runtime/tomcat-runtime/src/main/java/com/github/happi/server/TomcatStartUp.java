@@ -3,6 +3,10 @@ package com.github.happi.server;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import jakarta.el.ELProcessor;
+import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
@@ -45,9 +49,8 @@ public class TomcatStartUp implements ServletContextListener {
 
         LOG.info(info);
 
-        jtaPropertyManager.getJTAEnvironmentBean().setUserTransactionJNDIContext("java:comp/env/UserTransactionManager");
-        jtaPropertyManager.getJTAEnvironmentBean().setTransactionManagerJNDIContext("java:comp/env/TransactionManager");
-        jtaPropertyManager.getJTAEnvironmentBean().setTransactionSynchronizationRegistryJNDIContext("java:comp/env/TransactionSynchronizationRegistry");
+        setELProcessor();
+        setTransaction();
 
         this.service.pingDatabase();
         this.service.populateDatabase();
@@ -66,5 +69,22 @@ public class TomcatStartUp implements ServletContextListener {
         LOG.info(info);
     }
 
+    private static void setTransaction() {
+        LOG.config("Set transaction manager...");
+        jtaPropertyManager.getJTAEnvironmentBean().setUserTransactionJNDIContext("java:comp/env/UserTransactionManager");
+        jtaPropertyManager.getJTAEnvironmentBean().setTransactionManagerJNDIContext("java:comp/env/TransactionManager");
+        jtaPropertyManager.getJTAEnvironmentBean().setTransactionSynchronizationRegistryJNDIContext("java:comp/env/TransactionSynchronizationRegistry");
+    }
+
+    private static void setELProcessor() {
+        LOG.config("Set EL processor...");
+        try {
+            BeanManager beanManager = InitialContext.doLookup("java:comp/env/BeanManager");
+            ELProcessor elProcessor = new ELProcessor();
+            elProcessor.getELManager().addELResolver(beanManager.getELResolver());
+        } catch (NamingException ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
 
 }

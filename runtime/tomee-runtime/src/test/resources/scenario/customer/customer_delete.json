@@ -1,0 +1,24 @@
+{
+  "title": "Customer delete",
+  "method": "DELETE",
+  "port": 8080,
+  "path": "/example/api/entity/customer/{id}",
+  "requiredGeneratedJWT": true,
+  "skip": false,
+  "body": null,
+  "statusCode": 204,
+  "pathParameters": [
+    {
+      "name": "id",
+      "value": "b5d9a517-cd73-4643-adc5-c34ac7522791"
+    }
+  ],
+  "queryParameters": [],
+  "headerParameters": [
+    {
+      "name": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "matchers": []
+}

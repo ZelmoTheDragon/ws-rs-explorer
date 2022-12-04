@@ -3,6 +3,47 @@
 **H**yper **A**pplication **P**owerful **P**rogramming **I**nterface - **E**xplorer
 A generic and dynamic endpoint for basic **CRUD** *(Create, Read, Update, Delete)* operation.  
 
+It provides Docker images for each runtime environment based on **GNU/Linux Alpine**.  
+
+## Requirement
+
+This project is written in **Java 17 LTS** with **Jakarta 9.1**.  
+It builds with **Maven 3.8.X**.  
+
+## Runtime environment
+
+Available Java web server: 
+  * [x] Eclipse Glassfish
+    * Reference web server.
+  * [x] Payara
+    * **WARNING** Work fine, but it's Jakarta 10 with retro-compatibility.
+  * [x] Apache Tomcat
+    * **WARNING** It is a prototype using extra dependencies from a Jakarta platform implementations. 
+  * [ ] Apache TomEE
+    * **WARNING** Work in progress. It uses a release candidate version of the server.
+  * [ ] Wildfly
+    * **WARNING** Not implemented yet! 
+
+## Maven
+
+**Building the whole project.**  
+~~~
+cd happi-explorer-parent
+mvn clean install -U -DskipITs
+~~~
+
+**Running integration tests.**  
+~~~
+cd happi-explorer-parent/runtime/<web-server-runtime>
+mvn clean verify -U
+~~~
+
+**Running web server.**  
+~~~
+cd happi-explorer-parent/runtime/<web-server-runtime>
+mvn mvn clean install -U -DskipITs cargo:run
+~~~
+
 ## Showcase
 
 For example, you want an endpoint for a `Customer` entity.  
@@ -411,10 +452,3 @@ Content-Type: application/json
 
 
 ___
-
-> This project is writing in **Java 17** with **Jakarta 9.1**.  
-> Build with **Maven 3.8.X**.  
-> It uses **Glassfish 6.X** as standard implementation.  
-> **Payara 6.2022.X** work fine.  
-> **Tomcat10x** is available as a prototype.  
-

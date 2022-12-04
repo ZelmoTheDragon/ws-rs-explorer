@@ -76,6 +76,7 @@
         <version.httpclient>4.5.13</version.httpclient>
 
         <!-- Maven plugins -->
+        <version.maven-antrun-plugin>3.1.0</version.maven-antrun-plugin>
         <version.maven-clean-plugin>3.1.0</version.maven-clean-plugin>
         <version.maven-compiler-plugin>3.10.1</version.maven-compiler-plugin>
         <version.maven-dependency-plugin>3.3.0</version.maven-dependency-plugin>
@@ -92,7 +93,7 @@
 
         <!-- Additional plugins -->
         <version.build-helper-maven-plugin>3.3.0</version.build-helper-maven-plugin>
-        <version.cargo-maven3-plugin>1.9.11</version.cargo-maven3-plugin>
+        <version.cargo-maven3-plugin>1.10.4</version.cargo-maven3-plugin>
         <version.versions-maven-plugin>2.12.0</version.versions-maven-plugin>
 
         <!-- External plugins -->
@@ -176,6 +177,11 @@
             <plugins>
 
                 <!-- Maven plugins  -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>${version.maven-antrun-plugin}</version>
+                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>

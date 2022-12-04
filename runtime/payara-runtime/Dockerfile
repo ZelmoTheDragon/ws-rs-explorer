@@ -1,4 +1,4 @@
-FROM alpine:3.16.2 AS happi-explorer-glassfish
+FROM alpine:3.16.2 AS happi-explorer-payara
 
 ARG PAYARA_SERVER="payara-6.2022.1.zip"
 ARG APPLICATION="payara-runtime-0.0.14-SNAPSHOT.war"

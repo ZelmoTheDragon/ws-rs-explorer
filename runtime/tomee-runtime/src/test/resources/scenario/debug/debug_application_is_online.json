@@ -1,0 +1,19 @@
+{
+  "title": "Debug application is online",
+  "method": "GET",
+  "port": 8080,
+  "path": "/example",
+  "requiredGeneratedJWT": false,
+  "skip": false,
+  "body": null,
+  "statusCode": 200,
+  "pathParameters": [],
+  "queryParameters": [],
+  "headerParameters": [
+    {
+      "name": "Accept",
+      "value": "text/html,application/xhtml+xml,application/xml"
+    }
+  ],
+  "matchers": []
+}

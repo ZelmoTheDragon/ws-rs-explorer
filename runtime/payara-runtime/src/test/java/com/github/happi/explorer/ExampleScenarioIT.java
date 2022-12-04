@@ -1,4 +1,4 @@
-package explorer;
+package com.github.happi.explorer;
 
 
 import java.util.stream.Stream;

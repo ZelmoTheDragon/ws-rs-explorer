@@ -16,6 +16,7 @@
     <artifactId>happi-explorer</artifactId>
     <packaging>jar</packaging>
     <name>happi-explorer</name>
+    <description>Generic and dynamic API for web project</description>
 
     <properties>
         <!-- Configuration -->

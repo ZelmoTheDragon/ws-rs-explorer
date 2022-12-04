@@ -16,6 +16,7 @@
     <artifactId>happi-explorer-example</artifactId>
     <packaging>jar</packaging>
     <name>happi-explorer-example</name>
+    <description>Showcase for happi-explorer</description>
 
     <properties>
         <!-- Configuration -->

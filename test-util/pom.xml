@@ -17,7 +17,6 @@
     <packaging>jar</packaging>
 
     <properties>
-        <version.group.jackson>2.14.1</version.group.jackson>
         <version.parsson>1.1.1</version.parsson>
         <version.yasson>2.0.4</version.yasson>
 

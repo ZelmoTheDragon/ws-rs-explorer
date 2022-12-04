@@ -18,6 +18,7 @@
     <artifactId>tomcat-runtime</artifactId>
     <packaging>war</packaging>
     <name>tomcat-runtime</name>
+    <description>Tomcat runtime for happi-explorer-example</description>
 
     <properties>
         <!-- Server -->
