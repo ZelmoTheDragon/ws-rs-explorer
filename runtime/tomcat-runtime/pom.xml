@@ -9,9 +9,11 @@
     <parent>
         <groupId>com.github.zelmothedragon.happi-explorer</groupId>
         <artifactId>runtime</artifactId>
-        <version>0.0.13-SNAPSHOT</version>
+        <version>0.0.14-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
+
+    <!-- /!\ WARNING : It's a prototype. -->
 
     <artifactId>tomcat-runtime</artifactId>
     <packaging>war</packaging>
@@ -243,7 +245,7 @@
         <dependency>
             <groupId>com.github.zelmothedragon.happi-explorer</groupId>
             <artifactId>test-util</artifactId>
-            <version>0.0.13-SNAPSHOT</version>
+            <version>0.0.14-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
         <dependency>

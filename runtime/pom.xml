@@ -9,12 +9,13 @@
     <parent>
         <groupId>com.github.zelmothedragon.happi-explorer</groupId>
         <artifactId>happi-explorer-parent</artifactId>
-        <version>0.0.13-SNAPSHOT</version>
+        <version>0.0.14-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modules>
         <module>glassfish-runtime</module>
+        <module>payara-runtime</module>
         <module>tomcat-runtime</module>
     </modules>
 

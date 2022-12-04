@@ -1,7 +1,7 @@
 FROM alpine:3.16.2 AS happi-explorer-tomcat
 
-ARG TOMCAT_SERVER="tomcat-10.1.2.zip"
-ARG APPLICATION="tomcat-runtime-0.0.11-SNAPSHOT.war"
+ARG TOMCAT_SERVER="tomcat-10.0.27.zip"
+ARG APPLICATION="tomcat-runtime-0.0.14-SNAPSHOT.war"
 
 COPY "target/$TOMCAT_SERVER" "/tmp"
 COPY "target/$APPLICATION" "/tmp"

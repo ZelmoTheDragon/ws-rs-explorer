@@ -1,0 +1,39 @@
+{
+  "title": "Gender update",
+  "method": "PUT",
+  "port": 8080,
+  "path": "/example/api/entity/gender/{id}",
+  "requiredGeneratedJWT": true,
+  "skip": false,
+  "body": {
+    "name": "Male",
+    "code": "M",
+    "description": "A male humain updated"
+  },
+  "statusCode": 400,
+  "pathParameters": [
+    {
+      "name": "id",
+      "value": "09ee5d9d-bf9b-4b5d-aad0-19117eb8da34"
+    }
+  ],
+  "queryParameters": [],
+  "headerParameters": [
+    {
+      "name": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "matchers": [
+    {
+      "jsonPath": "error",
+      "operator": "equalTo",
+      "value": "com.github.happi.explorer.service.ActionDeniedException"
+    },
+    {
+      "jsonPath": "message",
+      "operator": "equalTo",
+      "value": "On [gender] action [UPDATE] is denied ! Unauthorized operation"
+    }
+  ]
+}

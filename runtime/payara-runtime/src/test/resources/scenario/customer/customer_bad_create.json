@@ -1,0 +1,24 @@
+{
+  "title": "Customer Bad create",
+  "method": "POST",
+  "port": 8080,
+  "path": "/example/api/entity/customer",
+  "requiredGeneratedJWT": true,
+  "skip": false,
+  "body": {
+    "givenName": "Johnny",
+    "familyName": "",
+    "email": "@bad.email.org",
+    "phoneNumber": "0000000000"
+  },
+  "statusCode": 400,
+  "pathParameters": [],
+  "queryParameters": [],
+  "headerParameters": [
+    {
+      "name": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "matchers": []
+}

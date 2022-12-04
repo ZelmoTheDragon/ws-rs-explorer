@@ -1,6 +1,7 @@
 package com.github.happi.explorer.junit.scenario;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
@@ -81,22 +82,23 @@ public final class Scenarios {
      */
     public static Stream<Arguments> createArguments() {
         var resource = Scenarios.class.getClassLoader().getResource("scenario");
-        var scenarioPath = Path.of(resource.getPath());
-        try (var paths = Files.find(scenarioPath, Integer.MAX_VALUE, (p, a) -> a.isRegularFile() && Files.isReadable(p))) {
+        try {
+            var scenarioPath = Path.of(resource.toURI());
+            try (var paths = Files.find(scenarioPath, Integer.MAX_VALUE, (p, a) -> a.isRegularFile() && Files.isReadable(p))) {
 
-            var scenarios = paths
-                    .sorted()
-                    .map(Scenarios::loadFile)
-                    .map(Scenarios::readJsonString)
-                    .filter(s -> Objects.equals(Boolean.FALSE, s.getSkip()))
-                    .collect(Collectors.toList());
+                var scenarios = paths
+                        .sorted()
+                        .map(Scenarios::loadFile)
+                        .map(Scenarios::readJsonString)
+                        .filter(s -> Objects.equals(Boolean.FALSE, s.getSkip()))
+                        .toList();
 
-            return scenarios
-                    .stream()
-                    .map(Arguments::arguments);
+                return scenarios
+                        .stream()
+                        .map(Arguments::arguments);
 
-
-        } catch (IOException ex) {
+            }
+        } catch (IOException | URISyntaxException ex) {
             throw new IllegalStateException(ex);
         }
     }

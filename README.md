@@ -415,5 +415,6 @@ ___
 > This project is writing in **Java 17** with **Jakarta 9.1**.  
 > Build with **Maven 3.8.X**.  
 > It uses **Glassfish 6.X** as standard implementation.  
+> **Payara 6.2022.X** work fine.  
 > **Tomcat10x** is available as a prototype.  
 

@@ -7,19 +7,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.github.zelmothedragon.happi-explorer</groupId>
         <artifactId>runtime</artifactId>
+        <groupId>com.github.zelmothedragon.happi-explorer</groupId>
         <version>0.0.14-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>glassfish-runtime</artifactId>
+    <!-- /!\ WARNING : It's a Jakarta 10 platform. -->
+
+    <artifactId>payara-runtime</artifactId>
     <packaging>war</packaging>
-    <name>glassfish-runtime</name>
+    <name>payara-runtime</name>
 
     <properties>
         <!-- Server -->
-        <version.glassfish>6.2.5</version.glassfish>
+        <version.payara>6.2022.1</version.payara>
 
         <!-- Jakarta -->
         <version.group.eclipselink>3.0.3</version.group.eclipselink>
@@ -33,9 +35,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.glassfish.main.distributions</groupId>
-                <artifactId>glassfish</artifactId>
-                <version>${version.glassfish}</version>
+                <groupId>fish.payara.distributions</groupId>
+                <artifactId>payara</artifactId>
+                <version>${version.payara}</version>
                 <type>zip</type>
             </dependency>
         </dependencies>
@@ -116,8 +118,8 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>org.glassfish.main.distributions</groupId>
-                                    <artifactId>glassfish</artifactId>
+                                    <groupId>fish.payara.distributions</groupId>
+                                    <artifactId>payara</artifactId>
                                     <type>zip</type>
                                     <overWrite>false</overWrite>
                                     <outputDirectory>${project.build.directory}</outputDirectory>
@@ -205,17 +207,17 @@
                 </executions>
                 <configuration>
                     <container>
-                        <containerId>glassfish6x</containerId>
+                        <containerId>payara</containerId>
                         <artifactInstaller>
-                            <groupId>org.glassfish.main.distributions</groupId>
-                            <artifactId>glassfish</artifactId>
-                            <version>${version.glassfish}</version>
+                            <groupId>fish.payara.distributions</groupId>
+                            <artifactId>payara</artifactId>
+                            <version>${version.payara}</version>
                         </artifactInstaller>
                     </container>
                     <deployables>
                         <deployable>
                             <groupId>com.github.zelmothedragon.happi-explorer</groupId>
-                            <artifactId>glassfish-runtime</artifactId>
+                            <artifactId>payara-runtime</artifactId>
                             <type>war</type>
                             <properties>
                                 <context>/example</context>

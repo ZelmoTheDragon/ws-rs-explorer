@@ -1,0 +1,34 @@
+{
+  "title": "Gender Bad create",
+  "method": "POST",
+  "port": 8080,
+  "path": "/example/api/entity/gender",
+  "requiredGeneratedJWT": true,
+  "skip": false,
+  "body": {
+    "name": "Random",
+    "code": "R",
+    "description": "Random sex organ"
+  },
+  "statusCode": 400,
+  "pathParameters": [],
+  "queryParameters": [],
+  "headerParameters": [
+    {
+      "name": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "matchers": [
+    {
+      "jsonPath": "error",
+      "operator": "equalTo",
+      "value": "com.github.happi.explorer.service.ActionDeniedException"
+    },
+    {
+      "jsonPath": "message",
+      "operator": "equalTo",
+      "value": "On [gender] action [CREATE] is denied ! Unauthorized operation"
+    }
+  ]
+}
