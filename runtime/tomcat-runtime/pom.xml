@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.github.zelmothedragon.happi-explorer</groupId>
         <artifactId>runtime</artifactId>
-        <version>0.0.11-SNAPSHOT</version>
+        <version>0.0.12-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -241,7 +241,7 @@
         <dependency>
             <groupId>com.github.zelmothedragon.happi-explorer</groupId>
             <artifactId>test-util</artifactId>
-            <version>0.0.11-SNAPSHOT</version>
+            <version>0.0.12-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
         <dependency>
