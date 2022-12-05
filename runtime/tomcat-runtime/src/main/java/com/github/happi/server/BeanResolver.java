@@ -1,32 +1,51 @@
 package com.github.happi.server;
 
-import java.util.logging.Logger;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Observes;
-import jakarta.enterprise.inject.spi.AfterBeanDiscovery;
+import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.CDI;
+import jakarta.security.enterprise.identitystore.IdentityStoreHandler;
 
+import com.github.happi.security.HappiSecurityManager;
 import com.github.happi.security.OAuth2Authentication;
 
 @ApplicationScoped
 public class BeanResolver {
 
-    private static final Logger LOG = Logger.getLogger(BeanResolver.class.getName());
+    //FIXME: Debug only.
 
     public BeanResolver() {
+        // NO-OP
     }
 
-    public void addMissingBean(@Observes final AfterBeanDiscovery event) {
+    @Produces
+    public OAuth2Authentication createOAuth2Authentication() {
+        var instance = new OAuth2Authentication();
+        injectField(instance, "identityStoreHandler", createIdentityStoreHandler());
+        injectField(instance, "securityManager", createHappiSecurityManager());
 
-        var authenticationMechanism = CDI.current().select(OAuth2Authentication.class);
+        return instance;
+    }
 
-        if (!authenticationMechanism.isResolvable()) {
-            event
-                    .addBean()
-                    .types(OAuth2Authentication.class)
-                    .scope(ApplicationScoped.class);
+    private static HappiSecurityManager createHappiSecurityManager() {
+        return CDI.current().select(HappiSecurityManager.class).get();
+    }
+
+    private static IdentityStoreHandler createIdentityStoreHandler() {
+        return CDI.current().select(IdentityStoreHandler.class).get();
+    }
+
+    private static <B> void injectField(
+            final OAuth2Authentication instance,
+            final String fieldName,
+            final B bean) {
+
+        try {
+            var injectableField = OAuth2Authentication.class.getDeclaredField(fieldName);
+            injectableField.setAccessible(true);
+            injectableField.set(instance, bean);
+        } catch (NoSuchFieldException | IllegalAccessException ex) {
+            throw new IllegalStateException(ex);
         }
-
-        //TODO: add producer...
     }
+
 }
