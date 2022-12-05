@@ -18,6 +18,7 @@
         <module>payara-runtime</module>
         <module>tomcat-runtime</module>
         <module>tomee-runtime</module>
+        <module>wildfly-runtime</module>
     </modules>
 
     <artifactId>runtime</artifactId>

@@ -1,0 +1,19 @@
+{
+  "title": "Debug server is online",
+  "method": "OPTIONS",
+  "port": 8080,
+  "path": "/example/api/entity/fake",
+  "requiredGeneratedJWT": false,
+  "skip": false,
+  "body": null,
+  "statusCode": 400,
+  "pathParameters": [],
+  "queryParameters": [],
+  "headerParameters": [
+    {
+      "name": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "matchers": []
+}

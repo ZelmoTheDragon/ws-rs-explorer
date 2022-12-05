@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence
+        xmlns="https://jakarta.ee/xml/ns/persistence"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+        version="3.0">
+
+    <persistence-unit name="explorer-pu" transaction-type="JTA">
+
+        <jta-data-source>java:jboss/jdbc/ExplorerDS</jta-data-source>
+
+        <!-- External classes -->
+        <class>com.github.happi.explorer.example.customer.CustomerEntity</class>
+        <class>com.github.happi.explorer.example.gender.GenderEntity</class>
+        <class>com.github.happi.explorer.example.persistence.AbstractEntity</class>
+        <class>com.github.happi.explorer.example.persistence.UUIDConverter</class>
+
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+        <validation-mode>CALLBACK</validation-mode>
+
+        <properties>
+            <!--
+                JPA property:
+
+                Populate the database during deployment.
+            -->
+            <property name="jakarta.persistence.schema-generation.database.action" value="none" />
+            <property name="jakarta.persistence.schema-generation.scripts.create-source"  value="metadata" />
+            <property name="jakarta.persistence.schema-generation.scripts.drop-source" value="metadata" />
+            <property name="jakarta.persistence.sql-load-script-source" value="META-INF/database/h2-init.sql" />
+
+            <!--
+                /!\ Hibernate property:
+
+                DEBUG only.
+                Print queries to console output.
+            -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="false"/>
+        </properties>
+
+
+    </persistence-unit>
+</persistence>

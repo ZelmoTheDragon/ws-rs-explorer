@@ -22,7 +22,7 @@ Available Java web server:
   * [ ] Apache TomEE
     * **WARNING** Work in progress. It uses a release candidate version of the server.
   * [ ] Wildfly
-    * **WARNING** Not implemented yet! 
+    * **WARNING** Work in progress, but it's Jakarta 10 with retro-compatibility.
 
 ## Basic Maven commands
 
