@@ -24,12 +24,6 @@
         <!-- Server -->
         <version.tomcat>10.0.27</version.tomcat>
 
-        <!-- Jakarta API -->
-        <version.jakarta.activation-api>2.1.0</version.jakarta.activation-api>
-        <version.jakarta.annotation-api>2.1.1</version.jakarta.annotation-api>
-        <version.jakarta.transaction-api>2.0.1</version.jakarta.transaction-api>
-        <version.jakarta.xml.bind-api>3.0.1</version.jakarta.xml.bind-api>
-
         <!-- Jakarta implementation -->
         <version.exousia>1.1</version.exousia>
         <version.group.hibernate>5.5.9.Final</version.group.hibernate>
@@ -83,22 +77,18 @@
         <dependency>
             <groupId>jakarta.activation</groupId>
             <artifactId>jakarta.activation-api</artifactId>
-            <version>${version.jakarta.activation-api}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.annotation</groupId>
             <artifactId>jakarta.annotation-api</artifactId>
-            <version>${version.jakarta.annotation-api}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.transaction</groupId>
             <artifactId>jakarta.transaction-api</artifactId>
-            <version>${version.jakarta.transaction-api}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>${version.jakarta.xml.bind-api}</version>
         </dependency>
 
         <!-- CDI 3.0 -->
@@ -246,7 +236,7 @@
         <dependency>
             <groupId>com.github.zelmothedragon.happi-explorer</groupId>
             <artifactId>rest-scenario</artifactId>
-            <version>0.0.14-SNAPSHOT</version>
+            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
