@@ -57,6 +57,14 @@ public final class TokenGenerator {
                     }
                     """;
 
+    /**
+     * Internal constructor.
+     * Instance does not allow.
+     */
+    private TokenGenerator() {
+        throw new UnsupportedOperationException("Instance not allowed");
+
+    }
 
     /**
      * Generate a new token.

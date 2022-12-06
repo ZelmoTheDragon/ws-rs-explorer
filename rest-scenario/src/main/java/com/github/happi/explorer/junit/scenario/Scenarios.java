@@ -30,7 +30,7 @@ public final class Scenarios {
      * A map for pattern matching in the body of the response.
      */
     private static final Map<String, Function<Object, Matcher<?>>> MATCHERS = Map.ofEntries(
-            Map.entry("equalTo", v -> Matchers.equalTo(v)),
+            Map.entry("equalTo", Matchers::equalTo),
             Map.entry("greaterThan", v -> Matchers.greaterThan((Comparable) v)),
             Map.entry("greaterThanOrEqualTo", v -> Matchers.greaterThanOrEqualTo((Comparable) v)),
             Map.entry("lessThan", v -> Matchers.lessThan((Comparable) v)),
@@ -40,7 +40,7 @@ public final class Scenarios {
             Map.entry("not.equalToIgnoringCase", v -> Matchers.not(Matchers.equalToIgnoringCase((String) v))),
             Map.entry("empty", v -> Matchers.empty()),
             Map.entry("not.empty", v -> Matchers.not(Matchers.empty())),
-            Map.entry("hasItem", v -> Matchers.hasItem(v)),
+            Map.entry("hasItem", Matchers::hasItem),
             Map.entry("not.hasItem", v -> Matchers.not(Matchers.hasItem(v))),
             Map.entry("anything", v -> Matchers.anything())
     );
@@ -80,8 +80,11 @@ public final class Scenarios {
      * @return A stream of JUnit argument
      */
     public static Stream<Arguments> createArguments() {
-        var resource = Scenarios.class.getClassLoader().getResource("scenario");
         try {
+            var resource = Optional
+                    .ofNullable(Scenarios.class.getClassLoader().getResource("scenario"))
+                    .orElseThrow(() -> new IllegalStateException("Wrong resource URL !"));
+
             var scenarioPath = Path.of(resource.toURI());
             try (var paths = Files.find(scenarioPath, Integer.MAX_VALUE, (p, a) -> a.isRegularFile() && Files.isReadable(p))) {
 

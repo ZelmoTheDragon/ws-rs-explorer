@@ -76,7 +76,7 @@
         <!-- === TEST === -->
         <dependency>
             <groupId>com.github.zelmothedragon.happi-explorer</groupId>
-            <artifactId>test-util</artifactId>
+            <artifactId>rest-scenario</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>

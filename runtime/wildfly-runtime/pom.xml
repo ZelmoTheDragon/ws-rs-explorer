@@ -71,7 +71,7 @@
         <!-- === TEST === -->
         <dependency>
             <groupId>com.github.zelmothedragon.happi-explorer</groupId>
-            <artifactId>test-util</artifactId>
+            <artifactId>rest-scenario</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
@@ -92,17 +92,14 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>download-files</id>
+                        <id>download-server</id>
                         <phase>prepare-package</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
                         <configuration>
-                            <target>
-                                <get src="${wildfly.download.url}"
-                                     dest="${project.build.directory}"
-                                     verbose="false"
-                                     usetimestamp="true"/>
+                            <target name="download-server">
+                                <ant antfile="src/ant/build.xml"/>
                             </target>
                         </configuration>
                     </execution>

@@ -46,7 +46,7 @@
         <module>happi-explorer</module>
         <module>happi-explorer-example</module>
         <module>runtime</module>
-        <module>test-util</module>
+        <module>rest-scenario</module>
     </modules>
 
     <scm>

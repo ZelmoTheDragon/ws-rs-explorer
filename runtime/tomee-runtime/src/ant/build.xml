@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <get
+            src="${tomee.download.url}"
+            dest="${project.build.directory}"
+            verbose="false"
+            usetimestamp="true"/>
+
+</project>

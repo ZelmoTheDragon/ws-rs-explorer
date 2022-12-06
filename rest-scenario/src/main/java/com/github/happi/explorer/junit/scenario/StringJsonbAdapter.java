@@ -16,19 +16,23 @@ public class StringJsonbAdapter implements JsonbAdapter<String, JsonObject> {
      * Don't call this constructor explicitly.
      */
     public StringJsonbAdapter() {
+        // NO-OP
     }
 
     @Override
-    public JsonObject adaptToJson(final String data) throws Exception {
-        var jsonReader = Json.createReader(new StringReader(data));
-        return jsonReader.readObject();
+    public JsonObject adaptToJson(final String data) {
+        var reader = new StringReader(data);
+        try (var jsonReader = Json.createReader(reader)) {
+            return jsonReader.readObject();
+        }
     }
 
     @Override
-    public String adaptFromJson(final JsonObject data) throws Exception {
+    public String adaptFromJson(final JsonObject data) {
         var stringWriter = new StringWriter();
-        var jsonWriter = Json.createWriter(stringWriter);
-        jsonWriter.writeObject(data);
-        return stringWriter.toString();
+        try (var jsonWriter = Json.createWriter(stringWriter)) {
+            jsonWriter.writeObject(data);
+            return stringWriter.toString();
+        }
     }
 }

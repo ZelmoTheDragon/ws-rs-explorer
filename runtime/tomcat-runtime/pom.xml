@@ -245,7 +245,7 @@
         <!-- === TEST === -->
         <dependency>
             <groupId>com.github.zelmothedragon.happi-explorer</groupId>
-            <artifactId>test-util</artifactId>
+            <artifactId>rest-scenario</artifactId>
             <version>0.0.14-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
