@@ -27,10 +27,11 @@
         <!-- Jakarta implementation -->
         <version.exousia>1.1</version.exousia>
         <version.group.hibernate>5.5.9.Final</version.group.hibernate>
-        <version.group.hibernate-validator>8.0.0.Final</version.group.hibernate-validator>
+        <version.group.hibernate-validator>7.0.5.Final</version.group.hibernate-validator>
         <version.group.resteasy>6.0.3.Final</version.group.resteasy>
-        <version.group.weld>5.1.0.Final</version.group.weld>
+        <version.group.weld>4.0.3.Final</version.group.weld>
         <version.jabx-impl>3.0.2</version.jabx-impl>
+        <version.jakarta.el>4.0.1</version.jakarta.el>
         <version.jaxb-runtime>3.0.2</version.jaxb-runtime>
         <version.narayana-jta>5.13.1.Final</version.narayana-jta>
         <version.soteria>2.0.1</version.soteria>
@@ -83,6 +84,16 @@
             <artifactId>jakarta.annotation-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>jakarta.json</groupId>
+            <artifactId>jakarta.json-api</artifactId>
+            <version>${version.jakarta.json-api}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.json.bind</groupId>
+            <artifactId>jakarta.json.bind-api</artifactId>
+            <version>${version.jakarta.json.bind-api}</version>
+        </dependency>
+        <dependency>
             <groupId>jakarta.transaction</groupId>
             <artifactId>jakarta.transaction-api</artifactId>
         </dependency>
@@ -133,11 +144,6 @@
         <!-- Bean Validation 3.0 -->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator-cdi</artifactId>
-            <version>${version.group.hibernate-validator}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${version.group.hibernate-validator}</version>
         </dependency>
@@ -145,6 +151,18 @@
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator-annotation-processor</artifactId>
             <version>${version.group.hibernate-validator}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator-cdi</artifactId>
+            <version>${version.group.hibernate-validator}</version>
+        </dependency>
+
+        <!-- EL 4.0 -->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.el</artifactId>
+            <version>${version.jakarta.el}</version>
         </dependency>
 
         <!-- JAX-RS 3.0 -->
