@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <datasources>
     <datasource
-            jndi-name="java:jboss/jdbc/ExplorerDS"
-            pool-name="jdbc/ExplorerPool"
+            jndi-name="java:jboss/datasources/ExplorerDS"
+            pool-name="ExplorerPool"
             enabled="true"
             use-java-context="true">
 

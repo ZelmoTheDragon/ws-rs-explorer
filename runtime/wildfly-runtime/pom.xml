@@ -218,6 +218,21 @@
                             <extractDir>${project.build.directory}/extracts</extractDir>
                         </zipUrlInstaller>
                     </container>
+                    <configuration>
+                        <properties>
+                            <cargo.jvmargs>
+                                --add-opens=java.base/java.lang=ALL-UNNAMED
+                                --add-opens=java.base/java.lang.invoke=ALL-UNNAMED
+                                --add-opens=java.base/java.lang.reflect=ALL-UNNAMED
+                                --add-opens=java.base/java.io=ALL-UNNAMED
+                                --add-opens=java.base/java.security=ALL-UNNAMED
+                                --add-opens=java.base/java.util=ALL-UNNAMED
+                                --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+                                --add-opens=java.management/javax.management=ALL-UNNAMED
+                                --add-opens=java.naming/javax.naming=ALL-UNNAMED
+                            </cargo.jvmargs>
+                        </properties>
+                    </configuration>
                     <deployables>
                         <deployable>
                             <groupId>com.github.zelmothedragon.happi-explorer</groupId>

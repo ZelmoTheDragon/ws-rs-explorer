@@ -7,7 +7,7 @@
 
     <persistence-unit name="explorer-pu" transaction-type="JTA">
 
-        <jta-data-source>java:jboss/jdbc/ExplorerDS</jta-data-source>
+        <jta-data-source>java:jboss/datasources/ExplorerDS</jta-data-source>
 
         <!-- External classes -->
         <class>com.github.happi.explorer.example.customer.CustomerEntity</class>
