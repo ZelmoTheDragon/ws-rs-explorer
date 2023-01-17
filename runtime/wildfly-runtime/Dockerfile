@@ -1,13 +1,13 @@
-FROM alpine:3.16.2 AS happi-explorer-wildfly
+FROM alpine:3.17.1 AS happi-explorer-wildfly
 
-ARG WILDFLY_SERVER="wildfly-27.0.0.Final.zip"
-ARG APPLICATION="wildfly-runtime-0.0.14-SNAPSHOT.war"
+ARG WILDFLY_SERVER="wildfly-27.0.1.Final.zip"
+ARG APPLICATION="wildfly-runtime-0.0.15-SNAPSHOT.war"
 
 COPY "target/$WILDFLY_SERVER" "/tmp"
 COPY "target/$APPLICATION" "/tmp"
 
 ENV WILDFLY_USER="duke"
-ENV WILDFLY_HOME="/opt/wildfly-27.0.0.Final"
+ENV WILDFLY_HOME="/opt/wildfly-27.0.1.Final"
 ENV PATH="$PATH:$WILDFLY_HOME/bin"
 
 # TODO: Optimize Wildfly internal configuration...

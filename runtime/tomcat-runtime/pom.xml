@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.github.zelmothedragon.happi-explorer</groupId>
         <artifactId>runtime</artifactId>
-        <version>0.0.14-SNAPSHOT</version>
+        <version>0.0.15-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -22,31 +22,29 @@
 
     <properties>
         <!-- Server -->
-        <version.tomcat>10.0.27</version.tomcat>
+        <version.tomcat>10.1.5</version.tomcat>
 
         <!-- Jakarta implementation -->
-        <version.exousia>1.1</version.exousia>
-        <version.group.hibernate>5.5.9.Final</version.group.hibernate>
-        <version.group.hibernate-validator>7.0.5.Final</version.group.hibernate-validator>
-        <version.group.resteasy>6.0.3.Final</version.group.resteasy>
-        <version.group.weld>4.0.3.Final</version.group.weld>
+        <version.exousia>2.1.0</version.exousia>
+        <version.group.hibernate>5.6.14.Final</version.group.hibernate>
+        <version.group.hibernate-validator>8.0.0.Final</version.group.hibernate-validator>
+        <version.group.resteasy>6.2.2.Final</version.group.resteasy>
+        <version.group.weld>5.1.0.Final</version.group.weld>
         <version.jabx-impl>3.0.2</version.jabx-impl>
         <version.jakarta.el>4.0.1</version.jakarta.el>
-        <version.jaxb-runtime>3.0.2</version.jaxb-runtime>
+        <version.jaxb-runtime>4.0.1</version.jaxb-runtime>
         <version.narayana-jta>5.13.1.Final</version.narayana-jta>
-        <version.soteria>2.0.1</version.soteria>
+        <version.soteria>3.0.1</version.soteria>
 
         <!-- Miscellaneous -->
         <version.commons-io>2.11.0</version.commons-io>
         <version.h2>2.1.214</version.h2>
-        <version.jandex>2.4.3.Final</version.jandex>
+        <version.jandex>3.0.5</version.jandex>
         <version.jboss-logging>3.5.0.Final</version.jboss-logging>
         <version.parsson>1.1.1</version.parsson>
-        <version.yasson>2.0.4</version.yasson>
+        <version.yasson>3.0.2</version.yasson>
 
         <!-- Configuration -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <skipITs>false</skipITs>
     </properties>
 
@@ -94,6 +92,11 @@
             <version>${version.jakarta.json.bind-api}</version>
         </dependency>
         <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>${version.jakarta.servlet-api}</version>
+        </dependency>
+        <dependency>
             <groupId>jakarta.transaction</groupId>
             <artifactId>jakarta.transaction-api</artifactId>
         </dependency>
@@ -102,14 +105,14 @@
             <artifactId>jakarta.xml.bind-api</artifactId>
         </dependency>
 
-        <!-- CDI 3.0 -->
+        <!-- CDI -->
         <dependency>
             <groupId>org.jboss.weld.servlet</groupId>
             <artifactId>weld-servlet-core</artifactId>
             <version>${version.group.weld}</version>
         </dependency>
 
-        <!-- JPA 3.0 -->
+        <!-- JPA -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core-jakarta</artifactId>
@@ -134,14 +137,14 @@
             <version>${version.jaxb-runtime}</version>
         </dependency>
 
-        <!-- JTA 2.0 -->
+        <!-- JTA -->
         <dependency>
             <groupId>org.jboss.narayana.jta</groupId>
             <artifactId>narayana-jta-jakarta</artifactId>
             <version>${version.narayana-jta}</version>
         </dependency>
 
-        <!-- Bean Validation 3.0 -->
+        <!-- Bean Validation -->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
@@ -158,14 +161,14 @@
             <version>${version.group.hibernate-validator}</version>
         </dependency>
 
-        <!-- EL 4.0 -->
+        <!-- EL -->
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>jakarta.el</artifactId>
             <version>${version.jakarta.el}</version>
         </dependency>
 
-        <!-- JAX-RS 3.0 -->
+        <!-- JAX-RS -->
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-core</artifactId>
@@ -192,7 +195,7 @@
             <version>${version.group.resteasy}</version>
         </dependency>
 
-        <!-- JSON-P 2.0 -->
+        <!-- JSON-P -->
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-json-p-provider</artifactId>
@@ -204,7 +207,7 @@
             <version>${version.parsson}</version>
         </dependency>
 
-        <!-- JSON-B 2.0 -->
+        <!-- JSON-B -->
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-json-binding-provider</artifactId>
@@ -216,14 +219,14 @@
             <version>${version.yasson}</version>
         </dependency>
 
-        <!-- Security 2.0 -->
+        <!-- Security -->
         <dependency>
             <groupId>org.glassfish.soteria</groupId>
             <artifactId>jakarta.security.enterprise</artifactId>
             <version>${version.soteria}</version>
         </dependency>
         <dependency>
-            <groupId>org.omnifaces</groupId>
+            <groupId>org.glassfish.exousia</groupId>
             <artifactId>exousia</artifactId>
             <version>${version.exousia}</version>
         </dependency>
@@ -240,7 +243,7 @@
             <version>${version.h2}</version>
         </dependency>
         <dependency>
-            <groupId>org.jboss</groupId>
+            <groupId>io.smallrye</groupId>
             <artifactId>jandex</artifactId>
             <version>${version.jandex}</version>
         </dependency>

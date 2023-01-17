@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.github.zelmothedragon.happi-explorer</groupId>
         <artifactId>happi-explorer-parent</artifactId>
-        <version>0.0.14-SNAPSHOT</version>
+        <version>0.0.15-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -19,9 +19,7 @@
     <description>Showcase for happi-explorer</description>
 
     <properties>
-        <!-- Configuration -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
     </properties>
 
     <dependencies>

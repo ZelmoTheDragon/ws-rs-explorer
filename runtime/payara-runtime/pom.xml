@@ -9,11 +9,9 @@
     <parent>
         <groupId>com.github.zelmothedragon.happi-explorer</groupId>
         <artifactId>runtime</artifactId>
-        <version>0.0.14-SNAPSHOT</version>
+        <version>0.0.15-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-
-    <!-- /!\ WARNING : It's a Jakarta 10 platform. -->
 
     <artifactId>payara-runtime</artifactId>
     <packaging>war</packaging>
@@ -22,14 +20,12 @@
 
     <properties>
         <!-- Server -->
-        <version.payara>6.2022.1</version.payara>
+        <version.payara>6.2022.2</version.payara>
 
         <!-- Jakarta -->
-        <version.group.eclipselink>3.0.3</version.group.eclipselink>
+        <version.group.eclipselink>4.0.0</version.group.eclipselink>
 
         <!-- Configuration -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <skipITs>false</skipITs>
     </properties>
 

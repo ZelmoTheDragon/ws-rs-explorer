@@ -9,7 +9,7 @@
     <parent>
         <artifactId>runtime</artifactId>
         <groupId>com.github.zelmothedragon.happi-explorer</groupId>
-        <version>0.0.14-SNAPSHOT</version>
+        <version>0.0.15-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -20,18 +20,16 @@
 
     <properties>
         <!-- Server -->
-        <version.wildfly>27.0.0.Final</version.wildfly>
+        <version.wildfly>27.0.1.Final</version.wildfly>
         <wildfly.archive.name>wildfly-${version.wildfly}.zip</wildfly.archive.name>
         <wildfly.download.url>
             https://github.com/wildfly/wildfly/releases/download/${version.wildfly}/${wildfly.archive.name}
         </wildfly.download.url>
 
         <!-- Jakarta -->
-        <version.group.hibernate>5.5.9.Final</version.group.hibernate>
+        <version.group.hibernate>5.6.14.Final</version.group.hibernate>
 
         <!-- Configuration -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <skipITs>false</skipITs>
     </properties>
 
