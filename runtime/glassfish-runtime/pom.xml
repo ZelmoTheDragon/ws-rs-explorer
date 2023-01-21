@@ -215,7 +215,7 @@
                 </executions>
                 <configuration>
                     <container>
-                        <containerId>glassfish6x</containerId>
+                        <containerId>glassfish7x</containerId>
                         <artifactInstaller>
                             <groupId>org.glassfish.main.distributions</groupId>
                             <artifactId>glassfish</artifactId>

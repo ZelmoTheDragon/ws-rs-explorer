@@ -14,10 +14,10 @@ public final class HashMac {
 
     /**
      * Internal constructor.
-     * Instance does not allow.
+     * Instantiation is not allowed.
      */
     private HashMac() {
-        throw new UnsupportedOperationException("Instance not allowed");
+        throw new UnsupportedOperationException("Instantiation is not allowed");
     }
 
     /**
