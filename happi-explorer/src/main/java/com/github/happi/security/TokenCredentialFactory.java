@@ -25,10 +25,10 @@ public final class TokenCredentialFactory {
 
     /**
      * Internal constructor.
-     * Instance does not allow.
+     * Instantiation is not allowed.
      */
     private TokenCredentialFactory() {
-        throw new UnsupportedOperationException("Instance not allowed");
+        throw new UnsupportedOperationException("Instantiation is not allowed");
     }
 
     /**

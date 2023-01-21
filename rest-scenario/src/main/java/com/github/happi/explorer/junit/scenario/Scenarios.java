@@ -47,10 +47,10 @@ public final class Scenarios {
 
     /**
      * Internal constructor.
-     * Instance does not allow.
+     * Instantiation is not allowed.
      */
     private Scenarios() {
-        throw new UnsupportedOperationException("Instance not allowed");
+        throw new UnsupportedOperationException("Instantiation is not allowed");
     }
 
     /**

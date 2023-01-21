@@ -59,10 +59,10 @@ public final class TokenGenerator {
 
     /**
      * Internal constructor.
-     * Instance does not allow.
+     * Instantiation is not allowed.
      */
     private TokenGenerator() {
-        throw new UnsupportedOperationException("Instance not allowed");
+        throw new UnsupportedOperationException("Instantiation is not allowed");
 
     }
 
