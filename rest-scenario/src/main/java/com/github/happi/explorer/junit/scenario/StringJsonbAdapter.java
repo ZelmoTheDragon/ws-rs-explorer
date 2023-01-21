@@ -2,6 +2,8 @@ package com.github.happi.explorer.junit.scenario;
 
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.Objects;
+
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.bind.adapter.JsonbAdapter;
@@ -21,18 +23,30 @@ public class StringJsonbAdapter implements JsonbAdapter<String, JsonObject> {
 
     @Override
     public JsonObject adaptToJson(final String data) {
-        var reader = new StringReader(data);
-        try (var jsonReader = Json.createReader(reader)) {
-            return jsonReader.readObject();
+        JsonObject object;
+        if (Objects.nonNull(data)) {
+            var reader = new StringReader(data);
+            try (var jsonReader = Json.createReader(reader)) {
+                object = jsonReader.readObject();
+            }
+        } else {
+            object = null;
         }
+        return object;
     }
 
     @Override
     public String adaptFromJson(final JsonObject data) {
-        var stringWriter = new StringWriter();
-        try (var jsonWriter = Json.createWriter(stringWriter)) {
-            jsonWriter.writeObject(data);
-            return stringWriter.toString();
+        String text;
+        if (Objects.nonNull(data)) {
+            var stringWriter = new StringWriter();
+            try (var jsonWriter = Json.createWriter(stringWriter)) {
+                jsonWriter.writeObject(data);
+                text = stringWriter.toString();
+            }
+        } else {
+            text = null;
         }
+        return text;
     }
 }
