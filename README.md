@@ -7,7 +7,7 @@ It provides Docker images for each runtime environment based on **GNU/Linux Alpi
 
 ## Requirement
 
-This project is written in **Java 17 LTS** with **Jakarta 9.1**.  
+This project is written in **Java 17 LTS** with **Jakarta 10**.  
 It builds with **Maven 3.8.X**.  
 
 ## Runtime environment
@@ -16,8 +16,8 @@ Available Java web server:
   * [x] Eclipse Glassfish
     * Reference web server.
   * [x] Payara
-    * **WARNING** Work fine, but it's Jakarta 10 with retro-compatibility.
-  * [x] Apache Tomcat
+    * Fork of Glassfish.
+  * [ ] Apache Tomcat
     * **WARNING** It is a prototype using extra dependencies from a Jakarta platform implementations. 
   * [ ] Apache TomEE
     * **WARNING** Work in progress. It uses a release candidate version of the server.
