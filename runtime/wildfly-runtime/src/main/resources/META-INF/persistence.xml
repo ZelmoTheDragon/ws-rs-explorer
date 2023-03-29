@@ -10,10 +10,10 @@
         <jta-data-source>java:jboss/datasources/ExplorerDS</jta-data-source>
 
         <!-- External classes -->
-        <class>com.github.happi.explorer.example.customer.CustomerEntity</class>
-        <class>com.github.happi.explorer.example.gender.GenderEntity</class>
-        <class>com.github.happi.explorer.example.persistence.AbstractEntity</class>
-        <class>com.github.happi.explorer.example.persistence.UUIDConverter</class>
+        <class>com.github.happiexplorer.example.customer.CustomerEntity</class>
+        <class>com.github.happiexplorer.example.gender.GenderEntity</class>
+        <class>com.github.happiexplorer.example.persistence.AbstractEntity</class>
+        <class>com.github.happiexplorer.example.persistence.UUIDConverter</class>
 
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>

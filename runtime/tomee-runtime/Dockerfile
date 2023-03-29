@@ -1,7 +1,7 @@
 FROM alpine:3.17.1 AS happi-explorer-tomee
 
 ARG TOMEE_SERVER="apache-tomee-9.0.0.RC1-webprofile.zip"
-ARG APPLICATION="tomee-runtime-0.0.15-SNAPSHOT.war"
+ARG APPLICATION="tomee-runtime-0.0.16-SNAPSHOT.war"
 
 COPY "target/$TOMEE_SERVER" "/tmp"
 COPY "target/$APPLICATION" "/tmp"

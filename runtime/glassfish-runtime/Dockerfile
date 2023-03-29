@@ -1,7 +1,7 @@
 FROM alpine:3.17.1 AS happi-explorer-glassfish
 
-ARG GLASSFISH_SERVER="glassfish-7.0.0.zip"
-ARG APPLICATION="glassfish-runtime-0.0.15-SNAPSHOT.war"
+ARG GLASSFISH_SERVER="glassfish-7.0.2.zip"
+ARG APPLICATION="glassfish-runtime-0.0.16-SNAPSHOT.war"
 
 COPY "target/$GLASSFISH_SERVER" "/tmp"
 COPY "target/$APPLICATION" "/tmp"

@@ -1,7 +1,7 @@
 FROM alpine:3.17.1 AS happi-explorer-payara
 
-ARG PAYARA_SERVER="payara-6.2022.2.zip"
-ARG APPLICATION="payara-runtime-0.0.15-SNAPSHOT.war"
+ARG PAYARA_SERVER="payara-6.2023.2.zip"
+ARG APPLICATION="payara-runtime-0.0.16-SNAPSHOT.war"
 
 COPY "target/$PAYARA_SERVER" "/tmp"
 COPY "target/$APPLICATION" "/tmp"
