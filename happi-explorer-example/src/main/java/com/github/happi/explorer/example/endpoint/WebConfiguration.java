@@ -14,5 +14,6 @@ import com.github.happi.explorer.example.security.Roles;
 public class WebConfiguration extends Application {
 
     public WebConfiguration() {
+        // NO-OP
     }
 }

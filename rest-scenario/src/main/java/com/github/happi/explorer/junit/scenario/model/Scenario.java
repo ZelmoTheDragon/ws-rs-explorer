@@ -1,16 +1,16 @@
 package com.github.happi.explorer.junit.scenario.model;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import com.github.happi.explorer.junit.scenario.StringJsonbAdapter;
+import io.restassured.http.Method;
 import jakarta.json.bind.annotation.JsonbProperty;
 import jakarta.json.bind.annotation.JsonbPropertyOrder;
 import jakarta.json.bind.annotation.JsonbTypeAdapter;
 import jakarta.json.bind.config.PropertyOrderStrategy;
 
-import com.github.happi.explorer.junit.scenario.StringJsonbAdapter;
-import io.restassured.http.Method;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * A test scenario.

@@ -41,6 +41,8 @@ public class GenderDTO {
     public GenderDTO() {
     }
 
+    // Object identity...
+
     @Override
     public boolean equals(Object o) {
         boolean eq;
@@ -62,6 +64,8 @@ public class GenderDTO {
     public int hashCode() {
         return Objects.hash(id, name, code, description);
     }
+
+    // Getters & Setters...
 
     public String getId() {
         return id;

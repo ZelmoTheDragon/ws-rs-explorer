@@ -13,6 +13,7 @@ public class GenericDAO {
     private transient EntityManager em;
 
     public GenericDAO() {
+        // NO-OP
     }
 
     public <E> Optional<E> find(Class<E> entityClass, Object id) {

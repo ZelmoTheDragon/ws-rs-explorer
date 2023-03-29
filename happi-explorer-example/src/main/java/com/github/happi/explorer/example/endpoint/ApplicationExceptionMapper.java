@@ -12,6 +12,7 @@ import jakarta.ws.rs.ext.Provider;
 public class ApplicationExceptionMapper implements ExceptionMapper<Exception> {
 
     public ApplicationExceptionMapper() {
+        // NO-OP
     }
 
     @Override

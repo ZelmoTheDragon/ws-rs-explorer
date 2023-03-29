@@ -14,6 +14,7 @@ public class GenderMapper implements EntityMapper<GenderEntity, GenderDTO> {
     private GenericDAO dao;
 
     public GenderMapper() {
+        // NO-OP
     }
 
     @Override

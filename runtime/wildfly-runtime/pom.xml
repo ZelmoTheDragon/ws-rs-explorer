@@ -9,7 +9,7 @@
     <parent>
         <artifactId>runtime</artifactId>
         <groupId>com.github.zelmothedragon.happi-explorer</groupId>
-        <version>0.0.15-SNAPSHOT</version>
+        <version>0.0.16-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -27,7 +27,7 @@
         </wildfly.download.url>
 
         <!-- Jakarta -->
-        <version.group.hibernate>5.6.14.Final</version.group.hibernate>
+        <version.group.hibernate>5.6.15.Final</version.group.hibernate>
 
         <!-- Configuration -->
         <skipITs>false</skipITs>
@@ -73,18 +73,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>jakarta.json</groupId>
-            <artifactId>jakarta.json-api</artifactId>
-            <version>${version.jakarta.json-api}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.json.bind</groupId>
-            <artifactId>jakarta.json.bind-api</artifactId>
-            <version>${version.jakarta.json.bind-api}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <scope>test</scope>
@@ -96,9 +84,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
-                <configuration>
-                    <skip>${skipITs}</skip>
-                </configuration>
                 <executions>
                     <execution>
                         <id>download-server</id>
@@ -107,7 +92,7 @@
                             <goal>run</goal>
                         </goals>
                         <configuration>
-                            <target name="download-server">
+                            <target name="downloadServer">
                                 <ant antfile="src/ant/build.xml"/>
                             </target>
                         </configuration>

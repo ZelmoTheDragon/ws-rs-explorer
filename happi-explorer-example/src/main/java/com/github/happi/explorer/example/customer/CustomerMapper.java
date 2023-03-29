@@ -21,6 +21,7 @@ public class CustomerMapper implements EntityMapper<CustomerEntity, CustomerDTO>
     private GenderMapper genderMapper;
 
     public CustomerMapper() {
+        // NO-OP
     }
 
     @Override

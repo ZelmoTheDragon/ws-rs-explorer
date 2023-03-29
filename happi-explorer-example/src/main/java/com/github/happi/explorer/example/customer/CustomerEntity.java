@@ -57,6 +57,8 @@ public class CustomerEntity extends AbstractEntity {
         super();
     }
 
+    // Object identity...
+
     @Override
     public boolean equals(final Object o) {
         final boolean equality;
@@ -81,6 +83,8 @@ public class CustomerEntity extends AbstractEntity {
     public int hashCode() {
         return Objects.hash(id, version, givenName, familyName, email, phoneNumber, gender);
     }
+
+    // Getters & Setters...
 
     public String getGivenName() {
         return givenName;

@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.github.zelmothedragon.happi-explorer</groupId>
         <artifactId>runtime</artifactId>
-        <version>0.0.15-SNAPSHOT</version>
+        <version>0.0.16-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -22,19 +22,19 @@
 
     <properties>
         <!-- Server -->
-        <version.tomcat>10.1.5</version.tomcat>
+        <version.tomcat>10.1.7</version.tomcat>
 
         <!-- Jakarta implementation -->
         <version.exousia>2.1.0</version.exousia>
-        <version.group.hibernate>5.6.14.Final</version.group.hibernate>
+        <version.group.hibernate>5.6.15.Final</version.group.hibernate>
         <version.group.hibernate-validator>8.0.0.Final</version.group.hibernate-validator>
-        <version.group.resteasy>6.2.2.Final</version.group.resteasy>
+        <version.group.resteasy>6.2.3.Final</version.group.resteasy>
         <version.group.weld>5.1.0.Final</version.group.weld>
         <version.jabx-impl>3.0.2</version.jabx-impl>
         <version.jakarta.el>4.0.1</version.jakarta.el>
-        <version.jaxb-runtime>4.0.1</version.jaxb-runtime>
+        <version.jaxb-runtime>4.0.2</version.jaxb-runtime>
         <version.narayana-jta>5.13.1.Final</version.narayana-jta>
-        <version.soteria>3.0.1</version.soteria>
+        <version.soteria>3.0.2</version.soteria>
 
         <!-- Miscellaneous -->
         <version.commons-io>2.11.0</version.commons-io>
@@ -84,17 +84,14 @@
         <dependency>
             <groupId>jakarta.json</groupId>
             <artifactId>jakarta.json-api</artifactId>
-            <version>${version.jakarta.json-api}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.json.bind</groupId>
             <artifactId>jakarta.json.bind-api</artifactId>
-            <version>${version.jakarta.json.bind-api}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
-            <version>${version.jakarta.servlet-api}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.transaction</groupId>

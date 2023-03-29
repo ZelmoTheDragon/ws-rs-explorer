@@ -56,6 +56,8 @@ public class CustomerDTO {
     public CustomerDTO() {
     }
 
+    // Object identity...
+
     @Override
     public boolean equals(Object o) {
         boolean eq;
@@ -79,6 +81,8 @@ public class CustomerDTO {
     public int hashCode() {
         return Objects.hash(id, givenName, familyName, email, phoneNumber, gender);
     }
+
+    // Getters & Setters...
 
     public String getId() {
         return id;

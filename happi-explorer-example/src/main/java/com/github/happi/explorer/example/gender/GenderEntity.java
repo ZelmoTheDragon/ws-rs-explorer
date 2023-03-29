@@ -40,6 +40,8 @@ public class GenderEntity extends AbstractEntity {
         super();
     }
 
+    // Object identity...
+
     @Override
     public boolean equals(final Object o) {
         final boolean equality;
@@ -62,6 +64,8 @@ public class GenderEntity extends AbstractEntity {
     public int hashCode() {
         return Objects.hash(super.hashCode(), name, code, description);
     }
+
+    // Getters & Setters...
 
     public String getName() {
         return name;

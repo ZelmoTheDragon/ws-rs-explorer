@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.github.zelmothedragon.happi-explorer</groupId>
         <artifactId>runtime</artifactId>
-        <version>0.0.15-SNAPSHOT</version>
+        <version>0.0.16-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -20,10 +20,10 @@
 
     <properties>
         <!-- Server -->
-        <version.payara>6.2022.2</version.payara>
+        <version.payara>6.2023.2</version.payara>
 
         <!-- Jakarta -->
-        <version.group.eclipselink>4.0.0</version.group.eclipselink>
+        <version.group.eclipselink>4.0.1</version.group.eclipselink>
 
         <!-- Configuration -->
         <skipITs>false</skipITs>
@@ -73,18 +73,6 @@
             <groupId>com.github.zelmothedragon.happi-explorer</groupId>
             <artifactId>rest-scenario</artifactId>
             <version>${project.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.json</groupId>
-            <artifactId>jakarta.json-api</artifactId>
-            <version>${version.jakarta.json-api}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.json.bind</groupId>
-            <artifactId>jakarta.json.bind-api</artifactId>
-            <version>${version.jakarta.json.bind-api}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

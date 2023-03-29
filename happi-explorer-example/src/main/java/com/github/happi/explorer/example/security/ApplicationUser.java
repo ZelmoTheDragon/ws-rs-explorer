@@ -63,6 +63,8 @@ public class ApplicationUser implements Serializable {
         this.roles = new HashSet<>();
     }
 
+    // Object identity...
+
     @Override
     public boolean equals(final Object o) {
         final boolean equality;
@@ -85,6 +87,8 @@ public class ApplicationUser implements Serializable {
     public int hashCode() {
         return Objects.hash(id, version, username, password, roles);
     }
+
+    // Getters & Setters...
 
     public String getId() {
         return id;

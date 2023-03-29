@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.github.zelmothedragon.happi-explorer</groupId>
         <artifactId>happi-explorer-parent</artifactId>
-        <version>0.0.15-SNAPSHOT</version>
+        <version>0.0.16-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -19,7 +19,6 @@
     <properties>
         <version.parsson>1.1.1</version.parsson>
         <version.yasson>3.0.2</version.yasson>
-
     </properties>
 
     <dependencies>

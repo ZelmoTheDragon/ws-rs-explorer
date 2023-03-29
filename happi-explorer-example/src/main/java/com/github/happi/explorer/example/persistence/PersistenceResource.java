@@ -16,6 +16,7 @@ public class PersistenceResource {
     private transient EntityManager em;
 
     public PersistenceResource() {
+        // NO-OP
     }
 
     @Produces

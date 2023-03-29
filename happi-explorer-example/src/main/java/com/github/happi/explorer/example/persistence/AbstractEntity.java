@@ -36,6 +36,8 @@ public abstract class AbstractEntity implements Serializable {
         this.version = 0L;
     }
 
+    // Object identity...
+
     @Override
     public boolean equals(Object o) {
         final boolean equality;
@@ -55,6 +57,8 @@ public abstract class AbstractEntity implements Serializable {
     public int hashCode() {
         return Objects.hash(id, version);
     }
+
+    // Getters & Setters...
 
     public String getId() {
         return id;

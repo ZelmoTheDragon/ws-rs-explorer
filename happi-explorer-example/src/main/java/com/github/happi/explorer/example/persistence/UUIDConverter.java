@@ -11,6 +11,7 @@ public class UUIDConverter implements AttributeConverter<UUID, String> {
     public static final String COLUMN_DEFINITION = "VARCHAR(36)";
 
     public UUIDConverter() {
+        // NO-OP
     }
 
     @Override
