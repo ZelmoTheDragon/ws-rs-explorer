@@ -5,7 +5,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaUpdate;
 import jakarta.persistence.criteria.Root;
 
-public class UpdateQuery<R> extends BaseQuery<R, UpdateQuery<R>> {
+public final class UpdateQuery<R> extends BaseQuery<R, UpdateQuery<R>> {
 
     private final EntityManager manager;
 

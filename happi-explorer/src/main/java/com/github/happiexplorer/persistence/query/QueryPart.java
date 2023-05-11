@@ -9,4 +9,9 @@ public final class QueryPart<R> extends BaseQuery<R, QueryPart<R>> {
     protected QueryPart<R> self() {
         return this;
     }
+
+    public static <R> QueryPart<R> of() {
+        return new QueryPart<>();
+    }
+
 }

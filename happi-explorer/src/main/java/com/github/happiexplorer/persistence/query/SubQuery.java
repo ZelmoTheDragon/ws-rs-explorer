@@ -6,7 +6,7 @@ import jakarta.persistence.metamodel.SingularAttribute;
 
 import java.util.function.Function;
 
-public class SubQuery<R> extends BaseQuery<R, SubQuery<R>> {
+public final class SubQuery<R> extends BaseQuery<R, SubQuery<R>> {
 
     private final Class<R> targetType;
 

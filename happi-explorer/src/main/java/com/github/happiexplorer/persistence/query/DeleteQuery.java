@@ -5,7 +5,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaDelete;
 import jakarta.persistence.criteria.Root;
 
-public class DeleteQuery<R> extends BaseQuery<R, DeleteQuery<R>> {
+public final class DeleteQuery<R> extends BaseQuery<R, DeleteQuery<R>> {
 
     private final EntityManager manager;
 
