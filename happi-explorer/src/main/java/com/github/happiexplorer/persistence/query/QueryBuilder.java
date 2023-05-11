@@ -1,9 +1,6 @@
 package com.github.happiexplorer.persistence.query;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.metamodel.SingularAttribute;
-
-import java.util.Collection;
 
 public final class QueryBuilder {
 
