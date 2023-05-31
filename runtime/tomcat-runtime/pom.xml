@@ -22,7 +22,7 @@
 
     <properties>
         <!-- Server -->
-        <version.tomcat>10.1.7</version.tomcat>
+        <version.tomcat>10.1.9</version.tomcat>
 
         <!-- Jakarta implementation -->
         <version.exousia>2.1.0</version.exousia>

@@ -1,13 +1,13 @@
 FROM alpine:3.17.1 AS happi-explorer-glassfish
 
-ARG GLASSFISH_SERVER="glassfish-7.0.2.zip"
+ARG GLASSFISH_SERVER="glassfish-7.0.4.zip"
 ARG APPLICATION="glassfish-runtime-0.0.16-SNAPSHOT.war"
 
 COPY "target/$GLASSFISH_SERVER" "/tmp"
 COPY "target/$APPLICATION" "/tmp"
 
 ENV GLASSFISH_USER="duke"
-ENV GLASSFISH_HOME="/opt/glassfish6"
+ENV GLASSFISH_HOME="/opt/glassfish7"
 ENV PATH="$PATH:$GLASSFISH_HOME/bin"
 
 # TODO: Optimize Glassifh internal configuration...

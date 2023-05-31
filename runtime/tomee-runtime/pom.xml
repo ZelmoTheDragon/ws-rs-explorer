@@ -13,8 +13,6 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <!-- /!\ WARNING : It's a RELEASE CANDIDATE web server. -->
-
     <artifactId>tomee-runtime</artifactId>
     <packaging>war</packaging>
     <name>tomee-runtime</name>
@@ -22,7 +20,7 @@
 
     <properties>
         <!-- Server -->
-        <version.tomee>9.0.0.RC1</version.tomee>
+        <version.tomee>9.0.0</version.tomee>
         <tomee.classifier>webprofile</tomee.classifier>
         <tomee.archive.name>apache-tomee-${version.tomee}-${tomee.classifier}.zip</tomee.archive.name>
         <tomee.download.url>

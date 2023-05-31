@@ -20,7 +20,7 @@
 
     <properties>
         <!-- Server -->
-        <version.glassfish>7.0.2</version.glassfish>
+        <version.glassfish>7.0.4</version.glassfish>
 
         <!-- Jakarta -->
         <version.group.eclipselink>4.0.1</version.group.eclipselink>

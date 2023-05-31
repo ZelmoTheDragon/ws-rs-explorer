@@ -20,7 +20,7 @@
 
     <properties>
         <!-- Server -->
-        <version.wildfly>27.0.1.Final</version.wildfly>
+        <version.wildfly>28.0.1.Final</version.wildfly>
         <wildfly.archive.name>wildfly-${version.wildfly}.zip</wildfly.archive.name>
         <wildfly.download.url>
             https://github.com/wildfly/wildfly/releases/download/${version.wildfly}/${wildfly.archive.name}
