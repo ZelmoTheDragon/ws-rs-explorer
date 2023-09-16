@@ -33,16 +33,20 @@ public final class SubQuery<R> extends BaseQuery<R, SubQuery<R>> {
     }
 
     /**
-     * @return
+     * Create a with entity selection.
+     *
+     * @return A sub query
      */
     public SubQueryPredicate<R> select() {
         return this.buildPredicate(this.targetType, r -> r);
     }
 
     /**
-     * @param attribute
-     * @param <P>
-     * @return
+     * Create a with <i>JPA</i> column selection.
+     *
+     * @param attribute <i>JPA</i> column
+     * @param <P>       <i>JPA</i> column type
+     * @return A sub query
      */
     public <P> SubQueryPredicate<P> select(final SingularAttribute<R, P> attribute) {
         return this.buildPredicate(attribute.getJavaType(), r -> r.get(attribute));
