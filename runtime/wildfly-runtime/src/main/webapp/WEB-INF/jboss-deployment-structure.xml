@@ -2,7 +2,33 @@
 <jboss-deployment-structure>
     <deployment>
         <dependencies>
-            <module name="javaee.api"/>
+            <module name="jakarta.activation.api"/>
+            <module name="jakarta.annotation.api"/>
+            <module name="jakarta.batch.api"/>
+            <module name="jakarta.ejb.api"/>
+            <module name="jakarta.el.api"/>
+            <module name="jakarta.enterprise.api"/>
+            <module name="jakarta.enterprise.concurrent.api"/>
+            <module name="jakarta.faces.api"/>
+            <module name="jakarta.inject.api"/>
+            <module name="jakarta.interceptor.api"/>
+            <module name="jakarta.jms.api"/>
+            <module name="jakarta.json.api"/>
+            <module name="jakarta.mail.api"/>
+            <module name="jakarta.persistence.api"/>
+            <module name="jakarta.resource.api"/>
+            <module name="jakarta.security.auth.message.api"/>
+            <module name="jakarta.security.enterprise.api"/>
+            <module name="jakarta.security.jacc.api"/>
+            <module name="jakarta.servlet.api"/>
+            <module name="jakarta.servlet.jsp.api"/>
+            <module name="jakarta.servlet.jstl.api"/>
+            <module name="jakarta.transaction.api"/>
+            <module name="jakarta.validation.api"/>
+            <module name="jakarta.websocket.api"/>
+            <module name="jakarta.xml.bind.api"/>
+            <module name="jakarta.xml.soap.api"/>
+            <module name="jakarta.xml.ws.api"/>
         </dependencies>
     </deployment>
 </jboss-deployment-structure>

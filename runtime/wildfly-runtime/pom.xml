@@ -28,9 +28,6 @@
 
         <!-- Jakarta -->
         <version.group.hibernate>5.6.15.Final</version.group.hibernate>
-
-        <!-- Configuration -->
-        <skipITs>false</skipITs>
     </properties>
 
     <dependencyManagement>
@@ -119,33 +116,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <configuration>
-                    <overwrite>true</overwrite>
-                    <resources>
-                        <resource>
-                            <directory>src/main/resources</directory>
-                            <filtering>true</filtering>
-                        </resource>
-                    </resources>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <additionalClasspathElements>
-                        <additionalClasspathElement>src/test/resources</additionalClasspathElement>
-                    </additionalClasspathElements>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <configuration>
-                    <additionalClasspathElements>
-                        <additionalClasspathElement>src/test/resources</additionalClasspathElement>
-                    </additionalClasspathElements>
-                </configuration>
                 <executions>
                     <execution>
                         <id>webapp-integration</id>
@@ -184,13 +162,23 @@
                 </executions>
                 <configuration>
                     <container>
-                        <containerId>wildfly27x</containerId>
+                        <containerId>wildfly29x</containerId>
                         <zipUrlInstaller>
                             <url>file:///${project.build.directory}/${wildfly.archive.name}</url>
                             <downloadDir>${project.build.directory}/downloads</downloadDir>
                             <extractDir>${project.build.directory}/extracts</extractDir>
                         </zipUrlInstaller>
                     </container>
+                    <deployables>
+                        <deployable>
+                            <groupId>com.github.zelmothedragon.happi-explorer</groupId>
+                            <artifactId>wildfly-runtime</artifactId>
+                            <type>war</type>
+                            <properties>
+                                <context>/example</context>
+                            </properties>
+                        </deployable>
+                    </deployables>
                     <configuration>
                         <properties>
                             <cargo.jvmargs>
@@ -204,18 +192,11 @@
                                 --add-opens=java.management/javax.management=ALL-UNNAMED
                                 --add-opens=java.naming/javax.naming=ALL-UNNAMED
                             </cargo.jvmargs>
+                            <cargo.wildfly.script.cli.offline>
+                                ${project.build.testOutputDirectory}/wildfly29x.cli
+                            </cargo.wildfly.script.cli.offline>
                         </properties>
                     </configuration>
-                    <deployables>
-                        <deployable>
-                            <groupId>com.github.zelmothedragon.happi-explorer</groupId>
-                            <artifactId>wildfly-runtime</artifactId>
-                            <type>war</type>
-                            <properties>
-                                <context>/example</context>
-                            </properties>
-                        </deployable>
-                    </deployables>
                 </configuration>
             </plugin>
         </plugins>

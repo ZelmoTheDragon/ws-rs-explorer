@@ -28,7 +28,7 @@
     {
       "jsonPath": "error",
       "operator": "equalTo",
-      "value": "com.github.happi.explorer.service.ActionDeniedException"
+      "value": "com.github.happiexplorer.service.ActionDeniedException"
     },
     {
       "jsonPath": "message",

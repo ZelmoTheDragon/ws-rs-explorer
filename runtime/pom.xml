@@ -26,7 +26,8 @@
     <name>runtime</name>
 
     <properties>
-
+        <!-- Configuration -->
+        <skipITs>false</skipITs>
     </properties>
 
 

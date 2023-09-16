@@ -24,9 +24,6 @@
 
         <!-- Jakarta -->
         <version.group.eclipselink>4.0.1</version.group.eclipselink>
-
-        <!-- Configuration -->
-        <skipITs>false</skipITs>
     </properties>
 
     <dependencyManagement>
@@ -124,19 +121,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <configuration>
-                    <overwrite>true</overwrite>
-                    <resources>
-                        <resource>
-                            <directory>src/main/resources</directory>
-                            <filtering>true</filtering>
-                        </resource>
-                    </resources>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
