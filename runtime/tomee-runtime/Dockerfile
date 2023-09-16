@@ -1,4 +1,4 @@
-FROM alpine:3.17.1 AS happi-explorer-tomee
+FROM alpine:3.18.3 AS happi-explorer-tomee
 
 ARG TOMEE_SERVER="apache-tomee-9.1.0-webprofile.zip"
 ARG APPLICATION="tomee-runtime-0.0.17-SNAPSHOT.war"

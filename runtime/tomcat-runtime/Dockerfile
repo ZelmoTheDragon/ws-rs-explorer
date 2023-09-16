@@ -1,4 +1,4 @@
-FROM alpine:3.17.1 AS happi-explorer-tomcat
+FROM alpine:3.18.3 AS happi-explorer-tomcat
 
 ARG TOMCAT_SERVER="tomcat-10.1.13.zip"
 ARG APPLICATION="tomcat-runtime-0.0.17-SNAPSHOT.war"
