@@ -20,7 +20,7 @@ public class Scenario {
 
     /**
      * Title.
-     * Human readable.
+     * Human-readable.
      */
     @JsonbProperty("title")
     private String title;

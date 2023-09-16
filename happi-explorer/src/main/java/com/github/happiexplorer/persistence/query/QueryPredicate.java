@@ -6,6 +6,11 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.Path;
 import jakarta.persistence.criteria.Predicate;
 
+/**
+ * Function for construct a predicate.
+ *
+ * @param <R> Target entity type
+ */
 @FunctionalInterface
 interface QueryPredicate<R> {
 

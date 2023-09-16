@@ -13,23 +13,23 @@ It builds with **Maven 3.8.X**.
 ## Runtime environment
 
 Available Java web server: 
-  * [x] Eclipse Glassfish
+  * [x] Eclipse Glassfish 7.X
     * Reference web server.
-  * [x] Payara
+  * [x] Payara 6.2023.X
     * Fork of Glassfish.
   * [ ] Apache Tomcat
     * **WARNING** It is a prototype using extra dependencies from a Jakarta platform implementations. 
   * [ ] Apache TomEE
     * **WARNING** Work in progress. It uses a release candidate version of the server.
-  * [ ] Wildfly
-    * **WARNING** Work in progress, but it's Jakarta 10 with retro-compatibility.
+  * [x] Wildfly 29.X
+    * RedHat Community web server.
 
 ## Basic Maven commands
 
 **Building the whole project.**  
 ~~~
 cd happi-explorer-parent
-mvn clean install -U -DskipITs
+mvn clean install -U -DskipITs -DskipITs
 ~~~
 
 **Running integration tests.**  
@@ -41,7 +41,7 @@ mvn clean verify -U
 **Running web server.**  
 ~~~
 cd happi-explorer-parent/runtime/<web-server-runtime>
-mvn mvn clean install -U -DskipITs cargo:run
+mvn mvn clean install -U -DskipITs -DskipITs cargo:run
 ~~~
 
 ## Showcase

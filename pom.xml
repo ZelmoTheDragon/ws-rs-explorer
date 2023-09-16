@@ -8,7 +8,7 @@
 
     <groupId>com.github.zelmothedragon.happi-explorer</groupId>
     <artifactId>happi-explorer-parent</artifactId>
-    <version>0.0.16-SNAPSHOT</version>
+    <version>0.0.17-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>happi-explorer-parent</name>
@@ -68,33 +68,31 @@
         <version.group.jakarta>10.0.0</version.group.jakarta>
 
         <!-- TEST versions -->
-        <version.group.junit>5.9.2</version.group.junit>
-        <version.rest-assured>5.3.0</version.rest-assured>
-        <version.hamcrest>2.2</version.hamcrest>
-        <version.httpclient>4.5.14</version.httpclient>
+        <version.group.junit>5.10.0</version.group.junit>
+        <version.rest-assured>5.3.2</version.rest-assured>
 
         <!-- Maven plugins -->
         <version.maven-antrun-plugin>3.1.0</version.maven-antrun-plugin>
         <version.maven-clean-plugin>3.2.0</version.maven-clean-plugin>
         <version.maven-compiler-plugin>3.11.0</version.maven-compiler-plugin>
-        <version.maven-dependency-plugin>3.5.0</version.maven-dependency-plugin>
+        <version.maven-dependency-plugin>3.6.0</version.maven-dependency-plugin>
         <version.maven-deploy-plugin>3.1.1</version.maven-deploy-plugin>
-        <version.maven-enforcer-plugin>3.2.1</version.maven-enforcer-plugin>
-        <version.maven-failsafe-plugin>3.0.0</version.maven-failsafe-plugin>
+        <version.maven-enforcer-plugin>3.3.0</version.maven-enforcer-plugin>
+        <version.maven-failsafe-plugin>3.1.2</version.maven-failsafe-plugin>
         <version.maven-install-plugin>3.1.1</version.maven-install-plugin>
         <version.maven-jar-plugin>3.3.0</version.maven-jar-plugin>
         <version.maven-javadoc-plugin>3.5.0</version.maven-javadoc-plugin>
         <version.maven-release-plugin>3.0.0</version.maven-release-plugin>
         <version.maven-resources-plugin>3.3.1</version.maven-resources-plugin>
-        <version.maven-scm-plugin>1.13.0</version.maven-scm-plugin>
+        <version.maven-scm-plugin>2.0.0</version.maven-scm-plugin>
         <version.maven-site-plugin>3.12.1</version.maven-site-plugin>
-        <version.maven-surefire-plugin>3.0.0</version.maven-surefire-plugin>
+        <version.maven-surefire-plugin>3.1.2</version.maven-surefire-plugin>
         <version.maven-war-plugin>3.3.2</version.maven-war-plugin>
 
-        <!-- Additional plugins -->
-        <version.build-helper-maven-plugin>3.3.0</version.build-helper-maven-plugin>
-        <version.cargo-maven3-plugin>1.10.6</version.cargo-maven3-plugin>
-        <version.versions-maven-plugin>2.14.2</version.versions-maven-plugin>
+        <!-- MojoHaus plugins -->
+        <version.build-helper-maven-plugin>3.4.0</version.build-helper-maven-plugin>
+        <version.cargo-maven3-plugin>1.10.9</version.cargo-maven3-plugin>
+        <version.versions-maven-plugin>2.16.0</version.versions-maven-plugin>
 
         <!-- External plugins -->
         <version.docker-maven-plugin>0.42.0</version.docker-maven-plugin>
@@ -158,18 +156,6 @@
                 <groupId>io.rest-assured</groupId>
                 <artifactId>rest-assured</artifactId>
                 <version>${version.rest-assured}</version>
-            </dependency>
-            <dependency>
-                <!-- io.rest-assured:rest-assured -->
-                <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest</artifactId>
-                <version>${version.hamcrest}</version>
-            </dependency>
-            <dependency>
-                <!-- io.rest-assured:rest-assured -->
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpclient</artifactId>
-                <version>${version.httpclient}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -260,7 +246,7 @@
                     <version>${version.maven-war-plugin}</version>
                 </plugin>
 
-                <!-- Additional plugins -->
+                <!-- MojoHaus plugins -->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
@@ -289,6 +275,15 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <release>${version.java}</release>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <executions>
                     <execution>
@@ -298,9 +293,15 @@
                         </goals>
                         <configuration>
                             <rules>
+                                <requireJavaVersion>
+                                    <version>${version.java}</version>
+                                </requireJavaVersion>
                                 <requireMavenVersion>
                                     <version>3.8</version>
                                 </requireMavenVersion>
+                                <banDuplicatePomDependencyVersions/>
+                                <dependencyConvergence/>
+                                <reactorModuleConvergence/>
                             </rules>
                         </configuration>
                     </execution>

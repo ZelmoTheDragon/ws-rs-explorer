@@ -1,13 +1,13 @@
 FROM alpine:3.17.1 AS happi-explorer-tomee
 
-ARG TOMEE_SERVER="apache-tomee-9.0.0-webprofile.zip"
-ARG APPLICATION="tomee-runtime-0.0.16-SNAPSHOT.war"
+ARG TOMEE_SERVER="apache-tomee-9.1.0-webprofile.zip"
+ARG APPLICATION="tomee-runtime-0.0.17-SNAPSHOT.war"
 
 COPY "target/$TOMEE_SERVER" "/tmp"
 COPY "target/$APPLICATION" "/tmp"
 
 ENV TOMEE_USER="duke"
-ENV TOMEE_HOME="/opt/apache-tomee-webprofile-9.0.0"
+ENV TOMEE_HOME="/opt/apache-tomee-webprofile-9.1.0"
 ENV PATH="$PATH:$TOMEE_HOME/bin"
 
 # TODO: Optimize TomEE internal configuration...

@@ -9,7 +9,7 @@
     <parent>
         <artifactId>runtime</artifactId>
         <groupId>com.github.zelmothedragon.happi-explorer</groupId>
-        <version>0.0.16-SNAPSHOT</version>
+        <version>0.0.17-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -20,7 +20,7 @@
 
     <properties>
         <!-- Server -->
-        <version.wildfly>28.0.1.Final</version.wildfly>
+        <version.wildfly>29.0.1.Final</version.wildfly>
         <wildfly.archive.name>wildfly-${version.wildfly}.zip</wildfly.archive.name>
         <wildfly.download.url>
             https://github.com/wildfly/wildfly/releases/download/${version.wildfly}/${wildfly.archive.name}
@@ -92,6 +92,7 @@
                             <goal>run</goal>
                         </goals>
                         <configuration>
+                            <skip>${skipITs}</skip>
                             <target name="downloadServer">
                                 <ant antfile="src/ant/build.xml"/>
                             </target>
@@ -104,7 +105,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <release>${version.java}</release>
-                    <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                     <annotationProcessorPaths>
@@ -133,7 +133,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <skipTests>true</skipTests>
                     <additionalClasspathElements>
                         <additionalClasspathElement>src/test/resources</additionalClasspathElement>
                     </additionalClasspathElements>
@@ -143,18 +142,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <configuration>
-                    <skipITs>${skipITs}</skipITs>
                     <additionalClasspathElements>
                         <additionalClasspathElement>src/test/resources</additionalClasspathElement>
                     </additionalClasspathElements>
-                    <excludes>
-                        <exclude>**/*Test.java</exclude>
-                    </excludes>
-                    <includes>
-                        <include>**/*IT.java</include>
-                        <include>**/*IT*.java</include>
-                        <include>**/*ITCase.java</include>
-                    </includes>
                 </configuration>
                 <executions>
                     <execution>

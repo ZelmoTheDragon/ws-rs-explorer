@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.github.zelmothedragon.happi-explorer</groupId>
         <artifactId>runtime</artifactId>
-        <version>0.0.16-SNAPSHOT</version>
+        <version>0.0.17-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -20,7 +20,7 @@
 
     <properties>
         <!-- Server -->
-        <version.glassfish>7.0.4</version.glassfish>
+        <version.glassfish>7.0.8</version.glassfish>
 
         <!-- Jakarta -->
         <version.group.eclipselink>4.0.1</version.group.eclipselink>
@@ -89,7 +89,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <release>${version.java}</release>
-                    <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                     <annotationProcessorPaths>
@@ -112,6 +111,7 @@
                             <goal>copy</goal>
                         </goals>
                         <configuration>
+                            <skip>${skipITs}</skip>
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>org.glassfish.main.distributions</groupId>
@@ -141,30 +141,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <skipTests>true</skipTests>
-                    <additionalClasspathElements>
-                        <additionalClasspathElement>src/test/resources</additionalClasspathElement>
-                    </additionalClasspathElements>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <configuration>
-                    <skipITs>${skipITs}</skipITs>
-                    <additionalClasspathElements>
-                        <additionalClasspathElement>src/test/resources</additionalClasspathElement>
-                    </additionalClasspathElements>
-                    <excludes>
-                        <exclude>**/*Test.java</exclude>
-                    </excludes>
-                    <includes>
-                        <include>**/*IT.java</include>
-                        <include>**/*IT*.java</include>
-                        <include>**/*ITCase.java</include>
-                    </includes>
-                </configuration>
                 <executions>
                     <execution>
                         <id>webapp-integration</id>

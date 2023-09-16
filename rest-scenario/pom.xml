@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.github.zelmothedragon.happi-explorer</groupId>
         <artifactId>happi-explorer-parent</artifactId>
-        <version>0.0.16-SNAPSHOT</version>
+        <version>0.0.17-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -17,8 +17,8 @@
     <packaging>jar</packaging>
 
     <properties>
-        <version.parsson>1.1.1</version.parsson>
-        <version.yasson>3.0.2</version.yasson>
+        <version.parsson>1.1.4</version.parsson>
+        <version.yasson>3.0.3</version.yasson>
     </properties>
 
     <dependencies>
@@ -31,6 +31,12 @@
             <groupId>org.eclipse</groupId>
             <artifactId>yasson</artifactId>
             <version>${version.yasson}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.eclipse.parsson</groupId>
+                    <artifactId>parsson</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- JUnit 5 -->
@@ -46,25 +52,6 @@
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest</artifactId>
-        </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <release>${version.java}</release>
-                    <compilerArgument>-Xlint:all</compilerArgument>
-                    <showWarnings>true</showWarnings>
-                    <showDeprecation>true</showDeprecation>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

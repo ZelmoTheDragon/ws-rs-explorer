@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.github.zelmothedragon.happi-explorer</groupId>
         <artifactId>runtime</artifactId>
-        <version>0.0.16-SNAPSHOT</version>
+        <version>0.0.17-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -20,7 +20,7 @@
 
     <properties>
         <!-- Server -->
-        <version.tomee>9.0.0</version.tomee>
+        <version.tomee>9.1.0</version.tomee>
         <tomee.classifier>webprofile</tomee.classifier>
         <tomee.archive.name>apache-tomee-${version.tomee}-${tomee.classifier}.zip</tomee.archive.name>
         <tomee.download.url>
@@ -31,8 +31,6 @@
         <version.openjpa>3.2.2</version.openjpa>
 
         <!-- Configuration -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <skipITs>false</skipITs>
     </properties>
 
@@ -86,9 +84,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
-                <configuration>
-                    <skip>${skipITs}</skip>
-                </configuration>
                 <executions>
                     <execution>
                         <id>download-server</id>
@@ -97,6 +92,7 @@
                             <goal>run</goal>
                         </goals>
                         <configuration>
+                            <skip>${skipITs}</skip>
                             <target name="download-server">
                                 <ant antfile="src/ant/build.xml"/>
                             </target>
@@ -109,7 +105,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <release>${version.java}</release>
-                    <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                     <annotationProcessorPaths>
@@ -138,7 +133,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <skipTests>true</skipTests>
                     <additionalClasspathElements>
                         <additionalClasspathElement>src/test/resources</additionalClasspathElement>
                     </additionalClasspathElements>
@@ -148,18 +142,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <configuration>
-                    <skipITs>${skipITs}</skipITs>
                     <additionalClasspathElements>
                         <additionalClasspathElement>src/test/resources</additionalClasspathElement>
                     </additionalClasspathElements>
-                    <excludes>
-                        <exclude>**/*Test.java</exclude>
-                    </excludes>
-                    <includes>
-                        <include>**/*IT.java</include>
-                        <include>**/*IT*.java</include>
-                        <include>**/*ITCase.java</include>
-                    </includes>
                 </configuration>
                 <executions>
                     <execution>

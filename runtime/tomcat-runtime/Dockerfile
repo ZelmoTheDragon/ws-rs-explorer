@@ -1,13 +1,13 @@
 FROM alpine:3.17.1 AS happi-explorer-tomcat
 
-ARG TOMCAT_SERVER="tomcat-10.1.7.zip"
-ARG APPLICATION="tomcat-runtime-0.0.16-SNAPSHOT.war"
+ARG TOMCAT_SERVER="tomcat-10.1.13.zip"
+ARG APPLICATION="tomcat-runtime-0.0.17-SNAPSHOT.war"
 
 COPY "target/$TOMCAT_SERVER" "/tmp"
 COPY "target/$APPLICATION" "/tmp"
 
 ENV TOMCAT_USER="duke"
-ENV TOMCAT_HOME="/opt/apache-tomcat-10.1.5"
+ENV TOMCAT_HOME="/opt/apache-tomcat-10.1.13"
 ENV PATH="$PATH:$TOMCAT_HOME/bin"
 
 # TODO: Optimize Tomcat internal configuration...
