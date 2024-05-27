@@ -13,6 +13,8 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
+    <!-- /!\ WARNING : It's a prototype. -->
+
     <artifactId>tomee-runtime</artifactId>
     <packaging>war</packaging>
     <name>tomee-runtime</name>
@@ -20,7 +22,7 @@
 
     <properties>
         <!-- Server -->
-        <version.tomee>9.1.1</version.tomee>
+        <version.tomee>10.0.0-M1</version.tomee>
         <tomee.classifier>webprofile</tomee.classifier>
         <tomee.archive.name>apache-tomee-${version.tomee}-${tomee.classifier}.zip</tomee.archive.name>
         <tomee.download.url>
@@ -28,7 +30,7 @@
         </tomee.download.url>
 
         <!-- Jakarta -->
-        <version.openjpa>3.2.2</version.openjpa>
+        <version.openjpa>4.0.0</version.openjpa>
     </properties>
 
     <dependencyManagement>
@@ -91,7 +93,7 @@
                         <configuration>
                             <skip>${skipITs}</skip>
                             <target name="download-server">
-                                <ant antfile="src/ant/build.xml"/>
+                                <ant antfile="build.xml"/>
                             </target>
                         </configuration>
                     </execution>
@@ -158,7 +160,7 @@
                 </executions>
                 <configuration>
                     <container>
-                        <containerId>tomee9x</containerId>
+                        <containerId>tomee10x</containerId>
                         <zipUrlInstaller>
                             <url>file:///${project.build.directory}/${tomee.archive.name}</url>
                             <downloadDir>${project.build.directory}/downloads</downloadDir>

@@ -1,20 +1,20 @@
-FROM alpine:3.19.0 AS happi-explorer-wildfly
+FROM alpine:3.20.0 AS happi-explorer-wildfly
 
-ARG WILDFLY_SERVER="wildfly-30.0.1.Final.zip"
+ARG WILDFLY_SERVER="wildfly-32.0.0.Final.zip"
 ARG APPLICATION="wildfly-runtime-0.1.0-SNAPSHOT.war"
 
 COPY "target/$WILDFLY_SERVER" "/tmp"
 COPY "target/$APPLICATION" "/tmp"
 
 ENV WILDFLY_USER="duke"
-ENV WILDFLY_HOME="/opt/wildfly-30.0.1.Final"
+ENV WILDFLY_HOME="/opt/wildfly-32.0.0.Final"
 ENV PATH="$PATH:$WILDFLY_HOME/bin"
 
 # TODO: Optimize Wildfly internal configuration...
 RUN \
  apk update &&\
  apk upgrade &&\
- apk add --no-cache openjdk11-jre-headless &&\
+ apk add --no-cache openjdk21-jre-headless &&\
  addgroup --system "$WILDFLY_USER" &&\
  adduser --system --disabled-password --no-create-home --home="$WILDFLY_HOME" --ingroup="$WILDFLY_USER" "$WILDFLY_USER" &&\
  unzip "/tmp/$WILDFLY_SERVER" -d "/opt" &&\

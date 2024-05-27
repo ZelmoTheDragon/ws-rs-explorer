@@ -7,7 +7,7 @@ It provides Docker images for each runtime environment based on **GNU/Linux Alpi
 
 ## Requirement
 
-This project is written in **Java 11 LTS** with **Jakarta 10**.  
+This project is written in **Java 21 LTS** with **Jakarta 10**.  
 It builds with **Maven 3.8.X**.  
 
 ## Runtime environment
@@ -15,13 +15,13 @@ It builds with **Maven 3.8.X**.
 Available Java web server: 
   * [x] Eclipse Glassfish 7.X
     * Reference web server.
-  * [x] Payara 6.2023.X
+  * [x] Payara 6.2024.X
     * Fork of Glassfish.
   * [ ] Apache Tomcat 10.1.X
     * **WARNING** It is a prototype using extra dependencies from a Jakarta platform implementations. 
-  * [ ] Apache TomEE 9.1.X
+  * [ ] Apache TomEE 10.X
     * **WARNING** Work in progress.
-  * [x] Wildfly 30.X
+  * [x] Wildfly 32.X
     * RedHat Community web server.
 
 ## Basic Maven commands
@@ -95,7 +95,7 @@ Content-Type: application/json
 }
 ~~~
 
-The `data` attribut contains *JSON* objects based on the query parameters.  
+The `data` attribute contains *JSON* objects based on the query parameters.  
 The result is the *JSON* object of the entity.  
 
 ### Find
@@ -129,7 +129,7 @@ Content-Type: application/json
 ~~~
 
 This endpoint provides a simple created operation.  
-The unique identifier attribut doesn't need to be defined.  
+The unique identifier attribute doesn't need to be defined.  
 The *JSON* object of the entity is in the body of the request.  
 The result contains the location of the new resource.  
 

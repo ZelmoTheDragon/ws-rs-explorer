@@ -20,10 +20,10 @@
 
     <properties>
         <!-- Server -->
-        <version.payara>6.2023.11</version.payara>
+        <version.payara>6.2024.5</version.payara>
 
         <!-- Jakarta -->
-        <version.group.eclipselink>4.0.1</version.group.eclipselink>
+        <version.group.eclipselink>4.0.3</version.group.eclipselink>
     </properties>
 
     <dependencyManagement>

@@ -1,6 +1,6 @@
-FROM alpine:3.19.0 AS happi-explorer-payara
+FROM alpine:3.20.0 AS happi-explorer-payara
 
-ARG PAYARA_SERVER="payara-6.2023.11.zip"
+ARG PAYARA_SERVER="payara-6.2024.5.zip"
 ARG APPLICATION="payara-runtime-0.1.0-SNAPSHOT.war"
 
 COPY "target/$PAYARA_SERVER" "/tmp"
@@ -14,7 +14,7 @@ ENV PATH="$PATH:$PAYARA_HOME/bin"
 RUN \
  apk update &&\
  apk upgrade &&\
- apk add --no-cache openjdk11-jre-headless &&\
+ apk add --no-cache openjdk21-jre-headless &&\
  addgroup --system "$PAYARA_USER" &&\
  adduser --system --disabled-password --no-create-home --home="$PAYARA_HOME" --ingroup="$PAYARA_USER" "$PAYARA_USER" &&\
  unzip "/tmp/$PAYARA_SERVER" -d "/opt" &&\

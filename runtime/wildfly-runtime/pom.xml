@@ -20,7 +20,7 @@
 
     <properties>
         <!-- Server -->
-        <version.wildfly>30.0.1.Final</version.wildfly>
+        <version.wildfly>32.0.0.Final</version.wildfly>
         <wildfly.archive.name>wildfly-${version.wildfly}.zip</wildfly.archive.name>
         <wildfly.download.url>
             https://github.com/wildfly/wildfly/releases/download/${version.wildfly}/${wildfly.archive.name}
@@ -91,7 +91,7 @@
                         <configuration>
                             <skip>${skipITs}</skip>
                             <target name="downloadServer">
-                                <ant antfile="src/ant/build.xml"/>
+                                <ant antfile="build.xml"/>
                             </target>
                         </configuration>
                     </execution>
@@ -162,7 +162,7 @@
                 </executions>
                 <configuration>
                     <container>
-                        <containerId>wildfly30x</containerId>
+                        <containerId>wildfly32x</containerId>
                         <zipUrlInstaller>
                             <url>file:///${project.build.directory}/${wildfly.archive.name}</url>
                             <downloadDir>${project.build.directory}/downloads</downloadDir>

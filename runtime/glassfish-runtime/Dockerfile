@@ -1,6 +1,6 @@
-FROM alpine:3.19.0 AS happi-explorer-glassfish
+FROM alpine:3.20.0 AS happi-explorer-glassfish
 
-ARG GLASSFISH_SERVER="glassfish-7.0.11.zip"
+ARG GLASSFISH_SERVER="glassfish-7.0.14.zip"
 ARG APPLICATION="glassfish-runtime-0.1.0-SNAPSHOT.war"
 
 COPY "target/$GLASSFISH_SERVER" "/tmp"
@@ -14,7 +14,7 @@ ENV PATH="$PATH:$GLASSFISH_HOME/bin"
 RUN \
  apk update &&\
  apk upgrade &&\
- apk add --no-cache openjdk11-jre-headless &&\
+ apk add --no-cache openjdk21-jre-headless &&\
  addgroup --system "$GLASSFISH_USER" &&\
  adduser --system --disabled-password --no-create-home --home="$GLASSFISH_HOME" --ingroup="$GLASSFISH_USER" "$GLASSFISH_USER" &&\
  unzip "/tmp/$GLASSFISH_SERVER" -d "/opt" &&\
