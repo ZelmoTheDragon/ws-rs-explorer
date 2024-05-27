@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.github.zelmothedragon.happi-explorer</groupId>
         <artifactId>runtime</artifactId>
-        <version>0.0.17-SNAPSHOT</version>
+        <version>0.1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -20,7 +20,7 @@
 
     <properties>
         <!-- Server -->
-        <version.tomee>9.1.0</version.tomee>
+        <version.tomee>9.1.1</version.tomee>
         <tomee.classifier>webprofile</tomee.classifier>
         <tomee.archive.name>apache-tomee-${version.tomee}-${tomee.classifier}.zip</tomee.archive.name>
         <tomee.download.url>

@@ -7,7 +7,7 @@ It provides Docker images for each runtime environment based on **GNU/Linux Alpi
 
 ## Requirement
 
-This project is written in **Java 17 LTS** with **Jakarta 10**.  
+This project is written in **Java 11 LTS** with **Jakarta 10**.  
 It builds with **Maven 3.8.X**.  
 
 ## Runtime environment
@@ -17,11 +17,11 @@ Available Java web server:
     * Reference web server.
   * [x] Payara 6.2023.X
     * Fork of Glassfish.
-  * [ ] Apache Tomcat
+  * [ ] Apache Tomcat 10.1.X
     * **WARNING** It is a prototype using extra dependencies from a Jakarta platform implementations. 
-  * [ ] Apache TomEE
-    * **WARNING** Work in progress. It uses a release candidate version of the server.
-  * [x] Wildfly 29.X
+  * [ ] Apache TomEE 9.1.X
+    * **WARNING** Work in progress.
+  * [x] Wildfly 30.X
     * RedHat Community web server.
 
 ## Basic Maven commands
@@ -170,7 +170,7 @@ The result contains nothing.
 ## Setup
 
 Example for a customer entry point: `Customer`.  
-You need a *Jakarta 9.1* web project.  
+You need a *Jakarta 10* web project.  
 See `happi-exeplorer-example` for more details.  
 
 ### Step 1: Create your table in a database
