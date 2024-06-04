@@ -6,14 +6,14 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.zelmothedragon.happi-explorer</groupId>
+    <groupId>com.github.zelmo-dragon.happi-explorer</groupId>
     <artifactId>happi-explorer-parent</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.2.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>happi-explorer-parent</name>
     <description>Parent projet for happi-explorer</description>
-    <url>https://github.com/ZelmoTheDragon/happi-explorer</url>
+    <url>https://github.com/zelmo-dragon/happi-explorer</url>
     <inceptionYear>2022</inceptionYear>
     <organization>
         <name>GitHub</name>
@@ -29,13 +29,12 @@
 
     <developers>
         <developer>
-            <id>ZelmoTheDragon</id>
-            <name>MOSELLE Maxime</name>
-            <email>maximemoselle@gmail.com</email>
+            <id>zelmo-dragon</id>
+            <name>Zelmo</name>
             <organization>GitHub</organization>
             <organizationUrl>https://github.com</organizationUrl>
             <timezone>Europe/Paris</timezone>
-            <url>https://github.com/ZelmoTheDragon</url>
+            <url>https://github.com/zelmo-dragon</url>
             <roles>
                 <role>developer</role>
             </roles>
@@ -50,14 +49,14 @@
     </modules>
 
     <scm>
-        <connection>scm:git:https://github.com/ZelmoTheDragon/happi-explorer.git</connection>
-        <developerConnection>scm:git:https://github.com/ZelmoTheDragon/happi-explorer.git</developerConnection>
+        <connection>scm:git:https://github.com/zelmo-dragon/happi-explorer.git</connection>
+        <developerConnection>scm:git:https://github.com/zelmo-dragon/happi-explorer.git</developerConnection>
         <tag>HEAD</tag>
-        <url>https://github.com/ZelmoTheDragon/happi-explorer</url>
+        <url>https://github.com/zelmo-dragon/happi-explorer</url>
     </scm>
     <issueManagement>
         <system>Github</system>
-        <url>https://github.com/ZelmoTheDragon/happi-explorer/issues</url>
+        <url>https://github.com/zelmo-dragon/happi-explorer/issues</url>
     </issueManagement>
 
     <properties>

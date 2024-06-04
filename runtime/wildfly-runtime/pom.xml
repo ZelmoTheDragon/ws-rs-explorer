@@ -7,9 +7,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
+        <groupId>com.github.zelmo-dragon.happi-explorer</groupId>
         <artifactId>runtime</artifactId>
-        <groupId>com.github.zelmothedragon.happi-explorer</groupId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>0.2.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -37,12 +37,7 @@
     <dependencies>
         <!-- Module -->
         <dependency>
-            <groupId>com.github.zelmothedragon.happi-explorer</groupId>
-            <artifactId>happi-explorer</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.zelmothedragon.happi-explorer</groupId>
+            <groupId>com.github.zelmo-dragon.happi-explorer</groupId>
             <artifactId>happi-explorer-example</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -64,7 +59,7 @@
 
         <!-- === TEST === -->
         <dependency>
-            <groupId>com.github.zelmothedragon.happi-explorer</groupId>
+            <groupId>com.github.zelmo-dragon.happi-explorer</groupId>
             <artifactId>rest-scenario</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
